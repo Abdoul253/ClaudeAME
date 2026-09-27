@@ -7,8 +7,7 @@
   --bg:#f3f5f2;--surface:#fbfcfa;--surface2:#eef2ee;--ink:#14201b;--ink2:#4a5a53;--muted:#6f7d77;
   --line:#dde3de;--line2:#c9d2cc;--accent:#0e7a5a;--accent-ink:#ffffff;--accent-soft:#dcefe6;--brass:#7d6318;
   --good:#006300;--good-bg:#e1f2e1;--warn:#8a5a00;--warn-bg:#fdf0d3;--crit:#b22d2d;--crit-bg:#fbe4e4;
-  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;
-  --grid:#e1e0d9;--axis:#c3c2b7;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--grid:#e1e0d9;--axis:#c3c2b7;
   --heat-hi-ink:#ffffff;--h0:#eef4fb;--h1:#cde2fb;--h2:#9ec5f4;--h3:#6da7ec;--h4:#3987e5;--h5:#256abf;--h6:#184f95;
   --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
   --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -32,7 +31,7 @@ body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--sans);padding-inl
 .wrap{max-width:1180px;margin:0 auto}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
 h1{font-size:clamp(26px,4vw,36px);font-weight:700}
-h2{font-size:22px;font-weight:700}
+h2{font-size:21px;font-weight:700}
 h3{font-size:16px;font-weight:700}
 p{margin:0}
 a{color:var(--accent)}
@@ -42,10 +41,9 @@ a{color:var(--accent)}
 .label{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
 button,select,input{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-
 header.top{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:flex-end;justify-content:space-between;padding-block:28px 18px}
 .brand{display:grid;gap:6px}
-.brand p{color:var(--ink2);max-width:62ch}
+.brand p{color:var(--ink2);max-width:66ch}
 .status{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:600;border:1px solid var(--line2);background:var(--surface);white-space:nowrap}
 .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
@@ -54,95 +52,87 @@ header.top{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:flex-end;justif
 .btn:hover{border-color:var(--accent)}
 .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .btn:disabled{opacity:.5;cursor:default}
-
-.acct{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:18px}
+.acct{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:18px}
 .acct>div{background:var(--surface);padding:12px 16px;display:grid;gap:2px}
 .acct .v{font-family:var(--mono);font-size:19px;font-weight:500}
-.banner{border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px;display:flex;gap:10px;align-items:flex-start}
-.banner.warn{background:var(--warn-bg);color:var(--ink)}
-.banner.crit{background:var(--crit-bg);color:var(--ink)}
-.banner.info{background:var(--accent-soft);color:var(--ink)}
-
-nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);margin-bottom:22px;padding-top:6px}
-nav.tabs button{border:0;background:none;padding:10px 14px;cursor:pointer;color:var(--ink2);font-weight:600;border-bottom:2px solid transparent;white-space:nowrap}
+.banner{border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px}
+.banner.warn{background:var(--warn-bg)}.banner.crit{background:var(--crit-bg)}.banner.info{background:var(--accent-soft)}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--line);margin-bottom:22px;padding-top:6px}
+nav.tabs button{border:0;background:none;padding:10px 12px;cursor:pointer;color:var(--ink2);font-weight:600;border-bottom:2px solid transparent;white-space:nowrap}
 nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
-
 section.panel{display:grid;gap:18px}
-.intro{color:var(--ink2);max-width:75ch}
+.intro{color:var(--ink2);max-width:78ch}
 .controls{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:flex-end;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .ctl{display:grid;gap:4px;min-width:0}
-.ctl select,.ctl input[type=number]{border:1px solid var(--line2);background:var(--bg);border-radius:7px;padding:6px 8px;max-width:100%}
+.ctl select,.ctl input[type=number],.ctl input[type=text],.ctl input[type=email],.ctl input[type=url],.ctl input[type=date]{border:1px solid var(--line2);background:var(--bg);border-radius:7px;padding:6px 8px;max-width:100%}
+.ctl input[type=number]{width:120px}
 .ctl input[type=range]{width:150px;accent-color:var(--accent)}
-.seg{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden;flex-wrap:wrap}
 .seg button{border:0;background:var(--bg);padding:6px 11px;cursor:pointer;font-weight:500}
 .seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{border:1px solid var(--line2);background:var(--bg);border-radius:999px;padding:4px 10px;cursor:pointer;font-size:13px}
-.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--ink);font-weight:600}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);font-weight:600}
+.chip:disabled{opacity:.45;cursor:default}
 details.weights{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 16px}
 details.weights summary{cursor:pointer;font-weight:600}
 .wgrid{display:flex;flex-wrap:wrap;gap:12px 22px;padding-top:10px}
-
 .tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
 table{border-collapse:collapse;width:100%;font-size:13.5px}
 th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
-th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap;background:var(--surface);position:sticky;top:0}
-th.sort{cursor:pointer}
-th.sort:hover{color:var(--ink)}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap;background:var(--surface)}
+th.sort{cursor:pointer}th.sort:hover{color:var(--ink)}
 th.n,td.n{text-align:right;white-space:nowrap}
 tr:last-child td{border-bottom:0}
 tbody tr:hover td{background:var(--surface2)}
 tr.out td{opacity:.45}
+tfoot td{font-weight:600;border-top:1px solid var(--line2)}
 .tk{font-family:var(--mono);font-weight:600;font-size:14px}
 .nm{color:var(--ink2);font-size:12.5px;max-width:30ch}
 .pos{color:var(--good)}.neg{color:var(--crit)}
 .score{display:flex;align-items:center;gap:8px;min-width:110px}
-.score .bar{flex:1;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
-.score .bar i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.bar{flex:1;height:6px;border-radius:3px;background:var(--line);overflow:hidden;min-width:60px;position:relative}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.bar i.w{background:#fab219}.bar i.c{background:#d03b3b}
 .tags{display:flex;flex-wrap:wrap;gap:4px}
 .tag{font-size:11.5px;border-radius:5px;padding:1px 6px;white-space:nowrap;font-weight:600}
-.tag.w{background:var(--warn-bg);color:var(--warn)}
-.tag.c{background:var(--crit-bg);color:var(--crit)}
-.tag.g{background:var(--good-bg);color:var(--good)}
-.tag.z{background:var(--surface2);color:var(--ink2);font-weight:500}
+.tag.w{background:var(--warn-bg);color:var(--warn)}.tag.c{background:var(--crit-bg);color:var(--crit)}
+.tag.g{background:var(--good-bg);color:var(--good)}.tag.z{background:var(--surface2);color:var(--ink2);font-weight:500}
 .cert{color:var(--brass);font-size:12px;font-weight:600}
-
 .grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px}
 @media (max-width:860px){.grid2{grid-template-columns:minmax(0,1fr)}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:12px;align-content:start}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
-.kpi{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:2px;background:var(--bg)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:2px;background:var(--bg);align-content:start}
 .kpi .v{font-family:var(--mono);font-size:18px;font-weight:500}
 .kpi .d{font-size:12px;color:var(--muted)}
+.kpi.alert{border-color:#d03b3b}.kpi.watch{border-color:#fab219}
 .alloc td select,.alloc td input{border:1px solid var(--line2);background:var(--bg);border-radius:6px;padding:4px 6px;max-width:100%}
 .alloc td input{width:64px;text-align:right;font-family:var(--mono)}
 .x{border:0;background:none;cursor:pointer;color:var(--muted);font-size:18px;line-height:1}
 .x:hover{color:var(--crit)}
-
 .chart{width:100%;position:relative}
 .chart svg{display:block;width:100%;height:auto;overflow:visible}
 .chart text{fill:var(--muted);font:11px var(--mono)}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
-.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line2);border-radius:8px;padding:8px 10px;font-size:12.5px;box-shadow:0 4px 16px rgba(0,0,0,.12);min-width:150px;z-index:3}
+.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line2);border-radius:8px;padding:8px 10px;font-size:12.5px;box-shadow:0 4px 16px rgba(0,0,0,.12);min-width:160px;z-index:3}
 .tip b{font-family:var(--mono);font-weight:500}
 .tip .r{display:flex;justify-content:space-between;gap:12px;align-items:center}
 .tip i{width:10px;height:3px;display:inline-block;border-radius:2px;margin-right:6px}
-
-.heat{border-collapse:separate;border-spacing:2px;font-size:12px}
-.heat td,.heat th{border:0;padding:0;text-align:center;position:static}
+.heat{border-collapse:separate;border-spacing:2px;font-size:12px;width:auto}
+.heat td,.heat th{border:0;padding:0;text-align:center}
 .heat th{font-family:var(--mono);font-size:11.5px;text-transform:none;letter-spacing:0;padding:4px;background:none}
 .heat td{width:48px;height:34px;border-radius:4px;font-family:var(--mono)}
 .scale{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
 .scale .ramp{display:flex;height:10px;border-radius:3px;overflow:hidden}
 .scale .ramp i{width:26px}
-
 .spec td:first-child{font-weight:600;min-width:170px}
 .spec td{vertical-align:top}
 .sev{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;white-space:nowrap}
 .sev::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--sevc,#999)}
-.news{display:grid;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.news{display:grid;background:var(--surface);border:1px solid var(--line);border-radius:12px}
 .news article{display:grid;grid-template-columns:110px 1fr;gap:4px 18px;padding:14px 16px;border-bottom:1px solid var(--line)}
 .news article:last-child{border-bottom:0}
 .news time{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:2px}
@@ -150,52 +140,81 @@ tr.out td{opacity:.45}
 .news p{color:var(--ink2);font-size:14px;margin-top:3px;max-width:80ch}
 .news .src{font-size:12.5px;color:var(--muted);margin-top:4px}
 @media (max-width:560px){.news article{grid-template-columns:1fr}}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:6px}
+.tile .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tile .px{font-family:var(--mono);font-size:22px;font-weight:500}
+.tile svg{width:100%;height:46px;display:block}
+.mkts{display:flex;flex-wrap:wrap;gap:8px}
+.gauge{display:grid;gap:6px}
+.gauge .track{height:12px;border-radius:6px;background:var(--line);position:relative}
+.gauge .fill{height:100%;border-radius:6px;background:var(--accent)}
+.gauge .mark{position:absolute;top:-4px;width:2px;height:20px;background:var(--ink)}
+.gauge .lab{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.ed input{width:84px;border:1px solid var(--line2);background:var(--bg);border-radius:6px;padding:4px 6px;font-family:var(--mono);text-align:right}
+.ed input.wide{width:180px;text-align:left;font-family:var(--sans)}
 .foot{margin-top:28px;color:var(--muted);font-size:12.5px;max-width:90ch}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:14px;z-index:9}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
 <div class="wrap">
 <header class="top">
   <div class="brand">
-    <span class="label">Interactive Brokers · univers certifié charia</span>
+    <span class="label">Interactive Brokers · ETF certifiés charia</span>
     <h1>Radar ETF Halal</h1>
-    <p>Filtre noté des ETF islamiques cotés sur IBKR, portefeuille de départ à 1 000 $ et indicateurs de suivi. Les cours se mettent à jour depuis ton compte IBKR quand la page y a accès.</p>
+    <p>Suivi en temps réel des ETF islamiques cotés sur IBKR : conformité (dettes, purification), dépendance à la tech et à l'IA, rendement net pour un résident de Djibouti, alertes de prix. Chaque utilisateur voit ses propres cours et positions via son compte IBKR.</p>
   </div>
   <div class="status">
-    <span id="statusPill" class="pill snap"><span class="dot"></span><span id="statusText">Instantané du 25/09/2026</span></span>
+    <span id="statusPill" class="pill snap"><span class="dot"></span><span id="statusText">Instantané IBKR du 25/09/2026</span></span>
     <button id="refreshBtn" class="btn" type="button">Actualiser</button>
   </div>
 </header>
-
 <div id="banner"></div>
-
-<div class="acct" id="acct">
+<div class="acct">
   <div><span class="label">Valeur nette du compte</span><span class="v" id="aNet">—</span></div>
   <div><span class="label">Liquidités</span><span class="v" id="aCash">—</span></div>
   <div><span class="label">Positions ETF halal</span><span class="v" id="aPos">—</span></div>
-  <div><span class="label">Données</span><span class="v small" id="aFresh" style="font-size:14px">—</span></div>
+  <div><span class="label">En francs Djibouti</span><span class="v" id="aDjf">—</span></div>
+  <div><span class="label">Données</span><span class="v" id="aFresh" style="font-size:14px">—</span></div>
 </div>
 
 <nav class="tabs" role="tablist" aria-label="Sections">
+  <button role="tab" id="tab-direct" data-tab="direct">Temps réel</button>
   <button role="tab" id="tab-filtre" data-tab="filtre">Filtre ETF</button>
-  <button role="tab" id="tab-portefeuille" data-tab="portefeuille">Portefeuille 1 000 $</button>
+  <button role="tab" id="tab-portefeuille" data-tab="portefeuille">Portefeuille</button>
+  <button role="tab" id="tab-conformite" data-tab="conformite">Dettes & purification</button>
+  <button role="tab" id="tab-tech" data-tab="tech">Tech & IA</button>
+  <button role="tab" id="tab-roi" data-tab="roi">ROI Djibouti</button>
   <button role="tab" id="tab-comparer" data-tab="comparer">Comparer</button>
-  <button role="tab" id="tab-indicateurs" data-tab="indicateurs">Indicateurs à suivre</button>
+  <button role="tab" id="tab-alertes" data-tab="alertes">Alertes IBKR</button>
+  <button role="tab" id="tab-indicateurs" data-tab="indicateurs">Indicateurs</button>
   <button role="tab" id="tab-veille" data-tab="veille">Veille</button>
+  <button role="tab" id="tab-gerant" data-tab="gerant" hidden>Espace gérant</button>
 </nav>
 
-<!-- FILTRE -->
-<section class="panel" id="p-filtre" role="tabpanel">
-  <p class="intro">Chaque ETF de la liste est certifié par un comité charia. Le filtre retire ceux qui ne passent pas tes critères (accès selon ta résidence, taille, frais, liquidité), puis note les autres de 0 à 100 sur la performance, le rendement ajusté du risque, les frais, la taille et la liquidité. Les performances sont des variations de prix, hors dividendes.</p>
+<section class="panel" id="p-direct" role="tabpanel">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+    <p class="intro">Cours de ton portefeuille et de tes positions, rafraîchis chaque minute depuis IBKR, avec la séance du jour en barres de 30 minutes. Heures affichées à Djibouti (UTC+3).</p>
+    <div class="mkts" id="mkts"></div>
+  </div>
+  <div class="tiles" id="tiles"></div>
+  <div class="kpis" id="dirKpis"></div>
+</section>
+
+<section class="panel" id="p-filtre" role="tabpanel" hidden>
+  <p class="intro">Chaque ETF est certifié par un comité charia. Le filtre retire ceux qui ne passent pas tes critères, puis note les autres de 0 à 100. Les performances sont des variations de prix, hors dividendes.</p>
   <div class="controls">
-    <div class="ctl"><span class="label">Résidence fiscale</span>
-      <div class="seg" id="resSeg"><button type="button" data-v="nonEU">Hors UE</button><button type="button" data-v="EU">UE / EEE</button></div></div>
+    <div class="ctl"><span class="label">Résidence</span>
+      <div class="seg" id="resSeg"><button type="button" data-v="DJ">Djibouti</button><button type="button" data-v="nonEU">Autre hors UE</button><button type="button" data-v="EU">UE / EEE</button></div></div>
     <div class="ctl"><label class="label" for="fAum">Encours minimum</label>
       <select id="fAum"><option value="0">Aucun</option><option value="50">50 M$</option><option value="100">100 M$</option><option value="250">250 M$</option><option value="500">500 M$</option></select></div>
     <div class="ctl"><label class="label" for="fTer">Frais max : <span id="fTerV" class="num"></span></label>
       <input id="fTer" type="range" min="0.30" max="0.70" step="0.05"></div>
     <div class="ctl"><label class="label" for="fLiq">Liquidité min (vol. 90 j)</label>
       <select id="fLiq"><option value="0">Aucune</option><option value="0.1">100 k$/jour</option><option value="0.25">250 k$/jour</option><option value="1">1 M$/jour</option></select></div>
+    <div class="ctl"><label class="label" for="fTechMax">Dépendance tech max</label>
+      <select id="fTechMax"><option value="1">Aucune limite</option><option value="0.8">R² ≤ 0,80</option><option value="0.6">R² ≤ 0,60</option><option value="0.4">R² ≤ 0,40</option></select></div>
     <div class="ctl"><label class="label" for="fDist">Dividendes</label>
       <select id="fDist"><option value="all">Tous</option><option value="Dist">Distribués</option><option value="Acc">Capitalisés</option></select></div>
     <div class="ctl"><label class="label" for="fHist"><input id="fHist" type="checkbox"> Historique ≥ 1 an</label></div>
@@ -203,25 +222,23 @@ tr.out td{opacity:.45}
   </div>
   <details class="weights"><summary>Pondération du score</summary>
     <div class="wgrid" id="wgrid"></div>
-    <p class="small muted" style="margin-top:8px">Chaque critère est ramené sur 0–1 au sein des ETF retenus puis pondéré. Une donnée absente compte pour 0,5 et l'ETF porte une étiquette.</p>
+    <p class="small muted" style="margin-top:8px">Chaque critère est ramené sur 0–1 au sein des ETF retenus puis pondéré. Une donnée absente compte pour 0,5.</p>
   </details>
   <div class="tablebox"><table id="screen"><thead></thead><tbody></tbody></table></div>
   <p class="small muted" id="screenNote"></p>
 </section>
 
-<!-- PORTEFEUILLE -->
 <section class="panel" id="p-portefeuille" role="tabpanel" hidden>
-  <p class="intro">Répartition de départ pour un capital de 1 000 $. Hors UE, IBKR permet l'achat de fractions d'ETF américains, donc chaque dollar est investi. En UE, les ETF UCITS se cotent à Londres en parts entières avec une commission minimum par ordre : une ou deux lignes suffisent à ce montant.</p>
+  <p class="intro">Répartition de départ. Hors UE, IBKR permet l'achat de fractions d'ETF américains. Les ETF UCITS cotés à Londres s'achètent en parts entières.</p>
   <div class="controls">
     <div class="ctl"><label class="label" for="cap">Capital (USD)</label><input id="cap" type="number" min="100" step="50" value="1000"></div>
     <div class="ctl"><span class="label">Profil</span>
-      <div class="seg" id="profSeg"><button type="button" data-v="prudent">Prudent</button><button type="button" data-v="equilibre">Équilibré</button><button type="button" data-v="dynamique">Dynamique</button></div></div>
+      <div class="seg" id="profSeg"><button type="button" data-v="prudent">Prudent</button><button type="button" data-v="equilibre">Équilibré</button><button type="button" data-v="dynamique">Dynamique</button><button type="button" data-v="horsTech">Moins de tech</button></div></div>
     <div class="ctl"><span class="label">Résidence</span>
-      <div class="seg" id="resSeg2"><button type="button" data-v="nonEU">Hors UE</button><button type="button" data-v="EU">UE / EEE</button></div></div>
+      <div class="seg" id="resSeg2"><button type="button" data-v="DJ">Djibouti</button><button type="button" data-v="nonEU">Autre hors UE</button><button type="button" data-v="EU">UE / EEE</button></div></div>
     <div class="ctl"><label class="label" for="dca">Versement mensuel</label><input id="dca" type="number" min="0" step="25" value="100"></div>
     <div class="ctl"><label class="label" for="comUS">Commission / ordre US</label><input id="comUS" type="number" min="0" step="0.05" value="0.35"></div>
     <div class="ctl"><label class="label" for="comLSE">Commission / ordre LSE</label><input id="comLSE" type="number" min="0" step="0.5" value="4"></div>
-    <div class="ctl"><label class="label" for="pur">Purification (% des dividendes)</label><input id="pur" type="number" min="0" max="20" step="0.1" value="" placeholder="rapport du fonds"></div>
   </div>
   <div class="grid2">
     <div class="card">
@@ -229,22 +246,65 @@ tr.out td{opacity:.45}
       <div class="tablebox" style="border:0"><table class="alloc" id="allocT"><thead><tr><th>ETF</th><th class="n">Poids %</th><th class="n">Montant</th><th class="n">Cours</th><th class="n">Quantité</th><th class="n">Frais/an</th><th></th></tr></thead><tbody></tbody></table></div>
       <p class="small muted" id="allocNote"></p>
     </div>
-    <div class="card">
-      <h2>Ce que donne ce portefeuille</h2>
-      <div class="kpis" id="pkpis"></div>
-    </div>
+    <div class="card"><h2>Ce que donne ce portefeuille</h2><div class="kpis" id="pkpis"></div></div>
   </div>
   <div class="card">
     <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline"><h2>Si ce portefeuille avait été acheté il y a un an</h2><span class="small muted">Valeur hebdomadaire, sans rééquilibrage, dividendes exclus</span></div>
     <div class="chart" id="pchart"></div>
   </div>
-  <div class="card" id="driftCard">
-    <h2>Écart avec tes positions IBKR</h2>
-    <div id="drift" class="small"></div>
+  <div class="card"><h2>Écart avec tes positions IBKR</h2><div id="drift" class="small"></div></div>
+</section>
+
+<section class="panel" id="p-conformite" role="tabpanel" hidden>
+  <p class="intro">Deux contrôles pour rester dans le halal. La <b>dette</b> : chaque indice islamique exclut les sociétés trop endettées ; la marge montre la distance au plafond et son évolution d'une mise à jour à l'autre. La <b>purification</b> : la part des dividendes issue d'activités non conformes, à donner en charité, exprimée ici en pourcentage du montant investi.</p>
+  <div class="kpis" id="purKpis"></div>
+  <div class="card">
+    <h2>Épuration à prévoir sur ton portefeuille</h2>
+    <div class="tablebox" style="border:0"><table id="purT"><thead><tr><th>ETF</th><th class="n">Investi</th><th class="n">Rendement div.</th><th class="n">Ratio de purification</th><th class="n">À purifier / an</th><th class="n">% du montant investi</th></tr></thead><tbody></tbody><tfoot></tfoot></table></div>
+    <div class="ctl"><label class="label" for="purDef">Ratio par défaut quand le fonds n'a rien publié (%)</label><input id="purDef" type="number" min="0" max="20" step="0.5" value="3"></div>
+  </div>
+  <div class="card">
+    <h2>Suivi des dettes par ETF</h2>
+    <div class="tablebox" style="border:0"><table id="debtT"><thead><tr><th>ETF</th><th>Règle de l'indice</th><th class="n">Plafond</th><th class="n">Dette pondérée</th><th>Marge</th><th>Évolution</th><th class="n">Mis à jour</th></tr></thead><tbody></tbody></table></div>
+    <p class="small muted" id="debtNote"></p>
   </div>
 </section>
 
-<!-- COMPARER -->
+<section class="panel" id="p-tech" role="tabpanel" hidden>
+  <p class="intro">Les filtres charia écartent les sociétés endettées, ce qui laisse une part élevée aux géants de la tech peu endettés (Nvidia, Apple, Microsoft). Deux mesures calculées en direct sur un an de cours IBKR : la <b>dépendance tech</b> (R² face à XLK, le fonds tech américain : 0,86 veut dire que 86 % des variations suivent la tech) et la <b>sensibilité aux puces IA</b> (bêta face à SMH : 0,5 veut dire que l'ETF bouge de 5 % quand les semi-conducteurs bougent de 10 %).</p>
+  <div class="grid2">
+    <div class="card">
+      <h2>Ton portefeuille</h2>
+      <div class="gauge" id="techGauge"></div>
+      <div class="ctl"><label class="label" for="techTarget">Plafond de dépendance tech que tu te fixes : <span id="techTargetV" class="num"></span></label><input id="techTarget" type="range" min="0.2" max="0.9" step="0.05"></div>
+      <div id="techSuggest" class="small"></div>
+    </div>
+    <div class="card"><h2>Diversifiants disponibles</h2><div id="techDiv" class="small"></div></div>
+  </div>
+  <div class="tablebox"><table id="techT"><thead><tr><th>ETF</th><th>Classe</th><th class="n">Dépendance tech (R²)</th><th></th><th class="n">Bêta puces IA</th><th class="n">Poids tech déclaré</th><th class="n">5 géants IA</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section class="panel" id="p-roi" role="tabpanel" hidden>
+  <p class="intro">Rendement net pour un résident de Djibouti, en dollars et en francs Djibouti (arrimés au dollar à 177,721 FDJ depuis 1973, donc sans risque de change). Le calcul retire les frais de virement, les commissions, la retenue fiscale américaine sur les dividendes, la purification et, si tu le choisis, la zakat.</p>
+  <div class="banner warn" id="djWarn">La page d'ouverture de compte IBKR indique que les comptes ne sont pas proposés aux résidents de Djibouti. Vérifie que ton compte IBKR est bien enregistré avec ton pays de résidence réel : une adresse inexacte peut entraîner le gel du compte.</div>
+  <div class="controls">
+    <div class="ctl"><span class="label">Scénario de hausse annuelle</span>
+      <div class="seg" id="scSeg"><button type="button" data-v="prudent">Prudent 4 %</button><button type="button" data-v="central">Central 7 %</button><button type="button" data-v="hist">Historique IBKR</button></div></div>
+    <div class="ctl"><label class="label" for="hor">Horizon (années)</label><input id="hor" type="number" min="1" max="30" value="10"></div>
+    <div class="ctl"><label class="label" for="wireIn">Frais par virement vers IBKR (USD)</label><input id="wireIn" type="number" min="0" step="5" value="30"></div>
+    <div class="ctl"><label class="label" for="wiresYr">Virements par an</label><input id="wiresYr" type="number" min="0" max="12" value="4"></div>
+    <div class="ctl"><label class="label" for="ordersM">Ordres par mois</label><input id="ordersM" type="number" min="0" max="10" value="1"></div>
+    <div class="ctl"><label class="label" for="locTax">Impôt local sur revenus étrangers (%)</label><input id="locTax" type="number" min="0" max="50" step="1" value="0"></div>
+    <div class="ctl"><label class="label" for="zakOn"><input id="zakOn" type="checkbox" checked> Zakat payée depuis le portefeuille</label></div>
+  </div>
+  <div class="kpis" id="roiKpis"></div>
+  <div class="card"><div class="legend" id="roiLegend"></div><div class="chart" id="roiChart"></div></div>
+  <div class="grid2">
+    <div class="card"><h2>Année par année</h2><div class="tablebox" style="border:0"><table id="roiT"></table></div></div>
+    <div class="card"><h2>ETF américains ou UCITS irlandais ?</h2><div id="roiCmp" class="small"></div></div>
+  </div>
+</section>
+
 <section class="panel" id="p-comparer" role="tabpanel" hidden>
   <p class="intro">Compare jusqu'à trois ETF sur un an (base 100) et regarde leurs corrélations : deux ETF corrélés à plus de 0,9 font doublon dans un petit portefeuille.</p>
   <div class="controls"><div class="ctl" style="flex-basis:100%"><span class="label">ETF comparés (3 max)</span><div class="chips" id="cmpChips"></div></div></div>
@@ -256,386 +316,550 @@ tr.out td{opacity:.45}
   </div>
 </section>
 
-<!-- INDICATEURS -->
-<section class="panel" id="p-indicateurs" role="tabpanel" hidden>
-  <p class="intro">Les indicateurs à suivre pour un portefeuille halal diversifié de petite taille, avec le seuil qui doit déclencher une action. Les valeurs en direct de tes ETF sont dans l'onglet Filtre.</p>
-  <h2>Conformité</h2>
-  <div class="tablebox"><table class="spec"><thead><tr><th>Indicateur</th><th>Ce qu'il mesure</th><th>Seuil d'alerte</th><th>Fréquence</th><th>Où le trouver</th></tr></thead><tbody id="specC"></tbody></table></div>
-  <h2>Coûts et accès</h2>
-  <div class="tablebox"><table class="spec"><thead><tr><th>Indicateur</th><th>Ce qu'il mesure</th><th>Seuil d'alerte</th><th>Fréquence</th><th>Où le trouver</th></tr></thead><tbody id="specK"></tbody></table></div>
-  <h2>Performance et risque</h2>
-  <div class="tablebox"><table class="spec"><thead><tr><th>Indicateur</th><th>Ce qu'il mesure</th><th>Seuil d'alerte</th><th>Fréquence</th><th>Où le trouver</th></tr></thead><tbody id="specR"></tbody></table></div>
-  <h2>Discipline du portefeuille</h2>
-  <div class="tablebox"><table class="spec"><thead><tr><th>Indicateur</th><th>Ce qu'il mesure</th><th>Seuil d'alerte</th><th>Fréquence</th><th>Où le trouver</th></tr></thead><tbody id="specD"></tbody></table></div>
+<section class="panel" id="p-alertes" role="tabpanel" hidden>
+  <p class="intro">Les alertes sont enregistrées dans ton compte IBKR et surveillées par IBKR en continu, même quand cette page est fermée. Elles n'apparaissent que dans IBKR Desktop (pas dans l'application mobile ni TWS) : indique un e-mail pour être prévenu ailleurs.</p>
+  <form class="controls" id="alertForm">
+    <div class="ctl"><label class="label" for="alT">ETF</label><select id="alT"></select></div>
+    <div class="ctl"><label class="label" for="alK">Condition</label>
+      <select id="alK"><option value="LAST:LTE">Cours inférieur ou égal à</option><option value="LAST:GTE">Cours supérieur ou égal à</option><option value="PERCENT_CHANGE:LTE">Variation du jour ≤ (%)</option><option value="PERCENT_CHANGE:GTE">Variation du jour ≥ (%)</option></select></div>
+    <div class="ctl"><label class="label" for="alV">Seuil</label><input id="alV" type="number" step="0.01" required></div>
+    <div class="ctl"><label class="label" for="alE">E-mail de notification</label><input id="alE" type="email" placeholder="toi@exemple.com"></div>
+    <div class="ctl"><label class="label" for="alTif">Durée</label><select id="alTif"><option value="UNTIL_TRIGGERED">Jusqu'au déclenchement</option><option value="UNTIL_DELETED">Permanente</option></select></div>
+    <div class="ctl"><button class="btn primary" id="alGo" type="submit">Créer l'alerte dans IBKR</button></div>
+    <div class="ctl" style="flex-basis:100%"><span class="label">Seuils proposés</span><div class="chips" id="alPresets"></div></div>
+  </form>
+  <div id="alMsg"></div>
+  <div class="card"><h2>Alertes actives dans ton compte</h2><div id="alList" class="small"></div></div>
 </section>
 
-<!-- VEILLE -->
+<section class="panel" id="p-indicateurs" role="tabpanel" hidden>
+  <p class="intro">Les indicateurs à suivre, avec le seuil qui doit déclencher une action et l'onglet où les lire.</p>
+  <div id="specs" style="display:grid;gap:18px"></div>
+</section>
+
 <section class="panel" id="p-veille" role="tabpanel" hidden>
-  <p class="intro">Articles et annonces récents sur les ETF charia, relevés le 27/09/2026. Les classements publiés par des sites spécialisés servent à repérer des fonds ; les chiffres de cette page viennent d'IBKR.</p>
+  <p class="intro">Articles et annonces récents sur les ETF charia, relevés le 27/09/2026. Les chiffres de cette page viennent d'IBKR.</p>
   <div class="news" id="news"></div>
 </section>
 
-<p class="foot">Outil de suivi, pas un conseil en investissement. La conformité charia d'un ETF dépend de la méthodologie de son indice et de son comité ; vérifie la fiche de l'émetteur et, en cas de doute, demande l'avis d'un savant de confiance. Les commissions IBKR indiquées sont des estimations à régler selon ta grille tarifaire.</p>
+<section class="panel" id="p-gerant" role="tabpanel" hidden>
+  <p class="intro">Visible par toi seul, propriétaire de l'application. Les données de conformité saisies ici sont lues par tous tes abonnés ; chaque enregistrement ajoute un point à l'historique des dettes.</p>
+  <div class="card">
+    <h2>Données de conformité</h2>
+    <div class="tablebox" style="border:0"><table class="ed" id="edT"><thead><tr><th>ETF</th><th class="n">Dette pondérée %</th><th class="n">Purification %</th><th class="n">Poids tech %</th><th class="n">5 géants IA %</th><th>Source</th><th>Date</th><th></th></tr></thead><tbody></tbody></table></div>
+    <p class="small muted" id="edNote"></p>
+  </div>
+  <div class="card">
+    <h2>Mettre l'application en location</h2>
+    <div class="small" style="display:grid;gap:8px;max-width:80ch">
+      <p><b>Accès.</b> Partage l'application depuis le menu Partager de claude.ai, par invitation e-mail. Un abonné invité voit les cours et ses propres positions avec son compte claude.ai et son propre connecteur IBKR ; ses réglages restent dans son navigateur.</p>
+      <p><b>Données de marché.</b> Chaque abonné consulte les cours avec son propre compte IBKR : tu ne revends pas les données d'IBKR, ce que ses conditions interdisent.</p>
+      <p><b>Paiement.</b> Il se fait en dehors de l'application (virement, mobile money). Retire l'accès dans le menu Partager quand un abonnement s'arrête.</p>
+      <p><b>Cadre légal.</b> Vendre un outil d'information est différent de vendre des recommandations d'investissement personnalisées, qui demandent souvent un agrément (à Djibouti, renseigne-toi auprès de la Banque Centrale de Djibouti). Garde l'application sur le terrain de l'information et du suivi.</p>
+    </div>
+  </div>
+</section>
+
+<p class="foot">Outil d'information et de suivi, pas un conseil en investissement. La conformité charia d'un ETF dépend de la méthodologie de son indice et de son comité ; en cas de doute, demande l'avis d'un savant de confiance. Commissions, frais de virement et fiscalité sont des estimations à ajuster.</p>
 </div>
 
 <script>
 /*__DATA__*/
 const SERVER="Interactive Brokers (IBKR)";
+const DJF=177.721;
 const SNAP_FIELDS=["last","bid_ask","change","dividend_yield","avg_90d_usd_volume","cumulative_perf_1m","cumulative_perf_ytd","cumulative_perf_1y","cumulative_perf_3y","cumulative_perf_5y","total_net_assets","historical_vol","misc_statistics","top_status"];
 const BY=Object.fromEntries(UNIVERSE.map(e=>[e.t,e]));
 const CLASSES=[...new Set(UNIVERSE.map(e=>e.cls))];
 const $=s=>document.querySelector(s);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const SEED_COMP={SPUS:{tech:45,ai5:45.5,src:"stockanalysis.com / Halal Terminal",date:"2026-09"}};
 
-/* ---------- état ---------- */
 const store={get(k,d){try{const v=localStorage.getItem("radar:"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("radar:"+k,JSON.stringify(v))}catch(e){}}};
-const PRESETS={
-  nonEU:{prudent:[["SPUS",45],["SPWO",20],["SPSK",35]],equilibre:[["SPUS",55],["SPWO",30],["SPSK",15]],dynamique:[["SPUS",65],["SPWO",35]]},
-  EU:{prudent:[["MWIM",70]],equilibre:[["ISDW",80],["ISDE",20]],dynamique:[["MWIM",100]]}
-};
+const US_PRE={prudent:[["SPUS",45],["SPWO",20],["SPSK",35]],equilibre:[["SPUS",55],["SPWO",30],["SPSK",15]],dynamique:[["SPUS",65],["SPWO",35]],horsTech:[["SPUS",35],["SPWO",25],["SPSK",25],["SPRE",15]]};
+const PRESETS={DJ:US_PRE,nonEU:US_PRE,EU:{prudent:[["MWIM",70]],equilibre:[["ISDW",80],["ISDE",20]],dynamique:[["MWIM",100]],horsTech:[["ISDW",60],["ISDE",20]]}};
 const S={
-  res:store.get("res","nonEU"),prof:store.get("prof","equilibre"),
-  f:Object.assign({aum:"100",ter:0.65,liq:"0",dist:"all",hist:false,cls:CLASSES.slice()},store.get("f",{})),
+  res:store.get("res","DJ"),prof:store.get("prof","equilibre"),
+  f:Object.assign({aum:"100",ter:0.65,liq:"0",dist:"all",hist:false,techMax:"1",cls:CLASSES.slice()},store.get("f",{})),
   w:Object.assign({perf:25,sharpe:25,cost:20,size:15,liq:15},store.get("w",{})),
   rows:store.get("rows",null),cmp:store.get("cmp",["SPUS","SPWO","SPSK"]),
-  sort:{k:"score",dir:-1},
-  live:{},hist:{},acct:null,pos:null,errors:{},fresh:null,mode:"snap"
+  techTarget:store.get("techTarget",0.6),sc:store.get("sc","central"),
+  sort:{k:"score",dir:-1},live:{},hist:{},intra:{},bench:{},acct:null,pos:null,alerts:null,comp:{},errors:{},fresh:null,mode:"snap",owner:false
 };
-if(!S.rows) S.rows=PRESETS[S.res][S.prof].map(([t,w])=>({t,w}));
+if(!PRESETS[S.res])S.res="DJ";
+if(!PRESETS[S.res][S.prof])S.prof="equilibre";
+if(!S.rows)S.rows=PRESETS[S.res][S.prof].map(([t,w])=>({t,w}));
+S.rows=S.rows.filter(r=>BY[r.t]);
 
 /* ---------- données ---------- */
-function weeklyDates(n,end){const out=[];const d=new Date(end+"T00:00:00Z");for(let i=n-1;i>=0;i--){const x=new Date(d.getTime()-i*7*864e5);out.push(x.toISOString().slice(0,10))}return out}
-function hist(t){
-  if(S.hist[t]) return S.hist[t];
-  const c=SNAP.weekly[t]; if(!c) return null;
-  return {c,d:weeklyDates(c.length,SNAP.weeklyEnd),src:"snap"};
-}
+function weeklyDates(n,end){const out=[];const d=new Date(end+"T00:00:00Z");for(let i=n-1;i>=0;i--)out.push(new Date(d.getTime()-i*7*864e5).toISOString().slice(0,10));return out}
+function hist(t){if(S.hist[t])return S.hist[t];const c=SNAP.weekly[t];return c?{c,d:weeklyDates(c.length,SNAP.weeklyEnd),src:"snap"}:null}
+function bench(k){return S.bench[k]||(SNAP.bench[k]?{c:SNAP.bench[k].c}:null)}
 function data(t){const base=SNAP.snap[t]||{};const l=S.live[t];return l?Object.assign({},base,l):Object.assign({live:false},base)}
-function pct(x){return x==null||isNaN(x)?null:x}
+function comp(t){return Object.assign({},SEED_COMP[t]||{},S.comp[t]||{})}
 function parseSnap(p){
-  if(!p||typeof p!=="object") return null;
-  const g=(k,f)=>{const o=p[k];return o&&o[f]!=null?o[f]:null};
-  const o={live:true};
-  const last=g("last","price"); if(last!=null) o.p=last;
-  const set=(k,v)=>{if(v!=null&&!isNaN(v)) o[k]=v};
-  set("chg",g("change","change_pct"));set("m1",g("cumulative-perf-1m","change_pct"));set("ytd",g("cumulative-perf-ytd","change_pct"));
+  if(!p||typeof p!=="object")return null;
+  const g=(k,f)=>{const o=p[k];return o&&o[f]!=null?o[f]:null};const o={live:true};
+  const set=(k,v)=>{if(v!=null&&!isNaN(v))o[k]=v};
+  set("p",g("last","price"));set("chg",g("change","change_pct"));set("m1",g("cumulative-perf-1m","change_pct"));set("ytd",g("cumulative-perf-ytd","change_pct"));
   set("y1",g("cumulative-perf-1y","change_pct"));set("y3",g("cumulative-perf-3y","change_pct"));set("y5",g("cumulative-perf-5y","change_pct"));
-  const hv=g("historical-vol","annual_pct"); if(hv!=null) o.vol=hv*100;
+  const hv=g("historical-vol","annual_pct");if(hv!=null)o.vol=hv*100;
   set("dy",g("dividend-yield","yield_pct"));set("aum",g("total-net-assets","value"));set("liq",g("avg-90d-usd-volume","volume"));
   set("h52",g("misc-statistics","high_52w"));set("l52",g("misc-statistics","low_52w"));
-  const ba=p["bid-ask"]; if(ba&&ba.bid>0&&ba.ask>0){o.bid=ba.bid;o.ask=ba.ask}
-  const st=p["top-status"]; if(st&&st.status) o.status=st.status;
-  const ts=p.last&&p.last.ts; if(ts) o.ts=ts*1000;
+  const ba=p["bid-ask"];if(ba&&ba.bid>0&&ba.ask>0){o.bid=ba.bid;o.ask=ba.ask}
+  const st=p["top-status"];if(st&&st.status)o.status=st.status;
+  if(p.last&&p.last.ts)o.ts=p.last.ts*1000;
   return o;
 }
 function maxDD(c){let pk=c[0],m=0;for(const x of c){if(x>pk)pk=x;const d=x/pk-1;if(d<m)m=d}return m*100}
 function rets(c){const r=[];for(let i=1;i<c.length;i++)r.push(c[i]/c[i-1]-1);return r}
-function corr(a,b){const n=Math.min(a.length,b.length);if(n<8)return null;a=a.slice(-n);b=b.slice(-n);const ma=a.reduce((s,x)=>s+x,0)/n,mb=b.reduce((s,x)=>s+x,0)/n;let sab=0,saa=0,sbb=0;for(let i=0;i<n;i++){const x=a[i]-ma,y=b[i]-mb;sab+=x*y;saa+=x*x;sbb+=y*y}return sab/Math.sqrt(saa*sbb)}
-
+function stats(a,b){const n=Math.min(a.length,b.length);if(n<8)return null;a=a.slice(-n);b=b.slice(-n);const ma=a.reduce((s,x)=>s+x,0)/n,mb=b.reduce((s,x)=>s+x,0)/n;let sab=0,saa=0,sbb=0;for(let i=0;i<n;i++){const x=a[i]-ma,y=b[i]-mb;sab+=x*y;saa+=x*x;sbb+=y*y}return{corr:sab/Math.sqrt(saa*sbb),beta:sab/sbb}}
+function corr(a,b){const s=stats(a,b);return s?s.corr:null}
+function techOf(t){const h=hist(t),x=bench("XLK"),s=bench("SMH");if(!h||!x||!s)return{r2:null,beta:null};const r=rets(h.c);const a=stats(r,rets(x.c)),b=stats(r,rets(s.c));return{r2:a?a.corr*a.corr:null,beta:b?b.beta:null}}
 function metrics(t){
-  const e=BY[t],d=data(t),h=hist(t);
-  const m={t,e,d};
-  m.dd=h?maxDD(h.c):null;
-  m.fromHigh=d.p&&d.h52?(d.p/d.h52-1)*100:null;
+  const e=BY[t],d=data(t),h=hist(t);const m={t,e,d};
+  m.dd=h?maxDD(h.c):null;m.fromHigh=d.p&&d.h52?(d.p/d.h52-1)*100:null;
   m.spread=d.bid&&d.ask?((d.ask-d.bid)/((d.ask+d.bid)/2))*100:null;
-  m.perf=d.y1!=null?d.y1:null;
-  m.sharpe=m.perf!=null&&d.vol?m.perf/d.vol:null;
-  m.age=2026-e.since;
-  return m;
+  m.perf=d.y1!=null?d.y1:null;m.sharpe=m.perf!=null&&d.vol?m.perf/d.vol:null;
+  Object.assign(m,techOf(t));return m;
 }
+const accessible=e=>S.res!=="EU"||e.zone==="UCITS";
+
+/* ---------- format ---------- */
+const fmt={
+  p:(x,d=2)=>x==null||isNaN(x)?"—":x.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d}),
+  pc:(x,d=1)=>x==null||isNaN(x)?"—":(x>0?"+":"")+x.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d})+" %",
+  usd:(x,d=0)=>x==null||isNaN(x)?"—":x.toLocaleString("fr-FR",{style:"currency",currency:"USD",minimumFractionDigits:d,maximumFractionDigits:d}),
+  djf:x=>x==null||isNaN(x)?"—":Math.round(x*DJF).toLocaleString("fr-FR")+" FDJ",
+  big:x=>x==null?"—":x>=1e9?(x/1e9).toLocaleString("fr-FR",{maximumFractionDigits:2})+" Md$":(x/1e6).toLocaleString("fr-FR",{maximumFractionDigits:x<1e7?1:0})+" M$"
+};
+const cls=x=>x==null?"":x>0?"pos":x<0?"neg":"";
+const djTime=ms=>new Date(ms+3*3600e3).toISOString().slice(11,16);
+function toast(msg){const t=document.createElement("div");t.className="toast";t.setAttribute("role","status");t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
 
 /* ---------- filtre ---------- */
 function passes(m){
   const f=S.f,e=m.e,d=m.d,why=[];
-  if(S.res==="EU"&&e.zone==="US") why.push("non accessible UE");
-  if(!f.cls.includes(e.cls)) why.push("classe exclue");
-  if(d.aum!=null&&d.aum<(+f.aum)*1e6) why.push("encours faible");
-  if(e.ter>f.ter+1e-9) why.push("frais");
-  if(+f.liq>0&&(d.liq==null||d.liq<(+f.liq)*1e6)) why.push("liquidité");
-  if(f.dist!=="all"&&e.dist!==f.dist) why.push("dividendes");
-  if(f.hist&&m.perf==null) why.push("historique");
+  if(!accessible(e))why.push("non accessible UE");
+  if(!f.cls.includes(e.cls))why.push("classe exclue");
+  if(d.aum!=null&&d.aum<(+f.aum)*1e6)why.push("encours faible");
+  if(e.ter>f.ter+1e-9)why.push("frais");
+  if(+f.liq>0&&(d.liq==null||d.liq<(+f.liq)*1e6))why.push("liquidité");
+  if(+f.techMax<1&&m.r2!=null&&m.r2>+f.techMax)why.push("trop lié à la tech");
+  if(f.dist!=="all"&&e.dist!==f.dist)why.push("dividendes");
+  if(f.hist&&m.perf==null)why.push("historique");
   return why;
 }
 function scoreAll(list){
   const keys={perf:m=>m.perf,sharpe:m=>m.sharpe,cost:m=>-m.e.ter,size:m=>m.d.aum?Math.log10(m.d.aum):null,liq:m=>m.d.liq?Math.log10(m.d.liq):null};
-  const tot=Object.values(S.w).reduce((a,b)=>a+ +b,0)||1;
-  const rng={};
+  const tot=Object.values(S.w).reduce((a,b)=>a+ +b,0)||1;const rng={};
   for(const k in keys){const v=list.map(keys[k]).filter(x=>x!=null);rng[k]=[Math.min(...v),Math.max(...v)]}
-  for(const m of list){
-    let s=0;m.missing=[];
-    for(const k in keys){const v=keys[k](m);let n;
-      if(v==null){n=.5;m.missing.push(k)}else{const [a,b]=rng[k];n=b>a?(v-a)/(b-a):.5}
-      s+=n*S.w[k]}
-    m.score=Math.round(100*s/tot);
-  }
+  for(const m of list){let s=0;for(const k in keys){const v=keys[k](m);let n;if(v==null)n=.5;else{const[a,b]=rng[k];n=b>a?(v-a)/(b-a):.5}s+=n*S.w[k]}m.score=Math.round(100*s/tot)}
 }
 function tagsFor(m){
-  const t=[],d=m.d;
-  if(m.perf==null) t.push(["w","historique < 1 an"]);
-  if(d.aum!=null&&d.aum<1e8) t.push(["w","petit encours"]);
-  if(d.vol!=null&&d.vol>20) t.push(["c","volatilité > 20 %"]);
-  if(m.dd!=null&&m.dd<-15) t.push(["c","baisse max > 15 %"]);
-  if(m.spread!=null&&m.spread>0.3) t.push(["w","écart achat/vente large"]);
-  if(m.e.zone==="US") t.push(["z","fractions possibles"]);
-  if(m.e.cls==="Sukuk") t.push(["g","amortisseur"]);
+  const t=[],d=m.d,c=comp(m.t);
+  if(m.perf==null)t.push(["w","historique < 1 an"]);
+  if(d.aum!=null&&d.aum<1e8)t.push(["w","petit encours"]);
+  if(d.vol!=null&&d.vol>20)t.push(["c","volatilité > 20 %"]);
+  if(m.dd!=null&&m.dd<-15)t.push(["c","baisse max > 15 %"]);
+  if(m.r2!=null&&m.r2>0.8)t.push(["w","très lié à la tech"]);
+  if(m.spread!=null&&m.spread>0.3)t.push(["w","écart achat/vente large"]);
+  if(c.debt!=null&&m.e.debtMax&&c.debt>m.e.debtMax*0.8)t.push(["c","dette proche du plafond"]);
+  if(m.e.cls==="Sukuk"||(m.r2!=null&&m.r2<0.3))t.push(["g","diversifiant"]);
+  if(S.res==="DJ"&&m.e.usSitus)t.push(["z","retenue US 30 %"]);
   return t;
 }
-const fmt={
-  p:(x,d=2)=>x==null?"—":x.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d}),
-  pc:(x,d=1)=>x==null?"—":(x>0?"+":"")+x.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d})+" %",
-  usd:(x,d=0)=>x==null?"—":x.toLocaleString("fr-FR",{style:"currency",currency:"USD",minimumFractionDigits:d,maximumFractionDigits:d}),
-  big:x=>x==null?"—":x>=1e9?(x/1e9).toLocaleString("fr-FR",{maximumFractionDigits:2})+" Md$":(x/1e6).toLocaleString("fr-FR",{maximumFractionDigits:0})+" M$"
-};
-const cls=x=>x==null?"":x>0?"pos":x<0?"neg":"";
-
-const COLS=[
-  ["rank","#",0],["t","ETF",0],["score","Score",0],["cls","Classe",0],["m1","1 mois",1],["ytd","Depuis janv.",1],["y1","1 an",1],["vol","Vol. 30 j",1],["dd","Baisse max 1 an",1],["fromHigh","Vs plus haut 52 s.",1],["ter","Frais",1],["aum","Encours",1],["dy","Div.",1],["spread","Écart",1],["tags","Points d'attention",0]
-];
-function sortVal(m,k){switch(k){case "t":return m.t;case "cls":return m.e.cls;case "ter":return m.e.ter;case "aum":return m.d.aum;case "score":return m.pass?m.score:-1;case "dd":return m.dd;case "fromHigh":return m.fromHigh;case "spread":return m.spread;default:return m.d[k]}}
+const COLS=[["rank","#",0],["t","ETF",0],["score","Score",0],["cls","Classe",0],["m1","1 mois",1],["ytd","Depuis janv.",1],["y1","1 an",1],["dy","Div.",1],["vol","Vol. 30 j",1],["dd","Baisse max",1],["r2","Dép. tech",1],["ter","Frais",1],["aum","Encours",1],["liq","Liquidité/j",1],["spread","Écart",1],["tags","Points d'attention",0]];
+function sortVal(m,k){switch(k){case"t":return m.t;case"cls":return m.e.cls;case"ter":return m.e.ter;case"score":return m.pass?m.score:-1;case"dd":case"fromHigh":case"spread":case"r2":return m[k];default:return m.d[k]}}
 function renderScreen(){
-  const all=UNIVERSE.map(e=>metrics(e.t));
-  all.forEach(m=>{m.why=passes(m);m.pass=!m.why.length});
-  const kept=all.filter(m=>m.pass);
-  if(kept.length) scoreAll(kept);
+  const all=UNIVERSE.map(e=>metrics(e.t));all.forEach(m=>{m.why=passes(m);m.pass=!m.why.length});
+  const kept=all.filter(m=>m.pass);if(kept.length)scoreAll(kept);
   const k=S.sort.k,dir=S.sort.dir;
-  all.sort((a,b)=>{if(a.pass!==b.pass)return a.pass?-1:1;const va=sortVal(a,k),vb=sortVal(b,k);if(va==null&&vb==null)return 0;if(va==null)return 1;if(vb==null)return -1;return (va>vb?1:va<vb?-1:0)*dir});
-  const th=COLS.map(([key,lab,n])=>`<th class="${n?"n ":""}${key!=="rank"&&key!=="tags"?"sort":""}" data-k="${key}" ${key===k?`aria-sort="${dir>0?"ascending":"descending"}"`:""}>${lab}${key===k?(dir>0?" ▲":" ▼"):""}</th>`).join("");
-  $("#screen thead").innerHTML=`<tr>${th}</tr>`;
+  all.sort((a,b)=>{if(a.pass!==b.pass)return a.pass?-1:1;const va=sortVal(a,k),vb=sortVal(b,k);if(va==null&&vb==null)return 0;if(va==null)return 1;if(vb==null)return -1;return(va>vb?1:va<vb?-1:0)*dir});
+  $("#screen thead").innerHTML="<tr>"+COLS.map(([key,lab,n])=>`<th class="${n?"n ":""}${key!=="rank"&&key!=="tags"?"sort":""}" data-k="${key}">${lab}${key===k?(dir>0?" ▲":" ▼"):""}</th>`).join("")+"</tr>";
   let r=0;
-  $("#screen tbody").innerHTML=all.map(m=>{
-    const d=m.d,e=m.e;const rank=m.pass?++r:"";
-    const tags=m.pass?tagsFor(m).map(([c,l])=>`<span class="tag ${c}">${l}</span>`).join(""):`<span class="tag z">exclu : ${m.why.join(", ")}</span>`;
-    return `<tr class="${m.pass?"":"out"}">
-      <td class="n">${rank}</td>
-      <td><div class="tk">${m.t} <span class="muted small" style="font-family:var(--sans);font-weight:400">${e.ex}</span></div><div class="nm">${esc(e.name)}</div><div class="cert">${esc(e.screen)}</div></td>
-      <td>${m.pass?`<div class="score"><span class="num">${m.score}</span><span class="bar"><i style="width:${m.score}%"></i></span></div>`:"—"}</td>
-      <td>${esc(e.cls)}<div class="small muted">${e.zone==="US"?"ETF US":"UCITS "+e.dom} · ${e.dist==="Acc"?"capitalisant":"distribuant"}</div></td>
-      <td class="n ${cls(d.m1)}">${fmt.pc(d.m1)}</td><td class="n ${cls(d.ytd)}">${fmt.pc(d.ytd)}</td><td class="n ${cls(d.y1)}">${fmt.pc(d.y1)}</td>
-      <td class="n">${d.vol==null?"—":fmt.p(d.vol,1)+" %"}</td><td class="n">${fmt.pc(m.dd)}</td><td class="n">${fmt.pc(m.fromHigh)}</td>
-      <td class="n">${fmt.p(e.ter,2)} %</td><td class="n">${fmt.big(d.aum)}</td><td class="n">${d.dy==null?"—":fmt.p(d.dy,2)+" %"}</td>
-      <td class="n">${m.spread==null?"—":fmt.p(m.spread,2)+" %"}</td>
-      <td><div class="tags">${tags}</div></td></tr>`}).join("");
-  $("#screenNote").textContent=`${kept.length} ETF retenus sur ${all.length}. Cours : ${S.mode==="live"?"IBKR en direct":"instantané IBKR du "+SNAP.asOf.split("-").reverse().join("/")}. Baisse max calculée sur les clôtures hebdomadaires d'un an. Écart achat/vente disponible seulement en séance.`;
-  document.querySelectorAll("#screen th.sort").forEach(h=>h.onclick=()=>{const kk=h.dataset.k;S.sort=S.sort.k===kk?{k:kk,dir:-S.sort.dir}:{k:kk,dir:kk==="t"||kk==="cls"||kk==="ter"?1:-1};renderScreen()});
+  $("#screen tbody").innerHTML=all.map(m=>{const d=m.d,e=m.e;const tags=m.pass?tagsFor(m).map(([c,l])=>`<span class="tag ${c}">${l}</span>`).join(""):`<span class="tag z">exclu : ${m.why.join(", ")}</span>`;
+    return `<tr class="${m.pass?"":"out"}"><td class="n">${m.pass?++r:""}</td>
+    <td><div class="tk">${m.t} <span class="muted small" style="font-family:var(--sans);font-weight:400">${e.ex}</span></div><div class="nm">${esc(e.name)}</div><div class="cert">${esc(e.screen)}</div></td>
+    <td>${m.pass?`<div class="score"><span class="num">${m.score}</span><span class="bar"><i style="width:${m.score}%"></i></span></div>`:"—"}</td>
+    <td>${esc(e.cls)}<div class="small muted">${e.zone==="US"?"ETF US":"UCITS "+e.dom} · ${e.dist==="Acc"?"capitalisant":"distribuant"}</div></td>
+    <td class="n ${cls(d.m1)}">${fmt.pc(d.m1)}</td><td class="n ${cls(d.ytd)}">${fmt.pc(d.ytd)}</td><td class="n ${cls(d.y1)}">${fmt.pc(d.y1)}</td>
+    <td class="n">${d.dy==null?"—":fmt.p(d.dy,2)+" %"}</td><td class="n">${d.vol==null?"—":fmt.p(d.vol,1)+" %"}</td><td class="n">${fmt.pc(m.dd)}</td>
+    <td class="n">${m.r2==null?"—":fmt.p(m.r2,2)}</td><td class="n">${fmt.p(e.ter,2)} %</td><td class="n">${fmt.big(d.aum)}</td><td class="n">${d.liq==null?"—":fmt.big(d.liq)}</td>
+    <td class="n">${m.spread==null?"—":fmt.p(m.spread,2)+" %"}</td><td><div class="tags">${tags}</div></td></tr>`}).join("");
+  $("#screenNote").textContent=`${kept.length} ETF retenus sur ${all.length}. ${S.mode==="live"?"Cours IBKR en direct.":"Instantané IBKR du 25/09/2026."} Dépendance tech : R² des rendements hebdomadaires face à XLK sur un an. Écart achat/vente visible en séance seulement.`;
+  document.querySelectorAll("#screen th.sort").forEach(h=>h.onclick=()=>{const kk=h.dataset.k;S.sort=S.sort.k===kk?{k:kk,dir:-S.sort.dir}:{k:kk,dir:["t","cls","ter","r2"].includes(kk)?1:-1};renderScreen()});
 }
 function renderControls(){
   document.querySelectorAll("#resSeg button,#resSeg2 button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===S.res));
   document.querySelectorAll("#profSeg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===S.prof));
-  $("#fAum").value=S.f.aum;$("#fTer").value=S.f.ter;$("#fTerV").textContent=fmt.p(+S.f.ter,2)+" %";$("#fLiq").value=S.f.liq;$("#fDist").value=S.f.dist;$("#fHist").checked=S.f.hist;
+  document.querySelectorAll("#scSeg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===S.sc));
+  $("#fAum").value=S.f.aum;$("#fTer").value=S.f.ter;$("#fTerV").textContent=fmt.p(+S.f.ter,2)+" %";$("#fLiq").value=S.f.liq;$("#fDist").value=S.f.dist;$("#fHist").checked=S.f.hist;$("#fTechMax").value=S.f.techMax;
+  $("#techTarget").value=S.techTarget;$("#techTargetV").textContent=fmt.p(+S.techTarget,2);
+  $("#djWarn").hidden=S.res!=="DJ";
   $("#clsChips").innerHTML=CLASSES.map(c=>`<button type="button" class="chip" aria-pressed="${S.f.cls.includes(c)}" data-c="${esc(c)}">${esc(c)}</button>`).join("");
   $("#clsChips").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const c=b.dataset.c;S.f.cls=S.f.cls.includes(c)?S.f.cls.filter(x=>x!==c):[...S.f.cls,c];save();renderControls();renderScreen()});
   const W=[["perf","Performance 1 an"],["sharpe","Performance / volatilité"],["cost","Frais bas"],["size","Taille du fonds"],["liq","Liquidité"]];
   $("#wgrid").innerHTML=W.map(([k,l])=>`<div class="ctl"><label class="label" for="w-${k}">${l} : <span class="num">${S.w[k]}</span></label><input id="w-${k}" type="range" min="0" max="50" step="5" value="${S.w[k]}" data-k="${k}"></div>`).join("");
   $("#wgrid").querySelectorAll("input").forEach(i=>i.oninput=()=>{S.w[i.dataset.k]=+i.value;i.previousElementSibling.querySelector("span").textContent=i.value;save();renderScreen()});
 }
-function save(){store.set("res",S.res);store.set("prof",S.prof);store.set("f",S.f);store.set("w",S.w);store.set("rows",S.rows);store.set("cmp",S.cmp)}
+let prefTimer=null;
+function save(){
+  const P={res:S.res,prof:S.prof,f:S.f,w:S.w,rows:S.rows,cmp:S.cmp,techTarget:S.techTarget,sc:S.sc};
+  for(const k in P)store.set(k,P[k]);
+  if(DB&&UID){clearTimeout(prefTimer);prefTimer=setTimeout(()=>{DB.doc("data/users/"+UID+"/prefs").set({v:1,prefs:JSON.stringify(P)}).catch(()=>{})},1500)}
+}
 
-/* ---------- graphique en ligne ---------- */
-function lineChart(el,dates,series,opt={}){
-  const W=860,H=opt.h||280,L=58,R=16,T=14,B=30;
+/* ---------- graphiques ---------- */
+function niceStep(r){const p=Math.pow(10,Math.floor(Math.log10(r)));const f=r/p;return(f<1.5?1:f<3?2:f<7?5:10)*p}
+function monthLab(d){const m=["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];const x=new Date(d+"T00:00:00Z");return isNaN(x)?String(d):m[x.getUTCMonth()]+(x.getUTCMonth()===0?" "+String(x.getUTCFullYear()).slice(2):"")}
+function lineChart(el,labels,series,opt={}){
+  const W=860,H=opt.h||280,L=72,R=16,T=14,B=30;
   const all=series.flatMap(s=>s.v.filter(x=>x!=null));
-  if(!all.length){el.innerHTML='<p class="muted small">Pas d\'historique disponible pour cette sélection.</p>';return}
-  let lo=Math.min(...all),hi=Math.max(...all);const pad=(hi-lo)*.08||1;lo-=pad;hi+=pad;
-  const step=niceStep((hi-lo)/5);const t0=Math.ceil(lo/step)*step;const ticks=[];for(let v=t0;v<=hi;v+=step)ticks.push(v);
-  const n=dates.length,x=i=>L+(W-L-R)*(n<2?0:i/(n-1)),y=v=>T+(H-T-B)*(1-(v-lo)/(hi-lo));
-  const f=opt.fmt||(v=>fmt.p(v,0));
+  if(!all.length){el.innerHTML='<p class="muted small">Pas de données disponibles pour cette sélection.</p>';return}
+  let lo=Math.min(...all),hi=Math.max(...all);if(opt.zero)lo=Math.min(0,lo);const pad=(hi-lo)*.08||1;if(!opt.zero)lo-=pad;hi+=pad;
+  const step=niceStep((hi-lo)/5);const ticks=[];for(let v=Math.ceil(lo/step)*step;v<=hi;v+=step)ticks.push(v);
+  const n=labels.length,x=i=>L+(W-L-R)*(n<2?0:i/(n-1)),y=v=>T+(H-T-B)*(1-(v-lo)/(hi-lo));
+  const f=opt.fmt||(v=>fmt.p(v,0)),lab=opt.xlab||monthLab;
   let g=ticks.map(v=>`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)" stroke-width="1"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end">${f(v)}</text>`).join("");
-  if(opt.base!=null&&opt.base>lo&&opt.base<hi) g+=`<line x1="${L}" x2="${W-R}" y1="${y(opt.base)}" y2="${y(opt.base)}" stroke="var(--axis)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
-  const mi=[];for(let i=0;i<n;i+=Math.max(1,Math.round(n/6)))mi.push(i);
-  g+=mi.map(i=>`<text x="${x(i)}" y="${H-8}" text-anchor="middle">${monthLab(dates[i])}</text>`).join("");
+  if(opt.base!=null&&opt.base>lo&&opt.base<hi)g+=`<line x1="${L}" x2="${W-R}" y1="${y(opt.base)}" y2="${y(opt.base)}" stroke="var(--axis)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
+  const every=Math.max(1,Math.round(n/6));for(let i=0;i<n;i+=every)g+=`<text x="${x(i)}" y="${H-8}" text-anchor="middle">${esc(lab(labels[i]))}</text>`;
   g+=`<line x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}" stroke="var(--axis)" stroke-width="1"/>`;
-  series.forEach((s,si)=>{
-    const pts=s.v.map((v,i)=>v==null?null:[x(i),y(v)]).filter(Boolean);if(!pts.length)return;
+  series.forEach(s=>{const pts=s.v.map((v,i)=>v==null?null:[x(i),y(v)]).filter(Boolean);if(!pts.length)return;
     const d="M"+pts.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join("L");
-    if(opt.area&&series.length===1) g+=`<path d="${d}L${pts[pts.length-1][0]},${H-B}L${pts[0][0]},${H-B}Z" fill="${s.color}" fill-opacity=".10"/>`;
-    g+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
-    const lp=pts[pts.length-1];g+=`<circle cx="${lp[0]}" cy="${lp[1]}" r="4" fill="${s.color}" stroke="var(--surface)" stroke-width="2"/>`;
-  });
+    if(s.area)g+=`<path d="${d}L${pts[pts.length-1][0]},${H-B}L${pts[0][0]},${H-B}Z" fill="${s.color}" fill-opacity=".10"/>`;
+    g+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" ${s.dash?'stroke-dasharray="5 4"':""}/>`;
+    const lp=pts[pts.length-1];g+=`<circle cx="${lp[0]}" cy="${lp[1]}" r="4" fill="${s.color}" stroke="var(--surface)" stroke-width="2"/>`});
   g+=`<line class="xh" x1="0" x2="0" y1="${T}" y2="${H-B}" stroke="var(--axis)" stroke-width="1" visibility="hidden"/><rect x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent" class="hit"/>`;
   el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opt.label||"Graphique")}">${g}</svg><div class="tip" hidden></div>`;
-  const svg=el.querySelector("svg"),tip=el.querySelector(".tip"),xh=svg.querySelector(".xh");
-  const move=ev=>{const r=svg.getBoundingClientRect();const px=(ev.clientX-r.left)*W/r.width;let i=Math.round((px-L)/(W-L-R)*(n-1));i=Math.max(0,Math.min(n-1,i));
+  const svg=el.querySelector("svg"),tip=el.querySelector(".tip"),xh=svg.querySelector(".xh"),hit=svg.querySelector(".hit");
+  hit.addEventListener("pointermove",ev=>{const r=svg.getBoundingClientRect();const px=(ev.clientX-r.left)*W/r.width;let i=Math.round((px-L)/(W-L-R)*(n-1));i=Math.max(0,Math.min(n-1,i));
     xh.setAttribute("x1",x(i));xh.setAttribute("x2",x(i));xh.setAttribute("visibility","visible");
-    tip.innerHTML=`<div class="small muted">Semaine du ${dates[i].split("-").reverse().join("/")}</div>`+series.map(s=>`<div class="r"><span><i style="background:${s.color}"></i>${esc(s.name)}</span><b>${s.v[i]==null?"—":f(s.v[i])}</b></div>`).join("");
-    tip.hidden=false;const tx=x(i)*r.width/W;tip.style.left=Math.min(Math.max(0,tx+12),r.width-170)+"px";tip.style.top="8px"};
-  svg.querySelector(".hit").addEventListener("pointermove",move);
-  svg.querySelector(".hit").addEventListener("pointerleave",()=>{tip.hidden=true;xh.setAttribute("visibility","hidden")});
+    tip.innerHTML=`<div class="small muted">${esc(opt.tipLab?opt.tipLab(labels[i]):"Semaine du "+String(labels[i]).split("-").reverse().join("/"))}</div>`+series.map(s=>`<div class="r"><span><i style="background:${s.color}"></i>${esc(s.name)}</span><b>${s.v[i]==null?"—":f(s.v[i])}</b></div>`).join("");
+    tip.hidden=false;const tx=x(i)*r.width/W;tip.style.left=Math.min(Math.max(0,tx+12),r.width-180)+"px";tip.style.top="8px"});
+  hit.addEventListener("pointerleave",()=>{tip.hidden=true;xh.setAttribute("visibility","hidden")});
 }
-function niceStep(r){const p=Math.pow(10,Math.floor(Math.log10(r)));const f=r/p;return (f<1.5?1:f<3?2:f<7?5:10)*p}
-function monthLab(d){const m=["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];const x=new Date(d+"T00:00:00Z");return m[x.getUTCMonth()]+(x.getUTCMonth()===0?" "+String(x.getUTCFullYear()).slice(2):"")}
+function spark(vals,color,base){if(!vals||vals.length<2)return'<svg viewBox="0 0 200 46" aria-hidden="true"><text x="100" y="28" text-anchor="middle" style="fill:var(--muted);font:11px var(--mono)">séance non disponible</text></svg>';
+  const lo=Math.min(...vals,base??Infinity),hi=Math.max(...vals,base??-Infinity),r=hi-lo||1;const x=i=>2+196*i/(vals.length-1),y=v=>42-38*(v-lo)/r;
+  const d="M"+vals.map((v,i)=>x(i).toFixed(1)+","+y(v).toFixed(1)).join("L");
+  return `<svg viewBox="0 0 200 46" aria-hidden="true">${base!=null?`<line x1="0" x2="200" y1="${y(base)}" y2="${y(base)}" stroke="var(--axis)" stroke-dasharray="3 3"/>`:""}<path d="${d}L${x(vals.length-1)},44L2,44Z" fill="${color}" fill-opacity=".10"/><path d="${d}" fill="none" stroke="${color}" stroke-width="2"/><circle cx="${x(vals.length-1)}" cy="${y(vals[vals.length-1])}" r="3" fill="${color}"/></svg>`}
 const SER=["var(--s1)","var(--s2)","var(--s3)"];
 
 /* ---------- portefeuille ---------- */
-function commission(e,qty){return e.zone==="US"?+$("#comUS").value||0:+$("#comLSE").value||0}
-function renderPortfolio(){
+function commission(e){return e.zone==="US"?+$("#comUS").value||0:+$("#comLSE").value||0}
+function purRatio(t){const c=comp(t);return c.pur!=null?{v:+c.pur,src:"fonds"}:{v:+$("#purDef").value||0,src:"défaut"}}
+function portfolio(){
   const cap=Math.max(0,+$("#cap").value||0);
-  const opts=UNIVERSE.filter(e=>S.res!=="EU"||e.zone==="UCITS");
-  let totW=0,inv=0,terUSD=0,divUSD=0,com=0,warn=[];
-  const tb=S.rows.map((r,i)=>{
-    const e=BY[r.t];const d=data(r.t);totW+= +r.w||0;
-    const tgt=cap*(+r.w||0)/100;let q=0;
-    if(d.p){q=e.zone==="US"?Math.floor(tgt/d.p*1e4)/1e4:Math.floor(tgt/d.p)}
-    const val=q*(d.p||0);inv+=val;terUSD+=val*e.ter/100;divUSD+=val*(d.dy||0)/100;if(q>0)com+=commission(e,q);
-    if(S.res==="EU"&&e.zone==="US") warn.push(`${r.t} n'est pas achetable par un résident UE (pas de document PRIIPs).`);
-    if(e.zone==="UCITS"&&q===0&&tgt>0) warn.push(`${r.t} : le montant ne couvre pas une part entière.`);
-    return `<tr><td><select data-i="${i}" class="rsel" aria-label="ETF ligne ${i+1}">${opts.concat(opts.find(o=>o.t===r.t)?[]:[e]).map(o=>`<option value="${o.t}" ${o.t===r.t?"selected":""}>${o.t} · ${esc(o.cls)}</option>`).join("")}</select></td>
-      <td class="n"><input type="number" min="0" max="100" step="5" value="${r.w}" data-i="${i}" class="rw" aria-label="Poids ${r.t}"></td>
-      <td class="n">${fmt.usd(tgt)}</td><td class="n">${fmt.p(d.p,2)}</td><td class="n">${e.zone==="US"?fmt.p(q,4):q}</td><td class="n">${fmt.usd(val*e.ter/100,2)}</td>
-      <td><button class="x" data-i="${i}" type="button" aria-label="Retirer ${r.t}">×</button></td></tr>`}).join("");
-  $("#allocT tbody").innerHTML=tb;
-  const cash=cap-inv-com;
-  $("#allocNote").innerHTML=(Math.abs(totW-100)>0.01?`<span class="tag w">Total des poids : ${fmt.p(totW,0)} %</span> `:"")+warn.map(w=>`<span class="tag c">${esc(w)}</span>`).join(" ")+
-    ` Les ETF américains s'achètent en fractions chez IBKR ; les lignes LSE en parts entières.`;
-  $("#allocT").querySelectorAll(".rsel").forEach(s=>s.onchange=()=>{S.rows[+s.dataset.i].t=s.value;save();renderPortfolio()});
-  $("#allocT").querySelectorAll(".rw").forEach(s=>s.onchange=()=>{S.rows[+s.dataset.i].w=+s.value;save();renderPortfolio()});
-  $("#allocT").querySelectorAll(".x").forEach(s=>s.onclick=()=>{S.rows.splice(+s.dataset.i,1);save();renderPortfolio()});
-
-  // simulation sur 1 an
-  const hs=S.rows.map(r=>({r,h:hist(r.t)})).filter(o=>o.h&&(+o.r.w>0));
-  let sim=null,dates=null,vol=null,dd=null,ret=null;
-  if(hs.length){
-    const n=Math.min(...hs.map(o=>o.h.c.length));dates=hs.find(o=>o.h.c.length===n).h.d.slice(-n);
-    const wsum=hs.reduce((s,o)=>s+ +o.r.w,0);
-    sim=[];for(let j=0;j<n;j++){let v=0;for(const o of hs){const c=o.h.c.slice(-n);v+=(+o.r.w/wsum)*c[j]/c[0]}sim.push(v*cap)}
-    const rr=rets(sim);const mu=rr.reduce((a,b)=>a+b,0)/rr.length;vol=Math.sqrt(rr.reduce((a,b)=>a+(b-mu)**2,0)/(rr.length-1))*Math.sqrt(52)*100;
-    dd=maxDD(sim);ret=(sim[n-1]/sim[0]-1)*100;
-    const miss=S.rows.filter(r=>+r.w>0&&!hist(r.t)).map(r=>r.t);
-    lineChart($("#pchart"),dates,[{name:"Portefeuille",color:"var(--accent)",v:sim}],{area:true,base:cap,fmt:v=>fmt.usd(v),label:"Valeur simulée du portefeuille"});
-    if(miss.length) $("#pchart").insertAdjacentHTML("beforeend",`<p class="small muted">Sans historique d'un an, exclus de la simulation : ${miss.join(", ")}.</p>`);
-  } else $("#pchart").innerHTML='<p class="muted small">Aucun historique disponible pour ces lignes.</p>';
-  const pur=$("#pur").value===""?null:+$("#pur").value;
-  const K=[
-    ["Investi",fmt.usd(inv,2),`reste ${fmt.usd(cash,2)} en liquidités`],
-    ["Frais de gestion",fmt.usd(terUSD,2)+" /an",`soit ${fmt.p(inv?terUSD/inv*100:0,2)} % pondéré`],
-    ["Commissions d'achat",fmt.usd(com,2),`${fmt.p(cap?com/cap*100:0,2)} % du capital`],
-    ["Dividendes estimés",fmt.usd(divUSD,2)+" /an","rendement actuel des ETF"],
-    ["À purifier",pur==null?"—":fmt.usd(divUSD*pur/100,2)+" /an",pur==null?"saisis le ratio publié par le fonds":`${fmt.p(pur,1)} % des dividendes`],
-    ["Zakat indicative",fmt.usd(inv*0.025,2),"2,5 % de la valeur, méthode la plus prudente"],
-    ["Perf. prix sur 1 an",fmt.pc(ret),"si acheté il y a un an"],
-    ["Volatilité 1 an",vol==null?"—":fmt.p(vol,1)+" %","rendements hebdomadaires annualisés"],
-    ["Baisse max 1 an",fmt.pc(dd),"du plus haut au plus bas"],
-    ["Dans 12 mois",fmt.usd(cap+12*(+$("#dca").value||0)),"capital versé avec les versements mensuels"]
-  ];
-  $("#pkpis").innerHTML=K.map(([a,b,c])=>`<div class="kpi"><span class="label">${a}</span><span class="v">${b}</span><span class="d">${c}</span></div>`).join("");
-  renderDrift(cap);
+  const rows=S.rows.map(r=>{const e=BY[r.t],d=data(r.t),w=+r.w||0,tgt=cap*w/100;let q=0;if(d.p)q=e.zone==="US"?Math.floor(tgt/d.p*1e4)/1e4:Math.floor(tgt/d.p);
+    const val=q*(d.p||0);return{t:r.t,e,d,w,tgt,q,val,com:q>0?commission(e):0}});
+  const inv=rows.reduce((s,r)=>s+r.val,0),com=rows.reduce((s,r)=>s+r.com,0);
+  const W=rows.reduce((s,r)=>s+r.w,0);
+  const wavg=f=>{let s=0,ws=0;for(const r of rows){const v=f(r);if(v!=null&&!isNaN(v)){s+=v*r.w;ws+=r.w}}return ws?s/ws:null};
+  return{cap,rows,inv,com,cash:cap-inv-com,W,wavg};
 }
+function renderPortfolio(){
+  const P=portfolio();const opts=UNIVERSE.filter(accessible);const warn=[];
+  $("#allocT tbody").innerHTML=P.rows.map((r,i)=>{
+    if(!accessible(r.e))warn.push(`${r.t} n'est pas achetable par un résident UE (pas de document PRIIPs).`);
+    if(r.e.zone==="UCITS"&&r.q===0&&r.tgt>0)warn.push(`${r.t} : le montant ne couvre pas une part entière.`);
+    return `<tr><td><select data-i="${i}" class="rsel" aria-label="ETF ligne ${i+1}">${opts.concat(opts.includes(r.e)?[]:[r.e]).map(o=>`<option value="${o.t}" ${o.t===r.t?"selected":""}>${o.t} · ${esc(o.cls)}</option>`).join("")}</select></td>
+      <td class="n"><input type="number" min="0" max="100" step="5" value="${r.w}" data-i="${i}" class="rw" aria-label="Poids ${r.t}"></td>
+      <td class="n">${fmt.usd(r.tgt)}</td><td class="n">${fmt.p(r.d.p,2)}</td><td class="n">${r.e.zone==="US"?fmt.p(r.q,4):r.q}</td><td class="n">${fmt.usd(r.val*r.e.ter/100,2)}</td>
+      <td><button class="x" data-i="${i}" type="button" aria-label="Retirer ${r.t}">×</button></td></tr>`}).join("");
+  $("#allocNote").innerHTML=(Math.abs(P.W-100)>0.01?`<span class="tag w">Total des poids : ${fmt.p(P.W,0)} %</span> `:"")+warn.map(w=>`<span class="tag c">${esc(w)}</span>`).join(" ");
+  $("#allocT").querySelectorAll(".rsel").forEach(s=>s.onchange=()=>{S.rows[+s.dataset.i].t=s.value;save();renderAll()});
+  $("#allocT").querySelectorAll(".rw").forEach(s=>s.onchange=()=>{S.rows[+s.dataset.i].w=+s.value;save();renderAll()});
+  $("#allocT").querySelectorAll(".x").forEach(s=>s.onclick=()=>{S.rows.splice(+s.dataset.i,1);save();renderAll()});
+  const sim=simulate(P.cap);
+  if(sim){lineChart($("#pchart"),sim.dates,[{name:"Portefeuille",color:"var(--accent)",v:sim.v,area:true}],{base:P.cap,fmt:v=>fmt.usd(v),label:"Valeur simulée du portefeuille"});
+    if(sim.miss.length)$("#pchart").insertAdjacentHTML("beforeend",`<p class="small muted">Sans historique d'un an, exclus de la simulation : ${sim.miss.join(", ")}.</p>`)}
+  else $("#pchart").innerHTML='<p class="muted small">Aucun historique disponible pour ces lignes.</p>';
+  const ter=P.rows.reduce((s,r)=>s+r.val*r.e.ter/100,0),div=P.rows.reduce((s,r)=>s+r.val*(r.d.dy||0)/100,0);
+  const K=[["Investi",fmt.usd(P.inv,2),`reste ${fmt.usd(P.cash,2)} en liquidités`],["Frais de gestion",fmt.usd(ter,2)+" /an",`${fmt.p(P.inv?ter/P.inv*100:0,2)} % pondéré`],["Commissions d'achat",fmt.usd(P.com,2),`${fmt.p(P.cap?P.com/P.cap*100:0,2)} % du capital`],["Dividendes estimés",fmt.usd(div,2)+" /an","rendement actuel des ETF"],
+    ["Perf. prix sur 1 an",fmt.pc(sim&&sim.ret),"si acheté il y a un an"],["Volatilité 1 an",sim?fmt.p(sim.vol,1)+" %":"—","rendements hebdomadaires"],["Baisse max 1 an",fmt.pc(sim&&sim.dd),"du plus haut au plus bas"],["Dans 12 mois",fmt.usd(P.cap+12*(+$("#dca").value||0)),"capital versé, versements compris"]];
+  $("#pkpis").innerHTML=K.map(([a,b,c])=>`<div class="kpi"><span class="label">${a}</span><span class="v">${b}</span><span class="d">${c}</span></div>`).join("");
+  renderDrift();
+}
+function simulate(cap){
+  const hs=S.rows.map(r=>({r,h:hist(r.t)})).filter(o=>o.h&&(+o.r.w>0));if(!hs.length)return null;
+  const n=Math.min(...hs.map(o=>o.h.c.length));const dates=hs.find(o=>o.h.c.length===n).h.d.slice(-n);const ws=hs.reduce((s,o)=>s+ +o.r.w,0);
+  const v=[];for(let j=0;j<n;j++){let s=0;for(const o of hs){const c=o.h.c.slice(-n);s+=(+o.r.w/ws)*c[j]/c[0]}v.push(s*cap)}
+  const rr=rets(v),mu=rr.reduce((a,b)=>a+b,0)/rr.length;
+  return{dates,v,vol:Math.sqrt(rr.reduce((a,b)=>a+(b-mu)**2,0)/(rr.length-1))*Math.sqrt(52)*100,dd:maxDD(v),ret:(v[n-1]/v[0]-1)*100,miss:S.rows.filter(r=>+r.w>0&&!hist(r.t)).map(r=>r.t)};
+}
+function normPositions(p){const arr=Array.isArray(p)?p:(p&&Array.isArray(p.positions)?p.positions:[]);
+  return arr.map(o=>({sym:String(o.symbol||o.ticker||o.contract_desc||o.description||"").split(" ")[0].toUpperCase(),conid:+(o.contract_id||o.conid||o.contractId||0),mv:+(o.market_value??o.marketValue??o.mkt_value??o.value??0)}))}
+function halalPositions(){if(!S.pos)return null;return normPositions(S.pos).map(p=>{const e=BY[p.sym]||UNIVERSE.find(x=>x.conid===p.conid);return e?Object.assign(p,{t:e.t}):p})}
 function renderDrift(){
   const el=$("#drift");
-  if(S.pos==null){el.innerHTML=S.mode==="live"?"Lecture des positions IBKR…":"Visible quand la page lit ton compte IBKR.";return}
-  const items=normPositions(S.pos);
-  const halal=items.filter(p=>BY[p.sym]||UNIVERSE.some(e=>e.conid===p.conid));
-  if(!items.length){el.innerHTML="Ton compte IBKR n'a aucune position pour l'instant. Une fois tes premiers achats passés, l'écart avec la répartition cible s'affiche ici, avec une alerte au-delà de 5 points.";return}
+  if(S.pos==null){el.textContent=S.mode==="live"?"Lecture des positions IBKR…":"Visible quand la page lit ton compte IBKR.";return}
+  const items=halalPositions();const halal=items.filter(p=>p.t);
+  if(!items.length){el.textContent="Ton compte IBKR n'a aucune position pour l'instant. Après tes premiers achats, l'écart avec la répartition cible s'affiche ici, avec une alerte au-delà de 5 points.";return}
   const tot=halal.reduce((s,p)=>s+(p.mv||0),0);
-  const rows=S.rows.map(r=>{const p=halal.find(x=>x.sym===r.t||x.conid===BY[r.t].conid);const cw=p&&tot?p.mv/tot*100:0;const dlt=cw-(+r.w||0);
-    return `<tr><td class="tk">${r.t}</td><td class="n">${fmt.p(+r.w,0)} %</td><td class="n">${fmt.p(cw,1)} %</td><td class="n ${Math.abs(dlt)>5?"neg":""}">${fmt.pc(dlt)}</td><td>${Math.abs(dlt)>5?'<span class="tag c">rééquilibrer</span>':'<span class="tag g">dans la marge</span>'}</td></tr>`}).join("");
-  const other=items.filter(p=>!halal.includes(p)).map(p=>p.sym).join(", ");
-  el.innerHTML=`<div class="tablebox" style="border:0"><table><thead><tr><th>ETF</th><th class="n">Cible</th><th class="n">Actuel</th><th class="n">Écart</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`+(other?`<p class="small muted" style="margin-top:8px">Autres positions hors univers halal suivi : ${esc(other)}.</p>`:"");
+  const rows=S.rows.map(r=>{const p=halal.find(x=>x.t===r.t);const cw=p&&tot?p.mv/tot*100:0;const dl=cw-(+r.w||0);
+    return `<tr><td class="tk">${r.t}</td><td class="n">${fmt.p(+r.w,0)} %</td><td class="n">${fmt.p(cw,1)} %</td><td class="n ${Math.abs(dl)>5?"neg":""}">${fmt.pc(dl)}</td><td>${Math.abs(dl)>5?'<span class="tag c">rééquilibrer</span>':'<span class="tag g">dans la marge</span>'}</td></tr>`}).join("");
+  const other=items.filter(p=>!p.t).map(p=>p.sym).join(", ");
+  el.innerHTML=`<div class="tablebox" style="border:0"><table><thead><tr><th>ETF</th><th class="n">Cible</th><th class="n">Actuel</th><th class="n">Écart</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`+(other?`<p class="small muted">Autres positions hors univers suivi : ${esc(other)}.</p>`:"");
 }
-function normPositions(p){
-  const arr=Array.isArray(p)?p:(p&&Array.isArray(p.positions)?p.positions:[]);
-  return arr.map(o=>({sym:String(o.symbol||o.ticker||o.contract_desc||o.description||"").split(" ")[0].toUpperCase(),conid:+(o.contract_id||o.conid||o.contractId||0),mv:+(o.market_value??o.marketValue??o.mkt_value??o.value??0)}));
+
+/* ---------- temps réel ---------- */
+function marketState(){
+  const now=new Date(),u=now.getUTCHours()*60+now.getUTCMinutes(),wd=now.getUTCDay();const week=wd>0&&wd<6;
+  return[{n:"New York",open:week&&u>=13*60+30&&u<20*60,h:"16:30–23:00"},{n:"Londres",open:week&&u>=7*60&&u<15*60+30,h:"10:00–18:30"}];
+}
+function watchList(){const s=new Set(S.rows.map(r=>r.t));(halalPositions()||[]).forEach(p=>p.t&&s.add(p.t));return[...s].filter(t=>BY[t])}
+const ST={REALTIME:"temps réel",DELAYED:"différé 15 min",FROZEN:"dernier cours",FROZEN_DELAYED:"dernier cours différé"};
+function renderDirect(){
+  $("#mkts").innerHTML=marketState().map(m=>`<span class="pill ${m.open?"live":"snap"}"><span class="dot"></span>${m.n} ${m.open?"ouvert":"fermé"} · ${m.h}</span>`).join("");
+  $("#tiles").innerHTML=watchList().map(t=>{const d=data(t),i=S.intra[t];const vals=i?i.c:null;
+    const up=d.chg==null?"var(--accent)":d.chg>=0?"var(--good)":"var(--crit)";
+    return `<div class="tile"><div class="top"><span class="tk">${t}</span><span class="small muted">${esc(BY[t].cls)}</span></div>
+      <div class="top"><span class="px">${fmt.p(d.p,2)}</span><span class="num ${cls(d.chg)}">${fmt.pc(d.chg,2)}</span></div>
+      ${spark(vals,up,vals?vals[0]:null)}
+      <div class="small muted">${d.ts?"Dernier échange à "+djTime(d.ts)+" (Djibouti)":"Clôture du 25/09"} · ${esc(ST[d.status]||(d.live?"":"instantané"))}</div></div>`}).join("")||'<p class="muted">Ajoute des ETF dans l\'onglet Portefeuille.</p>';
+  const P=portfolio();const dayPnl=P.rows.reduce((s,r)=>s+(r.d.chg!=null?r.val*r.d.chg/(100+r.d.chg):0),0);
+  const tech=portTech(),pur=purTotals();
+  $("#dirKpis").innerHTML=[
+    ["Variation du jour",fmt.usd(dayPnl,2),"sur la répartition de l'onglet Portefeuille",""],
+    ["Dépendance tech",tech.r2==null?"—":fmt.p(tech.r2,2),`plafond fixé : ${fmt.p(+S.techTarget,2)}`,tech.r2!=null&&tech.r2>S.techTarget?"alert":""],
+    ["À purifier / an",fmt.usd(pur.amt,2),`${fmt.p(pur.pct,3)} % du montant investi`,""],
+    ["Dette la plus proche du plafond",pur.worst?pur.worst.t+" · "+fmt.p(pur.worst.m,0)+" %":"—",pur.worst?"du plafond de l'indice utilisé":"en attente des données du gérant",pur.worst&&pur.worst.m>80?"alert":pur.worst&&pur.worst.m>65?"watch":""]
+  ].map(([a,b,c,k])=>`<div class="kpi ${k}"><span class="label">${a}</span><span class="v">${b}</span><span class="d">${c}</span></div>`).join("");
+}
+
+/* ---------- conformité ---------- */
+function purTotals(){
+  const P=portfolio();let amt=0;const rows=P.rows.map(r=>{const pr=purRatio(r.t);const a=r.val*(r.d.dy||0)/100*pr.v/100;amt+=a;return{r,pr,a}});
+  let worst=null;for(const r of P.rows){const c=comp(r.t);if(c.debt!=null&&r.e.debtMax){const m=c.debt/r.e.debtMax*100;if(!worst||m>worst.m)worst={t:r.t,m}}}
+  return{P,rows,amt,pct:P.inv?amt/P.inv*100:0,worst};
+}
+function renderConformite(){
+  const T=purTotals();
+  $("#purT tbody").innerHTML=T.rows.map(({r,pr,a})=>`<tr><td class="tk">${r.t}</td><td class="n">${fmt.usd(r.val,2)}</td><td class="n">${r.d.dy==null?"—":fmt.p(r.d.dy,2)+" %"}</td><td class="n">${fmt.p(pr.v,1)} % <span class="small muted">${pr.src==="défaut"?"(défaut)":""}</span></td><td class="n">${fmt.usd(a,2)}</td><td class="n">${fmt.p(r.val?a/r.val*100:0,3)} %</td></tr>`).join("");
+  $("#purT tfoot").innerHTML=`<tr><td>Total</td><td class="n">${fmt.usd(T.P.inv,2)}</td><td></td><td></td><td class="n">${fmt.usd(T.amt,2)}</td><td class="n">${fmt.p(T.pct,3)} %</td></tr>`;
+  $("#purKpis").innerHTML=[
+    ["À purifier par an",fmt.usd(T.amt,2),fmt.djf(T.amt)],
+    ["Taux d'épuration",fmt.p(T.pct,3)+" %","du montant investi, par an"],
+    ["Pour 1 000 $ investis",fmt.usd(T.P.inv?T.amt/T.P.inv*1000:0,2),"par an, au rendement actuel"],
+    ["Zakat indicative",fmt.usd(T.P.inv*0.025,2),"2,5 % de la valeur, méthode prudente"]
+  ].map(([a,b,c])=>`<div class="kpi"><span class="label">${a}</span><span class="v">${b}</span><span class="d">${c}</span></div>`).join("");
+  $("#debtT tbody").innerHTML=UNIVERSE.filter(accessible).map(e=>{const c=comp(e.t);const h=(c.hist||[]).filter(x=>x.debt!=null);
+    const used=c.debt!=null&&e.debtMax?c.debt/e.debtMax*100:null;const k=used==null?"":used>80?"c":used>65?"w":"";
+    return `<tr><td class="tk">${e.t}</td><td class="small">${esc(e.debtRule)}</td><td class="n">${e.debtMax?fmt.p(e.debtMax,e.debtMax%1?2:0)+" %":"—"}</td>
+    <td class="n">${c.debt!=null?fmt.p(+c.debt,1)+" %":'<span class="muted">en attente</span>'}</td>
+    <td>${used!=null?`<div class="score"><span class="bar"><i class="${k}" style="width:${Math.min(100,used)}%"></i></span><span class="num small">${fmt.p(e.debtMax-c.debt,1)} pts</span></div>`:"—"}</td>
+    <td>${h.length>1?`<span style="display:inline-block;width:110px">${spark(h.map(x=>+x.debt),"var(--s2)",null)}</span>`:'<span class="small muted">'+(h.length?"1 relevé":"aucun relevé")+"</span>"}</td>
+    <td class="n small">${esc(c.date||"—")}</td></tr>`}).join("");
+  $("#debtNote").textContent="La dette pondérée est la moyenne du ratio utilisé par l'indice, pondérée par le poids de chaque société. Les émetteurs et des services comme Zoya ou Musaffa la publient ; le gérant de l'application la saisit dans son espace et chaque saisie s'ajoute à l'historique. Orange au-delà de 65 % du plafond utilisé, rouge au-delà de 80 %.";
+}
+
+/* ---------- tech & IA ---------- */
+function portTech(){const P=portfolio();return{r2:P.wavg(r=>techOf(r.t).r2),beta:P.wavg(r=>techOf(r.t).beta),tech:P.wavg(r=>comp(r.t).tech!=null?+comp(r.t).tech:null)}}
+function suggestLessTech(cand,tg){
+  let rows=S.rows.map(r=>({t:r.t,w:+r.w||0}));const moves={};
+  const r2=rs=>{let s=0,ws=0;for(const r of rs){const v=techOf(r.t).r2;if(v!=null){s+=v*r.w;ws+=r.w}}return ws?s/ws:null};
+  const divs=cand.filter(x=>x.r2<0.4).map(x=>x.e.t);if(!divs.length)return null;
+  for(let k=0;k<20&&r2(rows)>tg;k++){
+    const src=rows.filter(r=>r.w>=5&&!divs.includes(r.t)).sort((a,b)=>(techOf(b.t).r2||0)-(techOf(a.t).r2||0))[0];if(!src)break;
+    const to=divs.find(t=>!rows.some(r=>r.t===t))||divs[0];let dst=rows.find(r=>r.t===to);if(!dst){dst={t:to,w:0};rows.push(dst)}
+    src.w-=5;dst.w+=5;const key=src.t+">"+to;moves[key]=(moves[key]||0)+5;
+  }
+  rows=rows.filter(r=>r.w>0);
+  return{rows,r2:r2(rows),moves:Object.entries(moves).map(([k,w])=>{const[from,to]=k.split(">");return{from,to,w}})};
+}
+function renderTech(){
+  const pt=portTech(),tg=+S.techTarget,pct=v=>Math.max(0,Math.min(100,v*100));
+  $("#techGauge").innerHTML=pt.r2==null?'<p class="muted small">Historique insuffisant.</p>':`<div style="display:flex;justify-content:space-between;align-items:baseline"><span class="label">Dépendance tech pondérée</span><span class="num" style="font-size:20px">${fmt.p(pt.r2,2)}</span></div>
+    <div class="track"><div class="fill" style="width:${pct(pt.r2)}%;background:${pt.r2>tg?"#d03b3b":"var(--accent)"}"></div><span class="mark" style="left:${pct(tg)}%" title="Plafond"></span></div>
+    <div class="lab"><span>0 · indépendant</span><span>plafond ${fmt.p(tg,2)}</span><span>1 · suit la tech</span></div>
+    <p class="small">Bêta puces IA pondéré : <b class="num">${fmt.p(pt.beta,2)}</b>${pt.tech!=null?` · poids tech déclaré : <b class="num">${fmt.p(pt.tech,0)} %</b>`:""}</p>`;
+  const cand=UNIVERSE.filter(e=>accessible(e)&&hist(e.t)).map(e=>({e,...techOf(e.t)})).filter(x=>x.r2!=null).sort((a,b)=>a.r2-b.r2);
+  $("#techDiv").innerHTML=`<table><thead><tr><th>ETF</th><th>Classe</th><th class="n">Dép. tech</th><th class="n">Div.</th></tr></thead><tbody>${cand.slice(0,5).map(x=>`<tr><td class="tk">${x.e.t}</td><td>${esc(x.e.cls)}</td><td class="n">${fmt.p(x.r2,2)}</td><td class="n">${fmt.p(data(x.e.t).dy,2)} %</td></tr>`).join("")}</tbody></table>
+    <p class="small muted" style="margin-top:8px">Les sukuk (SPSK) et l'immobilier (SPRE) ne suivent presque pas la tech. KWIN n'a pas encore un an d'historique pour être mesuré.</p>`;
+  const sug=suggestLessTech(cand,tg);
+  $("#techSuggest").innerHTML=pt.r2==null?"":pt.r2<=tg?`<span class="tag g">Sous ton plafond</span> Rien à changer.`:
+    sug&&sug.moves.length?`<p><span class="tag c">Au-dessus du plafond</span> Proposition : ${sug.moves.map(m=>`${fmt.p(m.w,0)} points de ${m.from} vers ${m.to}`).join(", ")}. Dépendance obtenue : <b class="num">${fmt.p(sug.r2,2)}</b>.</p><button class="btn primary" id="applyTech" type="button" style="margin-top:8px">Appliquer à ma répartition</button>`:"Aucun diversifiant accessible ne permet d'atteindre ce plafond.";
+  const ap=$("#applyTech");if(ap)ap.onclick=()=>{S.rows=sug.rows;save();renderAll();toast("Répartition mise à jour")};
+  $("#techT tbody").innerHTML=UNIVERSE.map(e=>{const t=techOf(e.t),c=comp(e.t);return `<tr class="${accessible(e)?"":"out"}"><td class="tk">${e.t}</td><td>${esc(e.cls)}</td><td class="n">${t.r2==null?"—":fmt.p(t.r2,2)}</td><td>${t.r2==null?"":`<span class="bar" style="display:block;width:120px"><i class="${t.r2>0.8?"c":t.r2>0.6?"w":""}" style="width:${pct(t.r2)}%"></i></span>`}</td><td class="n">${t.beta==null?"—":fmt.p(t.beta,2)}</td><td class="n">${c.tech!=null?fmt.p(+c.tech,0)+" %":"—"}</td><td class="n">${c.ai5!=null?fmt.p(+c.ai5,1)+" %":"—"}</td></tr>`}).join("");
+}
+
+/* ---------- ROI Djibouti ---------- */
+function renderROI(){
+  const P=portfolio();const N=Math.max(1,Math.min(30,+$("#hor").value||10));
+  const hist3=P.wavg(r=>r.d.y3!=null?(Math.pow(1+r.d.y3/100,1/3)-1)*100:r.d.y1);
+  const g=(S.sc==="prudent"?4:S.sc==="central"?7:(hist3??7))/100;
+  const dy=(P.wavg(r=>r.d.dy)||0)/100;
+  const whtUS=S.res==="EU"?0.15:0.30;
+  const wht=(P.wavg(r=>r.e.usSitus?whtUS*100:0)||0)/100;
+  const pur=(P.wavg(r=>purRatio(r.t).v)||0)/100,loc=(+$("#locTax").value||0)/100;
+  const wire=+$("#wireIn").value||0,wiresYr=+$("#wiresYr").value||0,ordersM=+$("#ordersM").value||0,dca=+$("#dca").value||0;
+  const comAvg=P.rows.length?P.rows.reduce((s,r)=>s+commission(r.e),0)/P.rows.length:0;
+  const zak=$("#zakOn").checked;
+  let V=P.cap-wire-P.com,paid=P.cap,tax=0,purT=0,zakT=0,feeT=wire+P.com;const years=[];
+  for(let y=1;y<=N;y++){
+    const contrib=12*dca,fees=(dca>0?wiresYr*wire:0)+12*ordersM*comAvg*(dca>0?1:0);
+    V=V*(1+g)+(contrib-fees)*(1+g/2);paid+=contrib;feeT+=fees;
+    const D=V*dy,t=D*wht+D*(1-wht)*loc,pu=D*pur;V+=D-t-pu;tax+=t;purT+=pu;
+    if(zak){const z=V*0.025;V-=z;zakT+=z}
+    years.push({y,paid,V,gain:V-paid,roi:(V/paid-1)*100});
+  }
+  const last=years[years.length-1];
+  const usSitus=P.inv?P.rows.filter(r=>r.e.usSitus).reduce((s,r)=>s+r.val,0)/P.inv*last.V:0;
+  const K=[["Valeur après "+N+" ans",fmt.usd(last.V),fmt.djf(last.V),""],["Total versé",fmt.usd(last.paid),fmt.djf(last.paid),""],["Gain net",fmt.usd(last.gain),fmt.djf(last.gain),""],["ROI net",fmt.pc(last.roi),`hausse supposée ${fmt.p(g*100,1)} %/an`,""],
+    ["Frais de virement et d'ordres",fmt.usd(feeT),"cumulés",""],["Retenue US + impôt local",fmt.usd(tax),S.res==="EU"?"sur dividendes":"30 % sur les dividendes des ETF US",""],["Purification",fmt.usd(purT),"cumulée",""],["Zakat",zak?fmt.usd(zakT):"hors portefeuille",zak?"2,5 %/an de la valeur":"payée à part",""],
+    ["Seuil succession US",fmt.p(Math.min(999,usSitus/60000*100),0)+" %","des 60 000 $ au-delà desquels les ETF US d'un non-résident sont taxés au décès",usSitus>45000?"watch":""]];
+  $("#roiKpis").innerHTML=K.map(([a,b,c,k])=>`<div class="kpi ${k}"><span class="label">${a}</span><span class="v">${b}</span><span class="d">${c}</span></div>`).join("");
+  $("#roiLegend").innerHTML=`<span><i style="background:var(--s1)"></i>Valeur nette</span><span><i style="background:var(--s2)"></i>Total versé</span>`;
+  lineChart($("#roiChart"),years.map(x=>x.y),[{name:"Valeur nette",color:"var(--s1)",v:years.map(x=>x.V),area:true},{name:"Total versé",color:"var(--s2)",v:years.map(x=>x.paid),dash:true}],{zero:true,fmt:v=>fmt.usd(v),xlab:y=>"an "+y,tipLab:y=>"Année "+y,label:"Projection de la valeur"});
+  $("#roiT").innerHTML=`<thead><tr><th class="n">Année</th><th class="n">Versé</th><th class="n">Valeur</th><th class="n">En FDJ</th><th class="n">ROI</th></tr></thead><tbody>${years.map(x=>`<tr><td class="n">${x.y}</td><td class="n">${fmt.usd(x.paid)}</td><td class="n">${fmt.usd(x.V)}</td><td class="n">${fmt.djf(x.V)}</td><td class="n ${cls(x.roi)}">${fmt.pc(x.roi)}</td></tr>`).join("")}</tbody>`;
+  const order=Math.max(25,dca||100);
+  const cmp=[["SPUS","ISDU"],["SPWO","ISDW"]].map(([us,uc])=>{
+    const cost=(t,wh)=>{const e=BY[t],d=data(t);const drag=(d.dy||0)*wh;const com=commission(e)/order*100;return{ter:e.ter,drag,com,tot:e.ter+drag+com}};
+    return{us,uc,a:cost(us,whtUS),b:cost(uc,0)}});
+  $("#roiCmp").innerHTML=`<div class="tablebox" style="border:0"><table><thead><tr><th></th><th class="n">Frais</th><th class="n">Impôt div.</th><th class="n">Commission</th><th class="n">Coût /an</th></tr></thead><tbody>${cmp.map(c=>`<tr><td><b>${c.us}</b> <span class="muted">US</span></td><td class="n">${fmt.p(c.a.ter,2)} %</td><td class="n">${fmt.p(c.a.drag,2)} %</td><td class="n">${fmt.p(c.a.com,2)} %</td><td class="n"><b>${fmt.p(c.a.tot,2)} %</b></td></tr><tr><td><b>${c.uc}</b> <span class="muted">UCITS</span></td><td class="n">${fmt.p(c.b.ter,2)} %</td><td class="n">${fmt.p(c.b.drag,2)} %</td><td class="n">${fmt.p(c.b.com,2)} %</td><td class="n"><b>${fmt.p(c.b.tot,2)} %</b></td></tr>`).join("")}</tbody></table></div>
+  <p style="margin-top:8px">Djibouti n'a pas de convention fiscale avec les États-Unis : les dividendes des ETF américains subissent 30 % de retenue. Un ETF irlandais ne paie que 15 % à l'intérieur du fonds (déjà dans son cours), rien à la distribution, et échappe à l'impôt américain sur les successions. Les dividendes halal étant faibles, la retenue coûte peu ; à petit montant, la commission de Londres pèse davantage. Commission calculée sur un ordre de ${fmt.usd(order)}.</p>`;
 }
 
 /* ---------- comparer ---------- */
 function renderCompare(){
-  const withH=UNIVERSE.filter(e=>hist(e.t));
-  S.cmp=S.cmp.filter(t=>hist(t)).slice(0,3);
+  const withH=UNIVERSE.filter(e=>hist(e.t));S.cmp=S.cmp.filter(t=>hist(t)).slice(0,3);
   $("#cmpChips").innerHTML=withH.map(e=>{const i=S.cmp.indexOf(e.t);return `<button type="button" class="chip" aria-pressed="${i>=0}" data-t="${e.t}" ${i<0&&S.cmp.length>=3?"disabled":""}>${i>=0?`<i style="display:inline-block;width:10px;height:3px;border-radius:2px;background:${SER[i]};margin-right:6px;vertical-align:middle"></i>`:""}${e.t}</button>`}).join("");
   $("#cmpChips").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const t=b.dataset.t;S.cmp=S.cmp.includes(t)?S.cmp.filter(x=>x!==t):[...S.cmp,t];save();renderCompare()});
   const hs=S.cmp.map(t=>({t,h:hist(t)}));
-  if(hs.length){
-    const n=Math.min(...hs.map(o=>o.h.c.length));const dates=hs.find(o=>o.h.c.length===n).h.d.slice(-n);
-    const ser=hs.map((o,i)=>{const c=o.h.c.slice(-n);return {name:o.t,color:SER[i],v:c.map(x=>x/c[0]*100)}});
+  if(hs.length){const n=Math.min(...hs.map(o=>o.h.c.length));const dates=hs.find(o=>o.h.c.length===n).h.d.slice(-n);
+    const ser=hs.map((o,i)=>{const c=o.h.c.slice(-n);return{name:o.t,color:SER[i],v:c.map(x=>x/c[0]*100)}});
     $("#cmpLegend").innerHTML=ser.map(s=>`<span><i style="background:${s.color}"></i>${s.name} <b class="num">${fmt.pc(s.v[s.v.length-1]-100)}</b></span>`).join("");
-    lineChart($("#cmpChart"),dates,ser,{base:100,fmt:v=>fmt.p(v,0),label:"Comparaison base 100"});
-  } else {$("#cmpLegend").innerHTML="";$("#cmpChart").innerHTML='<p class="muted small">Choisis au moins un ETF.</p>'}
+    lineChart($("#cmpChart"),dates,ser,{base:100,fmt:v=>fmt.p(v,0),label:"Comparaison base 100"})}
+  else{$("#cmpLegend").innerHTML="";$("#cmpChart").innerHTML='<p class="muted small">Choisis au moins un ETF.</p>'}
   const ts=withH.map(e=>e.t);const R={};ts.forEach(t=>R[t]=rets(hist(t).c));
-  const col=v=>v==null?"var(--surface2)":`var(--h${Math.max(0,Math.min(6,Math.floor(v*7)))})`;
-  const ink=v=>v!=null&&v>=0.57?"var(--heat-hi-ink)":"var(--ink)";
+  const col=v=>v==null?"var(--surface2)":`var(--h${Math.max(0,Math.min(6,Math.floor(v*7)))})`;const ink=v=>v!=null&&v>=0.57?"var(--heat-hi-ink)":"var(--ink)";
   $("#heat").innerHTML=`<tr><th></th>${ts.map(t=>`<th>${t}</th>`).join("")}</tr>`+ts.map(a=>`<tr><th>${a}</th>${ts.map(b=>{const v=a===b?1:corr(R[a],R[b]);return `<td style="background:${col(v)};color:${ink(v)}" title="${a} / ${b} : ${v==null?"n.d.":fmt.p(v,2)}">${v==null?"—":fmt.p(v,2)}</td>`}).join("")}</tr>`).join("");
 }
 
+/* ---------- alertes ---------- */
+function renderAlertForm(){
+  const cur=$("#alT").value;$("#alT").innerHTML=UNIVERSE.filter(accessible).map(e=>`<option value="${e.t}">${e.t} · ${esc(e.cls)}</option>`).join("");if(cur&&BY[cur]&&accessible(BY[cur]))$("#alT").value=cur;
+  const t=$("#alT").value,d=data(t);
+  const P=[["−5 % sous le cours",d.p?["LAST:LTE",+(d.p*0.95).toFixed(2)]:null],["−10 % sous le cours",d.p?["LAST:LTE",+(d.p*0.90).toFixed(2)]:null],["Nouveau plus haut 52 sem.",d.h52?["LAST:GTE",+(d.h52*1.001).toFixed(2)]:null],["Séance ≤ −3 %",["PERCENT_CHANGE:LTE",-3]]].filter(x=>x[1]);
+  $("#alPresets").innerHTML=P.map((x,i)=>`<button type="button" class="chip" data-i="${i}">${x[0]}</button>`).join("");
+  $("#alPresets").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const p=P[+b.dataset.i][1];$("#alK").value=p[0];$("#alV").value=p[1]});
+}
+function renderAlerts(){
+  const el=$("#alList");
+  if(S.alerts==null){el.textContent=mcp?"Lecture des alertes IBKR…":"Visible quand la page lit ton compte IBKR.";return}
+  const arr=Array.isArray(S.alerts)?S.alerts:(S.alerts.alerts||[]);
+  if(!arr.length){el.textContent="Aucune alerte active dans ton compte IBKR.";return}
+  el.innerHTML=`<table><thead><tr><th>Alerte</th><th>Statut</th></tr></thead><tbody>${arr.map(a=>`<tr><td>${esc(a.name||a.alert_name||a.symbol||a.description||("Alerte "+(a.id||a.alert_id||"")))}</td><td>${esc(a.status||"")}</td></tr>`).join("")}</tbody></table>`;
+}
+$("#alT").onchange=renderAlertForm;
+$("#alertForm").addEventListener("submit",async ev=>{
+  ev.preventDefault();const msg=$("#alMsg");
+  if(!mcp){msg.innerHTML='<div class="banner crit">Les alertes demandent l\'accès à ton compte IBKR depuis Claude.</div>';return}
+  const e=BY[$("#alT").value];const[ct,op]=$("#alK").value.split(":");const v=+$("#alV").value;const email=$("#alE").value.trim();
+  const input={symbol:e.t,contract_id:e.conid,exchange:"SMART",condition_type:ct,operator:op,value:v,tif:$("#alTif").value,active_hours:"REGULAR"};
+  if(email){input.email=email;input.email_note="Radar ETF Halal : "+e.t}
+  $("#alGo").disabled=true;
+  try{await mcp.callTool(SERVER,"create_alert",input);msg.innerHTML=`<div class="banner info">Alerte créée dans IBKR : ${esc(e.t)} ${op==="LTE"?"≤":"≥"} ${esc(v)}${ct==="PERCENT_CHANGE"?" %":""}.${email?"":" Sans e-mail, elle ne s'affiche que dans IBKR Desktop."}</div>`;try{await mcp.invalidate(SERVER,"get_alerts")}catch(_){}}
+  catch(err){msg.innerHTML=`<div class="banner crit">${esc(MSG[err.code]||("IBKR a refusé l'alerte : "+(err.message||err.code)))}${["server_unavailable","upstream_error"].includes(err.code)?" Vérifie la liste ci-dessous avant de réessayer : l'alerte a pu être créée.":""}</div>`}
+  finally{$("#alGo").disabled=false}
+});
+
 /* ---------- indicateurs & veille ---------- */
-const SEV={r:["var(--crit)","action"],w:["#fab219","surveiller"],g:["#0ca30c","info"]};
+const SEV={r:["#d03b3b","action"],w:["#fab219","surveiller"],g:["#0ca30c","info"]};
 const sev=k=>`<span class="sev" style="--sevc:${SEV[k][0]}">${SEV[k][1]}</span>`;
-const SPEC={
- specC:[
-  ["Certification charia","Existence d'un comité charia ou d'un indice islamique reconnu (AAOIFI, S&P, FTSE/Yasaar, MSCI, Dow Jones Islamic).",sev("r")+" retrait du certificat ou changement d'indice","à chaque rapport annuel","site de l'émetteur, prospectus"],
-  ["Ratio de dette des sociétés","Les indices excluent les sociétés dont la dette dépasse environ 33 % de la capitalisation (S&P, DJ) ou des actifs (MSCI, FTSE). Les méthodes diffèrent : deux ETF « US charia » n'ont pas le même contenu.",sev("w")+" changement de méthodologie annoncé","semestriel (rebalancement d'indice)","fiche méthodologique de l'indice"],
-  ["Ratio de purification","Part des dividendes issue d'activités non conformes, à donner en charité sans intention de récompense.",sev("w")+" au-delà de 3 % des dividendes","trimestriel ou annuel","site de l'émetteur (SP Funds publie un calculateur)"],
-  ["Concentration technologique","Les filtres de dette favorisent la tech : souvent 35 à 45 % du fonds et plus de 30 % sur les 10 premières lignes.",sev("w")+" une seule valeur > 12 % du fonds","trimestriel","composition du fonds, IBKR Fundamentals"],
-  ["Zakat","Obligation distincte de la purification. Deux méthodes : 2,5 % de la valeur totale, ou 2,5 % de la part d'actifs zakatables des sociétés détenues.",sev("g")+" à calculer à ta date de hawl","annuel","valeur du portefeuille au jour du hawl"]
- ],
- specK:[
-  ["Frais de gestion (TER)","Coût annuel prélevé dans le fonds. Sur 1 000 $, 0,10 point = 1 $ par an.",sev("w")+" au-dessus de 0,55 % pour un ETF cœur","annuel","fiche du fonds (colonne Frais du filtre)"],
-  ["Commission par ordre","Coût fixe IBKR par achat. Sur 100 $ de versement, 1 $ de commission = 1 %.",sev("r")+" au-delà de 0,5 % du montant de l'ordre","à chaque ordre","relevé d'opérations IBKR"],
-  ["Écart achat / vente","Coût implicite de l'exécution. Visible en séance dans la colonne Écart.",sev("w")+" au-delà de 0,30 %","à chaque ordre (ordre limite conseillé)","cotation IBKR"],
-  ["Accès selon la résidence","Un résident UE/EEE ne peut pas acheter d'ETF américains (règlement PRIIPs, pas de document KID).",sev("r")+" changement de pays de résidence","ponctuel","profil de compte IBKR"],
-  ["Encours et liquidité","Un ETF de moins de 50 à 100 M$ risque la fermeture ; un volume faible élargit l'écart.",sev("w")+" encours < 100 M$ ou volume < 250 k$/jour","mensuel","colonnes Encours, filtre Liquidité"]
- ],
- specR:[
-  ["Performance 1 mois / depuis janvier / 1 an","Variation du prix. À comparer à un indice conventionnel pour voir l'effet du filtre charia.",sev("g")+" écart de plus de 5 points avec l'ETF du même segment","mensuel","onglet Filtre"],
-  ["Volatilité 30 jours","Amplitude annualisée des variations quotidiennes.",sev("w")+" au-dessus de 20 % pour une ligne cœur","hebdomadaire","onglet Filtre"],
-  ["Baisse maximale sur 1 an","Pire recul du plus haut au plus bas. Donne la perte que tu dois pouvoir supporter.",sev("r")+" au-delà de 15 % sur le portefeuille","mensuel","onglets Filtre et Portefeuille"],
-  ["Écart au plus haut 52 semaines","Situe le cours dans son range annuel ; utile pour étaler les achats.",sev("g")+" plus de 10 % sous le plus haut","hebdomadaire","onglet Filtre"],
-  ["Corrélation entre lignes","Deux ETF corrélés à plus de 0,9 font doublon (SPUS et HLAL : 0,96).",sev("w")+" au-dessus de 0,90","trimestriel","onglet Comparer"],
-  ["Rendement des sukuk","Les sukuk amortissent les baisses d'actions mais leur prix recule quand les taux montent.",sev("w")+" baisse de prix > 3 % sur 12 mois","mensuel","ligne SPSK"]
- ],
- specD:[
-  ["Dérive de l'allocation","Écart entre le poids actuel et le poids cible de chaque ligne.",sev("r")+" plus de 5 points d'écart","trimestriel","onglet Portefeuille (positions IBKR)"],
-  ["Versements réguliers","Investir un montant fixe chaque mois lisse le prix d'achat et limite l'effet des commissions minimum.",sev("g")+" versement manqué","mensuel","relevé IBKR"],
-  ["Liquidités non investies","Les liquidités d'un compte IBKR peuvent être rémunérées par des intérêts : désactive-les si tu veux éviter le riba.",sev("r")+" intérêts crédités sur le relevé","mensuel","Paramètres du compte IBKR"]
- ]
-};
+const SPEC=[
+ ["Dettes et conformité",[
+  ["Dette pondérée vs plafond","Ratio de dette moyen des sociétés du fonds face au plafond de son indice (30 % à 33,33 %).",sev("r")+" plus de 80 % du plafond utilisé","à chaque rapport trimestriel","Dettes & purification"],
+  ["Tendance de la dette","Hausse d'un relevé à l'autre : des sociétés risquent de sortir de l'indice.",sev("w")+" trois hausses de suite","trimestriel","Dettes & purification"],
+  ["Certification","Comité charia ou indice islamique reconnu (AAOIFI, S&P, FTSE/Yasaar, MSCI, Dow Jones).",sev("r")+" retrait ou changement d'indice","annuel","site de l'émetteur"]]],
+ ["Épuration",[
+  ["Ratio de purification","Part des dividendes à donner en charité.",sev("w")+" au-delà de 5 % des dividendes","trimestriel","Dettes & purification"],
+  ["Taux d'épuration sur l'investi","Purification annuelle ÷ montant investi, soit rendement × ratio.",sev("g")+" à verser à chaque dividende","à chaque dividende","Dettes & purification, Temps réel"],
+  ["Intérêts sur liquidités","IBKR peut rémunérer le cash : ce sont des intérêts (riba).",sev("r")+" intérêts crédités","mensuel","Paramètres du compte IBKR"]]],
+ ["Performance, liquidité, rendement",[
+  ["Performance 1 mois / depuis janvier / 1 an","Variation du prix, hors dividendes.",sev("g")+" 5 points sous l'ETF du même segment","mensuel","Filtre ETF"],
+  ["Liquidité","Volume moyen échangé par jour et écart achat/vente.",sev("w")+" volume < 250 k$/jour ou écart > 0,30 %","à chaque ordre","Filtre ETF"],
+  ["Rendement du dividende","Revenu versé, base de la purification et de la retenue US.",sev("g")+" baisse de moitié","trimestriel","Filtre ETF"],
+  ["Baisse maximale","Pire recul sur un an.",sev("r")+" au-delà de 15 % sur le portefeuille","mensuel","Portefeuille"]]],
+ ["ROI pour un résident de Djibouti",[
+  ["ROI net","Gain après frais de virement, commissions, retenue US, purification et zakat.",sev("w")+" plus de 1,5 point sous la hausse supposée","annuel","ROI Djibouti"],
+  ["Coût des virements","Frais bancaires fixes : 30 $ de frais sur 100 $ virés coûtent 30 %.",sev("r")+" frais > 2 % du montant viré","à chaque virement","ROI Djibouti"],
+  ["Seuil succession US","Au-delà de 60 000 $ d'ETF américains, les États-Unis taxent la succession d'un non-résident.",sev("w")+" 75 % du seuil atteint","annuel","ROI Djibouti"]]],
+ ["Dépendance à la tech et à l'IA",[
+  ["Dépendance tech (R² vs XLK)","Part des variations expliquée par la tech américaine.",sev("r")+" au-dessus du plafond fixé (0,60 par défaut)","mensuel","Tech & IA"],
+  ["Bêta puces IA (vs SMH)","Réaction aux semi-conducteurs, cœur de la vague IA.",sev("w")+" au-dessus de 0,40","mensuel","Tech & IA"],
+  ["Poids des 5 géants de l'IA","Nvidia, Apple, Microsoft, Alphabet et Broadcom dans le fonds.",sev("w")+" au-delà de 40 %","trimestriel","Tech & IA"]]]
+];
 const NEWS=[
- ["2026-06-02","Lunate lance le premier ETF dividendes charia du Golfe","GCCDIV suit l'indice Solactive GCC Shariah Dividend, cotation à Abu Dhabi à partir du 23 juin 2026. Pas encore dans l'univers IBKR suivi ici.","Zawya via TradingView","https://www.tradingview.com/news/reuters.com,2026-06-02:newsml_Zaw1Qm24r:0-zawya-lunate-expands-its-shariah-compliant-offering-with-launch-of-the-first-of-its-kind-gcc-shariah-dividend-etf/"],
- ["2026-02-16","Invesco lance un ETF MSCI ACWI Islamic en Europe","Premier ETF UCITS couvrant tout le marché mondial (développés et émergents) sous filtre charia. Frais de 0,35 %, capitalisant. Coté MWIM à Londres et en Suisse.","ETF Express","https://etfexpress.com/2026/02/16/invesco-launches-all-world-shariah-compliant-etf/"],
- ["2026-01-19","Wahed lance deux ETF UCITS charia","Wahed S&P 500 Shariah (SPWI, 0,49 %) et Wahed Dow Jones Islamic World (DJIW), avec un filtre éthique et droits humains en plus du filtre charia.","ETF Express","https://etfexpress.com/2026/01/19/wahed-launches-shariah-ucits-etfs/"],
- ["2026","SPUS ou HLAL : quel ETF halal US choisir ?","SPUS suit l'indice S&P 500 Shariah (grandes capitalisations, 0,45 %), HLAL le FTSE USA Shariah (grandes et moyennes, 0,50 %). Leur corrélation hebdomadaire sur un an est de 0,96 selon les données IBKR.","Zoya","https://blog.zoya.finance/spus-vs-hlal/"],
- ["2026","MNZL, le nouvel ETF halal le moins cher aux États-Unis","Lancé le 18 novembre 2025, 0,40 % de frais, environ 460 lignes issues du Russell 1000, filtre AAOIFI plus droits humains. Encours encore faible (≈ 30 M$).","Zoya","https://blog.zoya.finance/mnzl-etf-guide/"],
- ["2026","Les 8 meilleurs ETF halal de 2026 : frais et rendements","Panorama des ETF US : SPUS, HLAL, MNZL, UMMA, SPWO, SPSK, SPRE, SPTE. Frais de 0,40 % à 0,65 %.","HalalWallet","https://www.halalwallet.us/investing/halal-etfs"],
- ["2026","ETF halal comparés : frais, rendements, positions","Comparatif des ETF US et de leur exposition sectorielle.","Amal Invest","https://amalinvest.com/halal-investing/halal-etfs-compared"],
- ["2026","13 ETF charia en 2026 : le guide complet","Inclut les ETF UCITS (ISDW, HIWS, ISDE) et les méthodologies d'indice.","Halal Terminal","https://www.halalterminal.com/etf"],
- ["2026","Meilleurs ETF halal pour les investisseurs britanniques","HIWS et ISWD au coude à coude sur 3 ans ; une ligne de cotation d'ISWD doit être radiée le 15 décembre 2026 (à vérifier sur ishares.com).","MoneyMagpie","https://www.moneymagpie.com/investment-articles/best-halal-etfs"],
- ["2026","Calculateur de purification des dividendes","Outil de SP Funds pour calculer le montant à purifier sur SPUS, SPWO, SPSK, SPRE, SPTE.","SP Funds","https://www.sp-funds.com/purification-calculator/"],
- ["2025","KWIN : un ETF de revenu alternatif conforme à la charia","KraneShares et Wahed remplacent les obligations à intérêt par des ventes à terme conformes. Frais de 0,51 %.","Nasdaq","https://www.nasdaq.com/press-release/wahed-and-kraneshares-announce-launch-kwin-shariah-compliant-alternative-income-etf"]
+ ["2026-06-02","Lunate lance le premier ETF dividendes charia du Golfe","GCCDIV suit l'indice Solactive GCC Shariah Dividend, coté à Abu Dhabi depuis le 23 juin 2026. Une piste pour réduire la dépendance à la tech américaine.","Zawya via TradingView","https://www.tradingview.com/news/reuters.com,2026-06-02:newsml_Zaw1Qm24r:0-zawya-lunate-expands-its-shariah-compliant-offering-with-launch-of-the-first-of-its-kind-gcc-shariah-dividend-etf/"],
+ ["2026-02-16","Invesco lance un ETF MSCI ACWI Islamic en Europe","Premier ETF UCITS couvrant tout le marché mondial sous filtre charia. Frais de 0,35 %, capitalisant. Coté MWIM à Londres.","ETF Express","https://etfexpress.com/2026/02/16/invesco-launches-all-world-shariah-compliant-etf/"],
+ ["2026-01-19","Wahed lance deux ETF UCITS charia","Wahed S&P 500 Shariah (SPWI, 0,49 %) et Wahed Dow Jones Islamic World (DJIW), avec un filtre droits humains en plus.","ETF Express","https://etfexpress.com/2026/01/19/wahed-launches-shariah-ucits-etfs/"],
+ ["2026","SPUS : Nvidia, Apple et Microsoft font plus d'un tiers du fonds","Nvidia 13,8 %, Apple 12,6 %, Microsoft 9,6 %, Alphabet 5,1 %, Broadcom 4,5 %. La tech pèse 40 à 50 % du fonds contre environ 30 % dans le S&P 500.","Halal Terminal / stockanalysis","https://www.halalterminal.com/etf/spus"],
+ ["2026","UCITS ou ETF américains pour un investisseur non américain ?","Les ETF irlandais paient 15 % de retenue sur les dividendes américains, contre 30 % pour le résident d'un pays sans convention fiscale.","Bogleheads","https://www.bogleheads.org/wiki/Nonresident_alien_investors_and_Ireland_domiciled_ETFs"],
+ ["2026","SPUS ou HLAL : quel ETF halal US choisir ?","SPUS suit le S&P 500 Shariah (0,45 %), HLAL le FTSE USA Shariah (0,50 %). Corrélation hebdomadaire de 0,96 selon IBKR.","Zoya","https://blog.zoya.finance/spus-vs-hlal/"],
+ ["2026","MNZL, le nouvel ETF halal le moins cher aux États-Unis","Lancé le 18 novembre 2025, 0,40 % de frais, filtre AAOIFI plus droits humains. Encours encore faible.","Zoya","https://blog.zoya.finance/mnzl-etf-guide/"],
+ ["2026","Les 8 meilleurs ETF halal de 2026","Panorama des ETF US : SPUS, HLAL, MNZL, UMMA, SPWO, SPSK, SPRE, SPTE.","HalalWallet","https://www.halalwallet.us/investing/halal-etfs"],
+ ["2026","Calculateur de purification des dividendes","Outil de SP Funds ; les ratios sont publiés environ 2,5 mois après chaque trimestre selon la méthode AAOIFI.","SP Funds","https://www.sp-funds.com/purification-calculator/"],
+ ["2025","KWIN : un ETF de revenu alternatif conforme à la charia","Ventes à terme conformes au lieu d'obligations à intérêt. Frais de 0,51 %.","Nasdaq","https://www.nasdaq.com/press-release/wahed-and-kraneshares-announce-launch-kwin-shariah-compliant-alternative-income-etf"]
 ];
 function renderStatic(){
-  for(const k in SPEC) $("#"+k).innerHTML=SPEC[k].map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("");
+  $("#specs").innerHTML=SPEC.map(([h,rows])=>`<h2>${h}</h2><div class="tablebox"><table class="spec"><thead><tr><th>Indicateur</th><th>Ce qu'il mesure</th><th>Seuil d'alerte</th><th>Fréquence</th><th>Où le lire</th></tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`).join("");
   $("#news").innerHTML=NEWS.map(([d,t,p,s,u])=>`<article><time>${d.length>4?d.split("-").reverse().join("/"):d}</time><div><h3><a href="${u}" target="_blank" rel="noopener">${esc(t)}</a></h3><p>${esc(p)}</p><div class="src">${esc(s)}</div></div></article>`).join("");
 }
 
-/* ---------- onglets ---------- */
-const TABS=["filtre","portefeuille","comparer","indicateurs","veille"];
-function showTab(t){if(!TABS.includes(t))t="filtre";TABS.forEach(x=>{$("#p-"+x).hidden=x!==t;$("#tab-"+x).setAttribute("aria-selected",x===t)});if(t==="comparer")renderCompare();if(t==="portefeuille")renderPortfolio()}
-document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>{showTab(b.dataset.tab);try{history.replaceState(null,"","#"+b.dataset.tab)}catch(e){}});
+/* ---------- espace gérant ---------- */
+function renderGerant(){
+  if(!S.owner)return;
+  $("#edT tbody").innerHTML=UNIVERSE.map(e=>{const c=comp(e.t);const v=k=>c[k]!=null?c[k]:"";return `<tr><td class="tk">${e.t}</td>
+    <td class="n"><input type="number" step="0.1" min="0" max="100" data-k="debt" value="${v("debt")}" aria-label="Dette ${e.t}"></td>
+    <td class="n"><input type="number" step="0.1" min="0" max="100" data-k="pur" value="${v("pur")}" aria-label="Purification ${e.t}"></td>
+    <td class="n"><input type="number" step="1" min="0" max="100" data-k="tech" value="${v("tech")}" aria-label="Poids tech ${e.t}"></td>
+    <td class="n"><input type="number" step="0.1" min="0" max="100" data-k="ai5" value="${v("ai5")}" aria-label="5 géants IA ${e.t}"></td>
+    <td><input class="wide" type="text" data-k="src" value="${esc(v("src"))}" placeholder="lien ou nom de la source" aria-label="Source ${e.t}"></td>
+    <td><input class="wide" style="width:140px" type="date" data-k="date" value="${esc(/^\d{4}-\d{2}-\d{2}$/.test(v("date"))?v("date"):"")}" aria-label="Date ${e.t}"></td>
+    <td><button class="btn" type="button" data-save="${e.t}">Enregistrer</button></td></tr>`}).join("");
+  $("#edT").querySelectorAll("[data-save]").forEach(b=>b.onclick=async()=>{
+    if(!DB){toast("Stockage indisponible sur cette vue");return}
+    const t=b.dataset.save,tr=b.closest("tr");const o={};tr.querySelectorAll("input").forEach(i=>{if(i.value==="")return;o[i.dataset.k]=i.type==="number"?+i.value:i.value});
+    if(!o.date)o.date=new Date().toISOString().slice(0,10);
+    const h=((S.comp[t]||{}).hist||[]).slice(-39);if(o.debt!=null)h.push({date:o.date,debt:o.debt});
+    b.disabled=true;
+    try{await DB.doc("compliance/"+t).set(Object.assign({},o,{hist:h}));toast(t+" enregistré")}catch(err){toast("Échec de l'enregistrement ("+(err.code||"erreur")+")")}finally{b.disabled=false}
+  });
+  $("#edNote").textContent="Saisis la dette pondérée publiée pour le fonds (même base que son indice), le ratio de purification du dernier trimestre, le poids du secteur technologique et celui des 5 géants de l'IA. Laisse vide ce que tu ne connais pas.";
+}
 
-/* ---------- événements ---------- */
+/* ---------- onglets & événements ---------- */
+const TABS=["direct","filtre","portefeuille","conformite","tech","roi","comparer","alertes","indicateurs","veille","gerant"];
+let current="direct";
+const RENDER={direct:()=>renderDirect(),filtre:()=>renderScreen(),portefeuille:()=>renderPortfolio(),conformite:()=>renderConformite(),tech:()=>renderTech(),roi:()=>renderROI(),comparer:()=>renderCompare(),alertes:()=>{renderAlertForm();renderAlerts()},gerant:()=>renderGerant()};
+function showTab(t){if(!TABS.includes(t)||(t==="gerant"&&!S.owner))t="direct";current=t;TABS.forEach(x=>{$("#p-"+x).hidden=x!==t;$("#tab-"+x).setAttribute("aria-selected",x===t)});renderCurrent()}
+function renderCurrent(){const f=RENDER[current];if(f)f()}
+function renderAll(){renderAcct();if(current!=="gerant")renderCurrent()}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>{showTab(b.dataset.tab);try{history.replaceState(null,"","#"+b.dataset.tab)}catch(e){}});
 function setRes(v){S.res=v;S.rows=PRESETS[S.res][S.prof].map(([t,w])=>({t,w}));save();renderControls();renderAll()}
 document.querySelectorAll("#resSeg button,#resSeg2 button").forEach(b=>b.onclick=()=>setRes(b.dataset.v));
-document.querySelectorAll("#profSeg button").forEach(b=>b.onclick=()=>{S.prof=b.dataset.v;S.rows=PRESETS[S.res][S.prof].map(([t,w])=>({t,w}));save();renderControls();renderPortfolio()});
+document.querySelectorAll("#profSeg button").forEach(b=>b.onclick=()=>{S.prof=b.dataset.v;S.rows=PRESETS[S.res][S.prof].map(([t,w])=>({t,w}));save();renderControls();renderAll()});
+document.querySelectorAll("#scSeg button").forEach(b=>b.onclick=()=>{S.sc=b.dataset.v;save();renderControls();renderROI()});
 $("#fAum").onchange=e=>{S.f.aum=e.target.value;save();renderScreen()};
 $("#fTer").oninput=e=>{S.f.ter=+e.target.value;$("#fTerV").textContent=fmt.p(S.f.ter,2)+" %";save();renderScreen()};
 $("#fLiq").onchange=e=>{S.f.liq=e.target.value;save();renderScreen()};
+$("#fTechMax").onchange=e=>{S.f.techMax=e.target.value;save();renderScreen()};
 $("#fDist").onchange=e=>{S.f.dist=e.target.value;save();renderScreen()};
 $("#fHist").onchange=e=>{S.f.hist=e.target.checked;save();renderScreen()};
-["#cap","#dca","#comUS","#comLSE","#pur"].forEach(id=>$(id).oninput=()=>renderPortfolio());
-$("#addRow").onclick=()=>{const used=S.rows.map(r=>r.t);const e=UNIVERSE.find(x=>(S.res!=="EU"||x.zone==="UCITS")&&!used.includes(x.t));if(e){S.rows.push({t:e.t,w:0});save();renderPortfolio()}};
-
-function renderAll(){renderScreen();if(!$("#p-portefeuille").hidden)renderPortfolio();if(!$("#p-comparer").hidden)renderCompare();renderAcct()}
+$("#techTarget").oninput=e=>{S.techTarget=+e.target.value;$("#techTargetV").textContent=fmt.p(S.techTarget,2);save();renderTech()};
+["#cap","#dca","#comUS","#comLSE","#purDef","#hor","#wireIn","#wiresYr","#ordersM","#locTax","#zakOn"].forEach(id=>$(id).addEventListener("input",()=>renderAll()));
+$("#addRow").onclick=()=>{const used=S.rows.map(r=>r.t);const e=UNIVERSE.find(x=>accessible(x)&&!used.includes(x.t));if(e){S.rows.push({t:e.t,w:0});save();renderPortfolio()}};
 function renderAcct(){
-  const a=S.acct;
-  $("#aNet").textContent=a?fmt.usd(a.net_liquidation,2):"—";
-  $("#aCash").textContent=a?fmt.usd(a.total_cash_value,2):"—";
-  const items=S.pos?normPositions(S.pos):null;
-  $("#aPos").textContent=items?String(items.filter(p=>BY[p.sym]||UNIVERSE.some(e=>e.conid===p.conid)).length):"—";
-  $("#aFresh").textContent=S.mode==="live"&&S.fresh?"IBKR · "+new Date(S.fresh).toLocaleString("fr-FR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"Instantané du "+SNAP.asOf.split("-").reverse().join("/");
+  const a=S.acct;$("#aNet").textContent=a?fmt.usd(a.net_liquidation,2):"—";$("#aCash").textContent=a?fmt.usd(a.total_cash_value,2):"—";
+  $("#aDjf").textContent=a?fmt.djf(a.net_liquidation):"—";
+  const hp=halalPositions();$("#aPos").textContent=hp?String(hp.filter(p=>p.t).length):"—";
+  $("#aFresh").textContent=S.mode==="live"&&S.fresh?"IBKR · "+new Date(S.fresh).toLocaleString("fr-FR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"Instantané du 25/09/2026";
 }
 
 /* ---------- connexion IBKR ---------- */
 const MSG={
   needs_reauth:"La connexion à Interactive Brokers a expiré. Reconnecte IBKR dans claude.ai → Paramètres → Connecteurs, puis clique sur Actualiser.",
-  server_not_connected:"Le connecteur Interactive Brokers (IBKR) n'est pas ajouté à ton compte claude.ai. Ajoute-le dans Paramètres → Connecteurs pour voir les cours en direct.",
+  server_not_connected:"Le connecteur Interactive Brokers (IBKR) n'est pas ajouté à ton compte claude.ai. Ajoute-le dans Paramètres → Connecteurs pour voir tes cours et positions en direct.",
   selection_required:"Plusieurs connecteurs IBKR existent sur ton compte : choisis celui à utiliser dans la fenêtre proposée par claude.ai.",
   not_in_manifest:"L'accès à IBKR a été refusé pour cette page. Les données affichées sont l'instantané du 25/09/2026.",
   blocked_by_policy:"La politique de ton organisation bloque l'accès IBKR depuis cette page.",
@@ -643,62 +867,63 @@ const MSG={
   server_unavailable:"IBKR ne répond pas pour l'instant. Les dernières données reçues restent affichées.",
   tool_error:"IBKR a renvoyé une erreur pour une partie des données."
 };
-function setStatus(kind,text){$("#statusPill").className="pill "+kind;$("#statusText").textContent=text}
-function banner(code,extra){
-  const k=code in MSG?code:"other";const text=MSG[k]||"Erreur inattendue du connecteur IBKR ("+code+"). Les données de l'instantané restent affichées.";
-  const lvl=["server_unavailable","tool_error"].includes(code)?"warn":"crit";
-  $("#banner").innerHTML=`<div class="banner ${lvl}" role="status">${esc(text)}${extra?" "+esc(extra):""}</div>`;
-}
 const DENY=["needs_reauth","server_not_connected","not_in_manifest","blocked_by_policy","approval_required","selection_required"];
-let mcp=null,unsubs=[],renderTimer=null;
-function soon(){clearTimeout(renderTimer);renderTimer=setTimeout(()=>{renderAll()},250)}
+function setStatus(k,t){$("#statusPill").className="pill "+k;$("#statusText").textContent=t}
+function banner(code,extra){const text=MSG[code]||"Erreur inattendue du connecteur IBKR ("+code+"). Les données de l'instantané restent affichées.";$("#banner").innerHTML=`<div class="banner ${["server_unavailable","tool_error"].includes(code)?"warn":"crit"}" role="status">${esc(text)}${extra?" "+esc(extra):""}</div>`}
+let mcp=null,DB=null,UID=null,unsubs=[],renderTimer=null;
+function soon(){clearTimeout(renderTimer);renderTimer=setTimeout(renderAll,300)}
 function stamp(res){const t=res&&res.cache&&res.cache.storedAt?res.cache.storedAt:Date.now();if(!S.fresh||t>S.fresh)S.fresh=t}
 function onErr(key,err){
   S.errors[key]=err.code;
-  const codes=Object.values(S.errors);
-  if(DENY.includes(err.code)){
-    if(key.startsWith("s:"))delete S.live[key.slice(2)];
-    if(key.startsWith("h:"))delete S.hist[key.slice(2)];
-    if(key==="acct")S.acct=null;if(key==="pos")S.pos=null;
-  }
-  const denied=codes.filter(c=>DENY.includes(c));
+  if(DENY.includes(err.code)){const[k,t]=key.split(":");if(k==="s")delete S.live[t];if(k==="h")delete S.hist[t];if(k==="i")delete S.intra[t];if(k==="b")delete S.bench[t];if(key==="acct")S.acct=null;if(key==="pos")S.pos=null;if(key==="alerts")S.alerts=null}
+  const denied=Object.values(S.errors).filter(c=>DENY.includes(c));
   if(denied.length){S.mode="snap";setStatus("err","IBKR indisponible · instantané du 25/09");banner(denied[0])}
-  else if(codes.length) banner(err.code,err.code==="tool_error"&&err.message?"("+err.message.slice(0,140)+")":"");
+  else banner(err.code,err.code==="tool_error"&&err.message?"("+String(err.message).slice(0,140)+")":"");
   soon();
 }
 function onOk(key){delete S.errors[key];if(!Object.keys(S.errors).length)$("#banner").innerHTML=""}
+const intraWatch={};
+function watchIntra(){
+  if(!mcp)return;const want=new Set(watchList().slice(0,6));
+  for(const t in intraWatch)if(!want.has(t)){intraWatch[t]();delete intraWatch[t];delete S.intra[t]}
+  for(const t of want){if(intraWatch[t])continue;const e=BY[t];
+    intraWatch[t]=mcp.watchTool(SERVER,"get_price_history",{contract_id:e.conid,security_type:"STK",step:"THIRTY_MINS",period:"ONE_DAY",outside_rth:false},ev=>{
+      if(ev.type==="error")return onErr("i:"+t,ev.error);const p=ev.result.payload;if(p&&Array.isArray(p.close)){S.intra[t]={c:p.close};onOk("i:"+t);soon()}},{refetchInterval:120000,cache:{staleTime:60000}})}
+}
 function startLive(){
-  unsubs.forEach(u=>u());unsubs=[];
-  const OPT={refetchInterval:300000,cache:{staleTime:60000,gcTime:3600000}};
-  const HOPT={refetchInterval:3600000,cache:{staleTime:1800000,gcTime:86400000}};
+  unsubs.forEach(u=>u());unsubs=[];for(const t in intraWatch){intraWatch[t]();delete intraWatch[t]}
+  const Q={refetchInterval:60000,cache:{staleTime:30000,gcTime:3600000}},H={refetchInterval:3600000,cache:{staleTime:1800000,gcTime:86400000}};
   for(const e of UNIVERSE){
     unsubs.push(mcp.watchTool(SERVER,"get_price_snapshot",{contract_id:e.conid,market_data_names:SNAP_FIELDS},ev=>{
-      if(ev.type==="error")return onErr("s:"+e.t,ev.error);
-      const o=parseSnap(ev.result.payload);if(o){S.live[e.t]=o;S.mode="live";stamp(ev.result);setStatus("live","IBKR en direct");onOk("s:"+e.t);soon()}
-    },OPT));
+      if(ev.type==="error")return onErr("s:"+e.t,ev.error);const o=parseSnap(ev.result.payload);if(o){S.live[e.t]=o;S.mode="live";stamp(ev.result);setStatus("live","IBKR en direct · 1 min");onOk("s:"+e.t);soon()}},Q));
     unsubs.push(mcp.watchTool(SERVER,"get_price_history",{contract_id:e.conid,security_type:"STK",step:"ONE_WEEK",period:"ONE_YEAR",outside_rth:false},ev=>{
-      if(ev.type==="error")return onErr("h:"+e.t,ev.error);
-      const p=ev.result.payload;if(p&&Array.isArray(p.close)&&p.close.length>8){S.hist[e.t]={c:p.close,d:(p.time||[]).map(s=>String(s).slice(0,10)),src:"live"};onOk("h:"+e.t);soon()}
-    },HOPT));
+      if(ev.type==="error")return onErr("h:"+e.t,ev.error);const p=ev.result.payload;if(p&&Array.isArray(p.close)&&p.close.length>8){S.hist[e.t]={c:p.close,d:(p.time||[]).map(s=>String(s).slice(0,10))};onOk("h:"+e.t);soon()}},H));
   }
-  unsubs.push(mcp.watchTool(SERVER,"get_account_summary",null,ev=>{if(ev.type==="error")return onErr("acct",ev.error);const p=ev.result.payload;if(p&&typeof p==="object"){S.acct=p;stamp(ev.result);onOk("acct");soon()}},OPT));
-  unsubs.push(mcp.watchTool(SERVER,"get_account_positions",null,ev=>{if(ev.type==="error")return onErr("pos",ev.error);const p=ev.result.payload;if(p&&typeof p==="object"){S.pos=p;onOk("pos");soon()}},OPT));
+  for(const k in SNAP.bench)unsubs.push(mcp.watchTool(SERVER,"get_price_history",{contract_id:SNAP.bench[k].conid,security_type:"STK",step:"ONE_WEEK",period:"ONE_YEAR",outside_rth:false},ev=>{
+    if(ev.type==="error")return onErr("b:"+k,ev.error);const p=ev.result.payload;if(p&&Array.isArray(p.close)&&p.close.length>8){S.bench[k]={c:p.close};onOk("b:"+k);soon()}},H));
+  unsubs.push(mcp.watchTool(SERVER,"get_account_summary",null,ev=>{if(ev.type==="error")return onErr("acct",ev.error);const p=ev.result.payload;if(p&&typeof p==="object"){S.acct=p;stamp(ev.result);onOk("acct");soon()}},Q));
+  unsubs.push(mcp.watchTool(SERVER,"get_account_positions",null,ev=>{if(ev.type==="error")return onErr("pos",ev.error);const p=ev.result.payload;if(p&&typeof p==="object"){S.pos=p;onOk("pos");watchIntra();soon()}},Q));
+  unsubs.push(mcp.watchTool(SERVER,"get_alerts",null,ev=>{if(ev.type==="error")return onErr("alerts",ev.error);const p=ev.result.payload;if(p&&typeof p==="object"){S.alerts=p;onOk("alerts");soon()}},{refetchInterval:300000,cache:{staleTime:30000}}));
+  watchIntra();
 }
-$("#refreshBtn").onclick=async()=>{
-  if(!mcp){banner("server_not_connected");return}
-  $("#refreshBtn").disabled=true;
-  try{await mcp.invalidate(SERVER)}catch(e){startLive()}
-  setTimeout(()=>{$("#refreshBtn").disabled=false},3000);
-};
+$("#refreshBtn").onclick=async()=>{if(!mcp){banner("server_not_connected");return}$("#refreshBtn").disabled=true;try{await mcp.invalidate(SERVER)}catch(e){startLive()}setTimeout(()=>{$("#refreshBtn").disabled=false},3000)};
+setInterval(()=>{if(current==="direct")renderDirect()},60000);
 
 /* ---------- démarrage ---------- */
 renderControls();renderStatic();
 showTab((location.hash||"").slice(1));
-renderAll();
+renderAcct();
 (async()=>{
-  try{mcp=window.claude&&window.claude.use?await window.claude.use("mcp"):null}catch(e){mcp=null}
-  if(!mcp){setStatus("snap","Instantané IBKR du 25/09/2026");$("#refreshBtn").disabled=true;$("#refreshBtn").title="Disponible quand la page est ouverte dans Claude avec le connecteur IBKR";return}
-  setStatus("snap","Connexion à IBKR…");
-  startLive();
+  const use=n=>window.claude&&window.claude.use?Promise.resolve(window.claude.use(n)).catch(()=>null):Promise.resolve(null);
+  const[m,db,user]=await Promise.all([use("mcp"),use("db"),use("user")]);
+  mcp=m;DB=db;
+  if(user){try{S.owner=await user.isOwner();UID=await user.id()}catch(e){}}
+  if(S.owner){$("#tab-gerant").hidden=false;if((location.hash||"")==="#gerant")showTab("gerant")}
+  if(DB){
+    DB.collection("compliance").onSnapshot(snap=>{const c={};snap.docs.forEach(d=>{if(d.exists)c[d.id]=d.data()});S.comp=c;renderAll()},()=>{});
+    if(UID&&!store.get("rows",null)){try{const d=await DB.doc("data/users/"+UID+"/prefs").get();if(d.exists){const P=JSON.parse(d.data().prefs||"{}");Object.assign(S,{res:P.res||S.res,prof:P.prof||S.prof,f:P.f||S.f,w:P.w||S.w,rows:(P.rows||S.rows).filter(r=>BY[r.t]),cmp:P.cmp||S.cmp,techTarget:P.techTarget??S.techTarget,sc:P.sc||S.sc});renderControls();renderAll()}}catch(e){}}
+  }
+  if(!mcp){setStatus("snap","Instantané IBKR du 25/09/2026");$("#refreshBtn").disabled=true;$("#refreshBtn").title="Disponible quand la page est ouverte dans Claude avec le connecteur IBKR";renderAll();return}
+  setStatus("snap","Connexion à IBKR…");startLive();
 })();
 </script>

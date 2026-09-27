@@ -17,6 +17,20 @@ python3 scripts/build.py            # utilise le dernier instantané
 
 Une watchlist IBKR « ETF Halal » contient les mêmes 16 lignes.
 
+## Onglets
+
+Temps réel · Filtre ETF · Portefeuille · Dettes & purification · Tech & IA · ROI Djibouti · Comparer · Alertes IBKR · Indicateurs · Veille · Espace gérant (propriétaire seulement).
+
+- **Dettes** : plafond de dette de chaque méthode d'indice (S&P et Dow Jones 33 % de la capitalisation moyenne, MSCI et FTSE 33,33 % des actifs, AAOIFI 30 %), dette pondérée saisie par le gérant, marge et historique des relevés.
+- **Purification** : rendement × ratio de purification, en dollars et en % du montant investi.
+- **Tech & IA** : R² des rendements hebdomadaires face à XLK et bêta face à SMH, calculés sur un an de cours IBKR ; proposition automatique de réallocation vers les diversifiants (SPSK, SPRE).
+- **ROI Djibouti** : franc arrimé à 177,721 FDJ/USD, retenue US de 30 % sur les dividendes des ETF américains (pas de convention fiscale), frais de virement, commissions, purification, zakat, seuil successoral américain de 60 000 $.
+- **Alertes** : création d'alertes de prix dans le compte IBKR de l'utilisateur (`create_alert`).
+
+## Données partagées (location)
+
+La page déclare `db` : la collection `compliance/<ticker>` (dette, purification, poids tech, 5 géants IA, source, date, historique) est lue par tous et modifiable par le seul propriétaire. Les réglages de chaque abonné restent dans son navigateur et, s'il est Contributeur, dans `data/users/<id>/prefs`. Chaque abonné utilise son propre connecteur IBKR : les données de marché ne sont pas redistribuées.
+
 ## Score du filtre
 
 Filtres éliminatoires : accès selon la résidence (un résident UE/EEE ne peut pas acheter d'ETF américains, règlement PRIIPs), classe d'actifs, encours minimum, frais maximum, liquidité, type de dividendes, historique d'un an.
