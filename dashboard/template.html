@@ -155,6 +155,43 @@ tfoot td{font-weight:600;border-top:1px solid var(--line2)}
 .ed input.wide{width:180px;text-align:left;font-family:var(--sans)}
 .foot{margin-top:28px;color:var(--muted);font-size:12.5px;max-width:90ch}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:14px;z-index:9}
+.brief{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:8px}
+.brief h3{font-size:17px}
+.brief ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.brief .meta{font-size:12.5px;color:var(--muted)}
+.stale{font-size:12.5px;border-radius:6px;padding:2px 8px;background:var(--warn-bg);color:var(--warn);font-weight:600}
+.imp{font-family:var(--mono);font-weight:600;font-size:12px;border-radius:5px;padding:1px 6px;white-space:nowrap}
+.imp.up{background:var(--good-bg);color:var(--good)}.imp.down{background:var(--crit-bg);color:var(--crit)}.imp.flat{background:var(--surface2);color:var(--ink2)}
+#moreMenu{position:fixed;left:12px;right:12px;bottom:calc(64px + env(safe-area-inset-bottom,0px));background:var(--surface);border:1px solid var(--line2);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.18);z-index:8;display:grid;padding:6px}
+#moreMenu button{border:0;background:none;text-align:left;padding:12px;font-weight:600;border-radius:8px;cursor:pointer}
+#moreMenu button:hover{background:var(--surface2)}
+.tabmore{display:none}
+@media (max-width:720px){
+  body{font-size:15px;padding-block:0 calc(84px + env(safe-area-inset-bottom,0px))}
+  header.top{padding-block:14px 10px;align-items:center}
+  .brand p,.brand .label{display:none}
+  .status{flex-wrap:nowrap;gap:6px}.status .btn{padding:4px 10px}
+  .pill{font-size:11.5px;padding:3px 8px}
+  .acct .label{font-size:10.5px}
+  #p-direct>div:first-child .intro{display:none}
+  h1{font-size:24px}
+  .acct{grid-template-columns:1fr 1fr;margin-bottom:12px}
+  .acct>div{padding:9px 12px}
+  .acct>div:last-child{grid-column:1/-1}
+  .acct .v{font-size:16px}
+  nav.tabs{position:fixed;top:auto;left:0;right:0;bottom:0;margin:0;padding:0 4px env(safe-area-inset-bottom,0px);border-top:1px solid var(--line2);border-bottom:0;background:var(--surface);justify-content:space-around;overflow:visible;z-index:9}
+  nav.tabs button{display:none;flex:1;padding:12px 2px 14px;font-size:12.5px;border-bottom:0;border-top:2px solid transparent}
+  nav.tabs button.mob{display:block}
+  nav.tabs button[aria-selected="true"]{border-top-color:var(--accent);border-bottom:0}
+  .tabmore{display:block!important}
+  .intro{font-size:14px}
+  .controls{padding:12px}
+  .tiles{grid-template-columns:1fr}
+  .tile .px{font-size:26px}
+  .kpis{grid-template-columns:1fr 1fr}
+  h2{font-size:18px}
+  .foot{margin-top:18px}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -180,24 +217,33 @@ tfoot td{font-weight:600;border-top:1px solid var(--line2)}
 </div>
 
 <nav class="tabs" role="tablist" aria-label="Sections">
-  <button role="tab" id="tab-direct" data-tab="direct">Temps réel</button>
+  <button role="tab" id="tab-direct" data-tab="direct" class="mob">Temps réel</button>
+  <button role="tab" id="tab-bilan" data-tab="bilan" class="mob">Bilan</button>
   <button role="tab" id="tab-filtre" data-tab="filtre">Filtre ETF</button>
   <button role="tab" id="tab-portefeuille" data-tab="portefeuille">Portefeuille</button>
   <button role="tab" id="tab-conformite" data-tab="conformite">Dettes & purification</button>
-  <button role="tab" id="tab-tech" data-tab="tech">Tech & IA</button>
+  <button role="tab" id="tab-tech" data-tab="tech" class="mob">Tech & IA</button>
   <button role="tab" id="tab-roi" data-tab="roi">ROI Djibouti</button>
   <button role="tab" id="tab-comparer" data-tab="comparer">Comparer</button>
   <button role="tab" id="tab-alertes" data-tab="alertes">Alertes IBKR</button>
   <button role="tab" id="tab-indicateurs" data-tab="indicateurs">Indicateurs</button>
-  <button role="tab" id="tab-veille" data-tab="veille">Veille</button>
+  <button role="tab" id="tab-veille" data-tab="veille" class="mob">Veille</button>
   <button role="tab" id="tab-gerant" data-tab="gerant" hidden>Espace gérant</button>
+  <button type="button" id="tabMore" class="tabmore" aria-haspopup="true" aria-expanded="false">Plus</button>
 </nav>
+<div id="moreMenu" hidden></div>
+
+<section class="panel" id="p-bilan" role="tabpanel" hidden>
+  <p class="intro">Le bilan est préparé chaque matin vers 8 h (heure de Djibouti) à partir de ton compte IBKR et de l'actualité de la veille, puis envoyé en notification. Les sept derniers bilans restent consultables ici.</p>
+  <div id="briefs" style="display:grid;gap:12px"></div>
+</section>
 
 <section class="panel" id="p-direct" role="tabpanel">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
     <p class="intro">Cours de ton portefeuille et de tes positions, rafraîchis chaque minute depuis IBKR, avec la séance du jour en barres de 30 minutes. Heures affichées à Djibouti (UTC+3).</p>
     <div class="mkts" id="mkts"></div>
   </div>
+  <div id="lastBrief"></div>
   <div class="tiles" id="tiles"></div>
   <div class="kpis" id="dirKpis"></div>
 </section>
@@ -338,7 +384,10 @@ tfoot td{font-weight:600;border-top:1px solid var(--line2)}
 </section>
 
 <section class="panel" id="p-veille" role="tabpanel" hidden>
-  <p class="intro">Articles et annonces récents sur les ETF charia, relevés le 27/09/2026. Les chiffres de cette page viennent d'IBKR.</p>
+  <p class="intro">Actualité de la tech, de l'IA et de la finance islamique qui fait bouger tes ETF, mise à jour chaque matin avec le bilan. L'impact indiqué est celui attendu sur les ETF halal concernés.</p>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div class="chips" id="newsCats"></div><span class="small muted" id="newsStamp"></span></div>
+  <div class="news" id="liveNews"></div>
+  <h2>Références sur les ETF halal</h2>
   <div class="news" id="news"></div>
 </section>
 
@@ -383,7 +432,7 @@ const S={
   w:Object.assign({perf:25,sharpe:25,cost:20,size:15,liq:15},store.get("w",{})),
   rows:store.get("rows",null),cmp:store.get("cmp",["SPUS","SPWO","SPSK"]),
   techTarget:store.get("techTarget",0.6),sc:store.get("sc","central"),
-  sort:{k:"score",dir:-1},live:{},hist:{},intra:{},bench:{},acct:null,pos:null,alerts:null,comp:{},errors:{},fresh:null,mode:"snap",owner:false
+  news:null,briefs:[],newsCat:"all",sort:{k:"score",dir:-1},live:{},hist:{},intra:{},bench:{},acct:null,pos:null,alerts:null,comp:{},errors:{},fresh:null,mode:"snap",owner:false
 };
 if(!PRESETS[S.res])S.res="DJ";
 if(!PRESETS[S.res][S.prof])S.prof="equilibre";
@@ -609,6 +658,7 @@ function marketState(){
 function watchList(){const s=new Set(S.rows.map(r=>r.t));(halalPositions()||[]).forEach(p=>p.t&&s.add(p.t));return[...s].filter(t=>BY[t])}
 const ST={REALTIME:"temps réel",DELAYED:"différé 15 min",FROZEN:"dernier cours",FROZEN_DELAYED:"dernier cours différé"};
 function renderDirect(){
+  renderLastBrief();
   $("#mkts").innerHTML=marketState().map(m=>`<span class="pill ${m.open?"live":"snap"}"><span class="dot"></span>${m.n} ${m.open?"ouvert":"fermé"} · ${m.h}</span>`).join("");
   $("#tiles").innerHTML=watchList().map(t=>{const d=data(t),i=S.intra[t];const vals=i?i.c:null;
     const up=d.chg==null?"var(--accent)":d.chg>=0?"var(--good)":"var(--crit)";
@@ -806,6 +856,30 @@ function renderStatic(){
   $("#news").innerHTML=NEWS.map(([d,t,p,s,u])=>`<article><time>${d.length>4?d.split("-").reverse().join("/"):d}</time><div><h3><a href="${u}" target="_blank" rel="noopener">${esc(t)}</a></h3><p>${esc(p)}</p><div class="src">${esc(s)}</div></div></article>`).join("");
 }
 
+/* ---------- veille dynamique & bilans ---------- */
+const CATS={all:"Tout",tech:"Tech & IA",macro:"Taux & marchés",halal:"Finance islamique"};
+const IMP={"+":["up","hausse"],"-":["down","baisse"],"=":["flat","neutre"]};
+const frDate=d=>d?String(d).slice(0,10).split("-").reverse().join("/"):"";
+const ageH=iso=>iso?(Date.now()-Date.parse(iso))/36e5:Infinity;
+function renderNews(){
+  $("#newsCats").innerHTML=Object.entries(CATS).map(([k,l])=>`<button type="button" class="chip" aria-pressed="${S.newsCat===k}" data-c="${k}">${l}</button>`).join("");
+  $("#newsCats").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{S.newsCat=b.dataset.c;renderNews()});
+  const n=S.news;const items=(n&&Array.isArray(n.items)?n.items:[]).filter(i=>S.newsCat==="all"||i.cat===S.newsCat);
+  const age=ageH(n&&n.updatedAt);
+  $("#newsStamp").innerHTML=n?`Mise à jour le ${esc(new Date(n.updatedAt).toLocaleString("fr-FR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit",timeZone:"Africa/Djibouti"}))} (Djibouti)${age>36?' <span class="stale">plus de 36 h</span>':""}`:(DB?"Chargement de la veille…":"Veille du jour disponible dans l'application Claude");
+  $("#liveNews").innerHTML=items.length?items.map(i=>{const im=IMP[i.impact]||IMP["="];return `<article><time>${esc(frDate(i.date))}</time><div><h3>${i.url?`<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a>`:esc(i.title)}</h3><p>${esc(i.summary||"")}</p><div class="src">${esc(i.source||"")} · ${esc(CATS[i.cat]||"")}${(i.tickers||[]).length?` · <span class="imp ${im[0]}">${esc(im[1])} ${esc(i.tickers.join(", "))}</span>`:""}</div></div></article>`}).join(""):'<article><div class="muted">Aucune actualité dans cette catégorie.</div></article>';
+}
+function briefCard(b,full){
+  return `<div class="brief"><div class="meta">Bilan du ${esc(frDate(b.date))}</div><h3>${esc(b.headline||"")}</h3>${Array.isArray(b.points)&&b.points.length?`<ul>${b.points.slice(0,full?20:3).map(p=>`<li>${esc(p)}</li>`).join("")}</ul>`:""}${full&&Array.isArray(b.watch)&&b.watch.length?`<div><span class="label">À surveiller</span><ul>${b.watch.map(p=>`<li>${esc(p)}</li>`).join("")}</ul></div>`:""}${full&&Array.isArray(b.market)&&b.market.length?`<div class="tablebox" style="border:0"><table><thead><tr><th>ETF</th><th class="n">Cours</th><th class="n">Jour</th><th class="n">Depuis janv.</th></tr></thead><tbody>${b.market.map(m=>`<tr><td class="tk">${esc(m.t)}</td><td class="n">${fmt.p(m.p,2)}</td><td class="n ${cls(m.chg)}">${fmt.pc(m.chg,2)}</td><td class="n ${cls(m.ytd)}">${fmt.pc(m.ytd)}</td></tr>`).join("")}</tbody></table></div>`:""}${full?"":`<button class="btn" type="button" data-go="bilan">Lire le bilan</button>`}</div>`;
+}
+function renderBriefs(){
+  $("#briefs").innerHTML=S.briefs.length?S.briefs.map(b=>briefCard(b,true)).join(""):`<p class="muted">${DB?"Le premier bilan arrive demain vers 8 h.":"Les bilans s'affichent dans l'application Claude."}</p>`;
+}
+function renderLastBrief(){
+  const b=S.briefs[0];const el=$("#lastBrief");if(!b){el.innerHTML="";return}
+  el.innerHTML=briefCard(b,false);const g=el.querySelector("[data-go]");if(g)g.onclick=()=>showTab("bilan");
+}
+
 /* ---------- espace gérant ---------- */
 function renderGerant(){
   if(!S.owner)return;
@@ -829,13 +903,18 @@ function renderGerant(){
 }
 
 /* ---------- onglets & événements ---------- */
-const TABS=["direct","filtre","portefeuille","conformite","tech","roi","comparer","alertes","indicateurs","veille","gerant"];
+const TABS=["direct","bilan","filtre","portefeuille","conformite","tech","roi","comparer","alertes","indicateurs","veille","gerant"];
 let current="direct";
-const RENDER={direct:()=>renderDirect(),filtre:()=>renderScreen(),portefeuille:()=>renderPortfolio(),conformite:()=>renderConformite(),tech:()=>renderTech(),roi:()=>renderROI(),comparer:()=>renderCompare(),alertes:()=>{renderAlertForm();renderAlerts()},gerant:()=>renderGerant()};
-function showTab(t){if(!TABS.includes(t)||(t==="gerant"&&!S.owner))t="direct";current=t;TABS.forEach(x=>{$("#p-"+x).hidden=x!==t;$("#tab-"+x).setAttribute("aria-selected",x===t)});renderCurrent()}
+const RENDER={direct:()=>renderDirect(),filtre:()=>renderScreen(),portefeuille:()=>renderPortfolio(),conformite:()=>renderConformite(),tech:()=>renderTech(),roi:()=>renderROI(),comparer:()=>renderCompare(),alertes:()=>{renderAlertForm();renderAlerts()},gerant:()=>renderGerant(),bilan:()=>renderBriefs(),veille:()=>renderNews()};
+function showTab(t){if(!TABS.includes(t)||(t==="gerant"&&!S.owner))t="direct";current=t;TABS.forEach(x=>{$("#p-"+x).hidden=x!==t;$("#tab-"+x).setAttribute("aria-selected",x===t)});$("#tabMore").setAttribute("aria-selected",!["direct","bilan","tech","veille"].includes(t));renderCurrent()}
 function renderCurrent(){const f=RENDER[current];if(f)f()}
 function renderAll(){renderAcct();if(current!=="gerant")renderCurrent()}
 document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>{showTab(b.dataset.tab);try{history.replaceState(null,"","#"+b.dataset.tab)}catch(e){}});
+const MORE=[["filtre","Filtre ETF"],["portefeuille","Portefeuille"],["conformite","Dettes & purification"],["roi","ROI Djibouti"],["comparer","Comparer"],["alertes","Alertes IBKR"],["indicateurs","Indicateurs"]];
+$("#tabMore").onclick=()=>{const m=$("#moreMenu");const open=m.hidden;m.innerHTML=MORE.concat(S.owner?[["gerant","Espace gérant"]]:[]).map(([k,l])=>`<button type="button" data-t="${k}">${l}</button>`).join("");m.hidden=!open;$("#tabMore").setAttribute("aria-expanded",open);
+  m.querySelectorAll("button").forEach(b=>b.onclick=()=>{m.hidden=true;$("#tabMore").setAttribute("aria-expanded","false");showTab(b.dataset.t);window.scrollTo(0,0)})};
+document.addEventListener("click",e=>{if(!e.target.closest("#moreMenu")&&e.target.id!=="tabMore")$("#moreMenu").hidden=true});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&mcp&&S.fresh&&Date.now()-S.fresh>60000){mcp.invalidate(SERVER).catch(()=>{})}});
 function setRes(v){S.res=v;S.rows=PRESETS[S.res][S.prof].map(([t,w])=>({t,w}));save();renderControls();renderAll()}
 document.querySelectorAll("#resSeg button,#resSeg2 button").forEach(b=>b.onclick=()=>setRes(b.dataset.v));
 document.querySelectorAll("#profSeg button").forEach(b=>b.onclick=()=>{S.prof=b.dataset.v;S.rows=PRESETS[S.res][S.prof].map(([t,w])=>({t,w}));save();renderControls();renderAll()});
@@ -920,6 +999,8 @@ renderAcct();
   if(user){try{S.owner=await user.isOwner();UID=await user.id()}catch(e){}}
   if(S.owner){$("#tab-gerant").hidden=false;if((location.hash||"")==="#gerant")showTab("gerant")}
   if(DB){
+    DB.doc("news/latest").onSnapshot(d=>{S.news=d.exists?d.data():null;if(current==="veille")renderNews()},()=>{});
+    DB.collection("briefs").orderBy("date","desc").limit(7).onSnapshot(q=>{S.briefs=q.docs.filter(d=>d.exists).map(d=>d.data());if(current==="bilan")renderBriefs();if(current==="direct")renderLastBrief()},()=>{});
     DB.collection("compliance").onSnapshot(snap=>{const c={};snap.docs.forEach(d=>{if(d.exists)c[d.id]=d.data()});S.comp=c;renderAll()},()=>{});
     if(UID&&!store.get("rows",null)){try{const d=await DB.doc("data/users/"+UID+"/prefs").get();if(d.exists){const P=JSON.parse(d.data().prefs||"{}");Object.assign(S,{res:P.res||S.res,prof:P.prof||S.prof,f:P.f||S.f,w:P.w||S.w,rows:(P.rows||S.rows).filter(r=>BY[r.t]),cmp:P.cmp||S.cmp,techTarget:P.techTarget??S.techTarget,sc:P.sc||S.sc});renderControls();renderAll()}}catch(e){}}
   }

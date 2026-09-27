@@ -46,3 +46,22 @@ Score sur 100 des ETF retenus, chaque critère ramené sur 0–1 au sein du grou
 | Dynamique | SPUS 65 · SPWO 35 | MWIM 100 |
 
 Outil de suivi, pas un conseil en investissement.
+
+## Version mobile
+
+- **Dans l'application Claude** (téléphone) : même lien que l'interface. Sous 720 px de large, la page passe en affichage mobile avec une barre d'onglets en bas (Temps réel, Bilan, Tech & IA, Veille, Plus). Les cours viennent du connecteur IBKR de l'utilisateur, rafraîchis chaque minute et relus au retour dans l'application.
+- **En local, sans Claude** : `local/radar_local.py` lit le compte via la passerelle officielle IBKR *Client Portal Gateway* et sert `local/mobile.html`.
+
+```
+# 1. Télécharger et lancer la passerelle IBKR (Java), puis se connecter sur https://localhost:5000
+# 2. Lancer le radar
+python3 local/radar_local.py          # http://localhost:8765 sur l'ordinateur
+python3 local/radar_local.py --lan    # lien avec code d'accès pour le téléphone (même Wi-Fi)
+python3 local/radar_local.py --demo   # essai sans IBKR
+```
+
+Lecture seule : le programme n'envoie aucun ordre. La passerelle IBKR demande une reconnexion environ une fois par jour.
+
+## Bilan quotidien
+
+Une routine claude.ai (« Bilan quotidien ETF Halal ») tourne chaque jour à 7 h 52, heure de Djibouti. Elle lit IBKR, cherche l'actualité tech, IA, taux et finance islamique, écrit `briefs/<date>` et `news/latest` dans la base de l'application, puis envoie le résumé en notification.

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0e7a5a">
+<title>Radar Halal</title>
+<style>
+:root{--bg:#f3f5f2;--surface:#fbfcfa;--ink:#14201b;--ink2:#4a5a53;--muted:#6f7d77;--line:#dde3de;--accent:#0e7a5a;--good:#006300;--crit:#b22d2d;--warn-bg:#fdf0d3;--crit-bg:#fbe4e4;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;--mono:ui-monospace,"SFMono-Regular",Menlo,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1412;--surface:#151d1a;--ink:#e9efec;--ink2:#b3c0ba;--muted:#86948e;--line:#25302b;--accent:#3fc39a;--good:#3ccf5a;--crit:#f07a7a;--warn-bg:#3a2d0c;--crit-bg:#3d1a1a;color-scheme:dark}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 var(--sans);padding:calc(12px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px))}
+h1{font-size:22px;margin:0}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.pill{font-size:12px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:3px 9px;display:inline-flex;gap:6px;align-items:center;background:var(--surface)}
+.dot{width:8px;height:8px;border-radius:50%;background:#fab219}.live .dot{background:#0ca30c}.err .dot{background:#d03b3b}
+.acct{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:12px}
+.acct div{background:var(--surface);padding:10px 12px;display:grid}
+.lab{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.v{font-family:var(--mono);font-size:17px}
+.tiles{display:grid;gap:10px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:4px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tk{font-family:var(--mono);font-weight:700}
+.px{font-family:var(--mono);font-size:26px}
+.pos{color:var(--good)}.neg{color:var(--crit)}
+.small{font-size:12.5px;color:var(--muted)}
+.bar{height:6px;border-radius:3px;background:var(--line);position:relative;margin-top:4px}
+.bar i{position:absolute;top:-3px;width:3px;height:12px;border-radius:2px;background:var(--ink)}
+.banner{border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:14px;background:var(--crit-bg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 11px;font:inherit;font-size:13px;color:inherit}
+.chip[aria-pressed="true"]{border-color:var(--accent);font-weight:700}
+a{color:var(--accent)}
+.foot{margin-top:16px;font-size:12.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header><h1>Radar Halal</h1><span id="st" class="pill"><span class="dot"></span><span id="stt">Connexion…</span></span></header>
+<div id="banner" hidden></div>
+<div class="acct">
+  <div><span class="lab">Valeur nette</span><span class="v" id="net">—</span></div>
+  <div><span class="lab">Liquidités</span><span class="v" id="cash">—</span></div>
+  <div><span class="lab">Tech US (XLK) jour</span><span class="v" id="xlk">—</span></div>
+  <div><span class="lab">Puces IA (SMH) jour</span><span class="v" id="smh">—</span></div>
+</div>
+<div class="tiles" id="tiles"></div>
+<div class="chips" id="chips"></div>
+<p class="foot">Bilan du matin et veille tech : <a href="https://claude.ai/artifact/SoGPxuK7eR41qqkQDm7Z2H#bilan">ouvrir dans Claude</a>. Heure de Djibouti. Lecture seule, aucun ordre n'est passé.</p>
+<script>
+const $=s=>document.querySelector(s);
+const store={get(k,d){try{return JSON.parse(localStorage.getItem("rl:"+k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem("rl:"+k,JSON.stringify(v))}catch(e){}}};
+const m=location.hash.match(/t=([\w-]+)/);if(m){store.set("token",m[1]);history.replaceState(null,"",location.pathname)}
+const TOKEN=store.get("token","");
+let pick=store.get("pick",["SPUS","SPWO","SPSK"]),last=null;
+const f=(x,d=2)=>x==null||isNaN(x)?"—":Number(x).toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d});
+const pc=x=>x==null||isNaN(x)?"—":(x>0?"+":"")+f(x)+" %";
+const usd=x=>x==null?"—":Number(x).toLocaleString("fr-FR",{style:"currency",currency:"USD"});
+const cl=x=>x>0?"pos":x<0?"neg":"";
+function render(s){
+  last=s;const live=s.mode==="live";
+  $("#st").className="pill "+(s.error?"err":live?"live":"");
+  const age=s.updated?Math.round(Date.now()/1000-s.updated):null;
+  $("#stt").textContent=s.error&&!s.updated?"IBKR non connecté":(s.mode==="demo"?"Démo · ":"IBKR · ")+(age==null?"":age<90?age+" s":Math.round(age/60)+" min");
+  $("#banner").hidden=!s.error;$("#banner").className="banner";$("#banner").textContent=s.error||"";
+  $("#net").textContent=usd(s.account&&s.account.net);$("#cash").textContent=usd(s.account&&s.account.cash);
+  const q=c=>s.quotes[String(c)]||{};
+  $("#xlk").textContent=pc(q(s.bench.XLK).chg);$("#xlk").className="v "+cl(q(s.bench.XLK).chg);
+  $("#smh").textContent=pc(q(s.bench.SMH).chg);$("#smh").className="v "+cl(q(s.bench.SMH).chg);
+  const held=new Set((s.positions||[]).map(p=>String(p.conid)));
+  const list=s.universe.filter(e=>pick.includes(e.t)||held.has(String(e.conid)));
+  $("#tiles").innerHTML=list.map(e=>{const d=q(e.conid);const pos=(s.positions||[]).find(p=>String(p.conid)===String(e.conid));
+    const r=d.h52&&d.l52&&d.p?Math.max(0,Math.min(100,(d.p-d.l52)/(d.h52-d.l52)*100)):null;
+    return `<div class="tile"><div class="row"><span class="tk">${e.t}</span><span class="small">${e.cls}</span></div>
+    <div class="row"><span class="px">${f(d.p)}</span><span class="${cl(d.chg)}" style="font-family:var(--mono)">${pc(d.chg)}</span></div>
+    ${r==null?"":`<div class="small">Position dans l'année (plus bas ${f(d.l52)} · plus haut ${f(d.h52)})</div><div class="bar"><i style="left:${r}%"></i></div>`}
+    ${pos?`<div class="small">Détenu : ${f(pos.qty,4)} parts · ${usd(pos.value)} · latent ${usd(pos.pnl)}</div>`:""}</div>`}).join("");
+  $("#chips").innerHTML=s.universe.map(e=>`<button class="chip" aria-pressed="${pick.includes(e.t)}" data-t="${e.t}">${e.t}</button>`).join("");
+  $("#chips").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const t=b.dataset.t;pick=pick.includes(t)?pick.filter(x=>x!==t):[...pick,t];store.set("pick",pick);render(last)});
+}
+async function load(){
+  try{const r=await fetch("/api/state"+(TOKEN?"?t="+encodeURIComponent(TOKEN):""),{cache:"no-store"});
+    if(r.status===401){$("#banner").hidden=false;$("#banner").className="banner";$("#banner").textContent="Code d'accès manquant : ouvre le lien affiché par le programme sur ton ordinateur.";return}
+    render(await r.json())}
+  catch(e){$("#st").className="pill err";$("#stt").textContent="Ordinateur injoignable"}
+}
+load();setInterval(load,30000);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")load()});
+</script>
+</body>
+</html>
