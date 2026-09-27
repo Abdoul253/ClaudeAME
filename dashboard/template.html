@@ -1,0 +1,704 @@
+<title>Radar ETF Halal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f3f5f2;--surface:#fbfcfa;--surface2:#eef2ee;--ink:#14201b;--ink2:#4a5a53;--muted:#6f7d77;
+  --line:#dde3de;--line2:#c9d2cc;--accent:#0e7a5a;--accent-ink:#ffffff;--accent-soft:#dcefe6;--brass:#7d6318;
+  --good:#006300;--good-bg:#e1f2e1;--warn:#8a5a00;--warn-bg:#fdf0d3;--crit:#b22d2d;--crit-bg:#fbe4e4;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;
+  --grid:#e1e0d9;--axis:#c3c2b7;
+  --heat-hi-ink:#ffffff;--h0:#eef4fb;--h1:#cde2fb;--h2:#9ec5f4;--h3:#6da7ec;--h4:#3987e5;--h5:#256abf;--h6:#184f95;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --bg:#0e1412;--surface:#151d1a;--surface2:#1b2622;--ink:#e9efec;--ink2:#b3c0ba;--muted:#86948e;
+  --line:#25302b;--line2:#34413b;--accent:#3fc39a;--accent-ink:#06231a;--accent-soft:#173a2e;--brass:#d2b25a;
+  --good:#3ccf5a;--good-bg:#12301a;--warn:#f2b93b;--warn-bg:#3a2d0c;--crit:#f07a7a;--crit-bg:#3d1a1a;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--grid:#2c2c2a;--axis:#383835;
+  --heat-hi-ink:#0b0b0b;--h0:#1a2230;--h1:#104281;--h2:#184f95;--h3:#256abf;--h4:#3987e5;--h5:#6da7ec;--h6:#9ec5f4;}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#0e1412;--surface:#151d1a;--surface2:#1b2622;--ink:#e9efec;--ink2:#b3c0ba;--muted:#86948e;
+  --line:#25302b;--line2:#34413b;--accent:#3fc39a;--accent-ink:#06231a;--accent-soft:#173a2e;--brass:#d2b25a;
+  --good:#3ccf5a;--good-bg:#12301a;--warn:#f2b93b;--warn-bg:#3a2d0c;--crit:#f07a7a;--crit-bg:#3d1a1a;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--grid:#2c2c2a;--axis:#383835;
+  --heat-hi-ink:#0b0b0b;--h0:#1a2230;--h1:#104281;--h2:#184f95;--h3:#256abf;--h4:#3987e5;--h5:#6da7ec;--h6:#9ec5f4;}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--sans);padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(26px,4vw,36px);font-weight:700}
+h2{font-size:22px;font-weight:700}
+h3{font-size:16px;font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+.num,td.n,th.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.label{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+header.top{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:flex-end;justify-content:space-between;padding-block:28px 18px}
+.brand{display:grid;gap:6px}
+.brand p{color:var(--ink2);max-width:62ch}
+.status{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:600;border:1px solid var(--line2);background:var(--surface);white-space:nowrap}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.pill.live .dot{background:#0ca30c}.pill.snap .dot{background:#fab219}.pill.err .dot{background:#d03b3b}
+.btn{border:1px solid var(--line2);background:var(--surface);border-radius:8px;padding:7px 12px;cursor:pointer;font-weight:500}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.5;cursor:default}
+
+.acct{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:18px}
+.acct>div{background:var(--surface);padding:12px 16px;display:grid;gap:2px}
+.acct .v{font-family:var(--mono);font-size:19px;font-weight:500}
+.banner{border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px;display:flex;gap:10px;align-items:flex-start}
+.banner.warn{background:var(--warn-bg);color:var(--ink)}
+.banner.crit{background:var(--crit-bg);color:var(--ink)}
+.banner.info{background:var(--accent-soft);color:var(--ink)}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);margin-bottom:22px;padding-top:6px}
+nav.tabs button{border:0;background:none;padding:10px 14px;cursor:pointer;color:var(--ink2);font-weight:600;border-bottom:2px solid transparent;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+
+section.panel{display:grid;gap:18px}
+.intro{color:var(--ink2);max-width:75ch}
+.controls{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:flex-end;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.ctl{display:grid;gap:4px;min-width:0}
+.ctl select,.ctl input[type=number]{border:1px solid var(--line2);background:var(--bg);border-radius:7px;padding:6px 8px;max-width:100%}
+.ctl input[type=range]{width:150px;accent-color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:var(--bg);padding:6px 11px;cursor:pointer;font-weight:500}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line2);background:var(--bg);border-radius:999px;padding:4px 10px;cursor:pointer;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--ink);font-weight:600}
+details.weights{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 16px}
+details.weights summary{cursor:pointer;font-weight:600}
+.wgrid{display:flex;flex-wrap:wrap;gap:12px 22px;padding-top:10px}
+
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap;background:var(--surface);position:sticky;top:0}
+th.sort{cursor:pointer}
+th.sort:hover{color:var(--ink)}
+th.n,td.n{text-align:right;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--surface2)}
+tr.out td{opacity:.45}
+.tk{font-family:var(--mono);font-weight:600;font-size:14px}
+.nm{color:var(--ink2);font-size:12.5px;max-width:30ch}
+.pos{color:var(--good)}.neg{color:var(--crit)}
+.score{display:flex;align-items:center;gap:8px;min-width:110px}
+.score .bar{flex:1;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.score .bar i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:11.5px;border-radius:5px;padding:1px 6px;white-space:nowrap;font-weight:600}
+.tag.w{background:var(--warn-bg);color:var(--warn)}
+.tag.c{background:var(--crit-bg);color:var(--crit)}
+.tag.g{background:var(--good-bg);color:var(--good)}
+.tag.z{background:var(--surface2);color:var(--ink2);font-weight:500}
+.cert{color:var(--brass);font-size:12px;font-weight:600}
+
+.grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px}
+@media (max-width:860px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:12px;align-content:start}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:2px;background:var(--bg)}
+.kpi .v{font-family:var(--mono);font-size:18px;font-weight:500}
+.kpi .d{font-size:12px;color:var(--muted)}
+.alloc td select,.alloc td input{border:1px solid var(--line2);background:var(--bg);border-radius:6px;padding:4px 6px;max-width:100%}
+.alloc td input{width:64px;text-align:right;font-family:var(--mono)}
+.x{border:0;background:none;cursor:pointer;color:var(--muted);font-size:18px;line-height:1}
+.x:hover{color:var(--crit)}
+
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{fill:var(--muted);font:11px var(--mono)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
+.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line2);border-radius:8px;padding:8px 10px;font-size:12.5px;box-shadow:0 4px 16px rgba(0,0,0,.12);min-width:150px;z-index:3}
+.tip b{font-family:var(--mono);font-weight:500}
+.tip .r{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.tip i{width:10px;height:3px;display:inline-block;border-radius:2px;margin-right:6px}
+
+.heat{border-collapse:separate;border-spacing:2px;font-size:12px}
+.heat td,.heat th{border:0;padding:0;text-align:center;position:static}
+.heat th{font-family:var(--mono);font-size:11.5px;text-transform:none;letter-spacing:0;padding:4px;background:none}
+.heat td{width:48px;height:34px;border-radius:4px;font-family:var(--mono)}
+.scale{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.scale .ramp{display:flex;height:10px;border-radius:3px;overflow:hidden}
+.scale .ramp i{width:26px}
+
+.spec td:first-child{font-weight:600;min-width:170px}
+.spec td{vertical-align:top}
+.sev{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;white-space:nowrap}
+.sev::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--sevc,#999)}
+.news{display:grid;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.news article{display:grid;grid-template-columns:110px 1fr;gap:4px 18px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.news article:last-child{border-bottom:0}
+.news time{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:2px}
+.news h3{font-size:15.5px}
+.news p{color:var(--ink2);font-size:14px;margin-top:3px;max-width:80ch}
+.news .src{font-size:12.5px;color:var(--muted);margin-top:4px}
+@media (max-width:560px){.news article{grid-template-columns:1fr}}
+.foot{margin-top:28px;color:var(--muted);font-size:12.5px;max-width:90ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brand">
+    <span class="label">Interactive Brokers · univers certifié charia</span>
+    <h1>Radar ETF Halal</h1>
+    <p>Filtre noté des ETF islamiques cotés sur IBKR, portefeuille de départ à 1 000 $ et indicateurs de suivi. Les cours se mettent à jour depuis ton compte IBKR quand la page y a accès.</p>
+  </div>
+  <div class="status">
+    <span id="statusPill" class="pill snap"><span class="dot"></span><span id="statusText">Instantané du 25/09/2026</span></span>
+    <button id="refreshBtn" class="btn" type="button">Actualiser</button>
+  </div>
+</header>
+
+<div id="banner"></div>
+
+<div class="acct" id="acct">
+  <div><span class="label">Valeur nette du compte</span><span class="v" id="aNet">—</span></div>
+  <div><span class="label">Liquidités</span><span class="v" id="aCash">—</span></div>
+  <div><span class="label">Positions ETF halal</span><span class="v" id="aPos">—</span></div>
+  <div><span class="label">Données</span><span class="v small" id="aFresh" style="font-size:14px">—</span></div>
+</div>
+
+<nav class="tabs" role="tablist" aria-label="Sections">
+  <button role="tab" id="tab-filtre" data-tab="filtre">Filtre ETF</button>
+  <button role="tab" id="tab-portefeuille" data-tab="portefeuille">Portefeuille 1 000 $</button>
+  <button role="tab" id="tab-comparer" data-tab="comparer">Comparer</button>
+  <button role="tab" id="tab-indicateurs" data-tab="indicateurs">Indicateurs à suivre</button>
+  <button role="tab" id="tab-veille" data-tab="veille">Veille</button>
+</nav>
+
+<!-- FILTRE -->
+<section class="panel" id="p-filtre" role="tabpanel">
+  <p class="intro">Chaque ETF de la liste est certifié par un comité charia. Le filtre retire ceux qui ne passent pas tes critères (accès selon ta résidence, taille, frais, liquidité), puis note les autres de 0 à 100 sur la performance, le rendement ajusté du risque, les frais, la taille et la liquidité. Les performances sont des variations de prix, hors dividendes.</p>
+  <div class="controls">
+    <div class="ctl"><span class="label">Résidence fiscale</span>
+      <div class="seg" id="resSeg"><button type="button" data-v="nonEU">Hors UE</button><button type="button" data-v="EU">UE / EEE</button></div></div>
+    <div class="ctl"><label class="label" for="fAum">Encours minimum</label>
+      <select id="fAum"><option value="0">Aucun</option><option value="50">50 M$</option><option value="100">100 M$</option><option value="250">250 M$</option><option value="500">500 M$</option></select></div>
+    <div class="ctl"><label class="label" for="fTer">Frais max : <span id="fTerV" class="num"></span></label>
+      <input id="fTer" type="range" min="0.30" max="0.70" step="0.05"></div>
+    <div class="ctl"><label class="label" for="fLiq">Liquidité min (vol. 90 j)</label>
+      <select id="fLiq"><option value="0">Aucune</option><option value="0.1">100 k$/jour</option><option value="0.25">250 k$/jour</option><option value="1">1 M$/jour</option></select></div>
+    <div class="ctl"><label class="label" for="fDist">Dividendes</label>
+      <select id="fDist"><option value="all">Tous</option><option value="Dist">Distribués</option><option value="Acc">Capitalisés</option></select></div>
+    <div class="ctl"><label class="label" for="fHist"><input id="fHist" type="checkbox"> Historique ≥ 1 an</label></div>
+    <div class="ctl" style="flex-basis:100%"><span class="label">Classes d'actifs</span><div class="chips" id="clsChips"></div></div>
+  </div>
+  <details class="weights"><summary>Pondération du score</summary>
+    <div class="wgrid" id="wgrid"></div>
+    <p class="small muted" style="margin-top:8px">Chaque critère est ramené sur 0–1 au sein des ETF retenus puis pondéré. Une donnée absente compte pour 0,5 et l'ETF porte une étiquette.</p>
+  </details>
+  <div class="tablebox"><table id="screen"><thead></thead><tbody></tbody></table></div>
+  <p class="small muted" id="screenNote"></p>
+</section>
+
+<!-- PORTEFEUILLE -->
+<section class="panel" id="p-portefeuille" role="tabpanel" hidden>
+  <p class="intro">Répartition de départ pour un capital de 1 000 $. Hors UE, IBKR permet l'achat de fractions d'ETF américains, donc chaque dollar est investi. En UE, les ETF UCITS se cotent à Londres en parts entières avec une commission minimum par ordre : une ou deux lignes suffisent à ce montant.</p>
+  <div class="controls">
+    <div class="ctl"><label class="label" for="cap">Capital (USD)</label><input id="cap" type="number" min="100" step="50" value="1000"></div>
+    <div class="ctl"><span class="label">Profil</span>
+      <div class="seg" id="profSeg"><button type="button" data-v="prudent">Prudent</button><button type="button" data-v="equilibre">Équilibré</button><button type="button" data-v="dynamique">Dynamique</button></div></div>
+    <div class="ctl"><span class="label">Résidence</span>
+      <div class="seg" id="resSeg2"><button type="button" data-v="nonEU">Hors UE</button><button type="button" data-v="EU">UE / EEE</button></div></div>
+    <div class="ctl"><label class="label" for="dca">Versement mensuel</label><input id="dca" type="number" min="0" step="25" value="100"></div>
+    <div class="ctl"><label class="label" for="comUS">Commission / ordre US</label><input id="comUS" type="number" min="0" step="0.05" value="0.35"></div>
+    <div class="ctl"><label class="label" for="comLSE">Commission / ordre LSE</label><input id="comLSE" type="number" min="0" step="0.5" value="4"></div>
+    <div class="ctl"><label class="label" for="pur">Purification (% des dividendes)</label><input id="pur" type="number" min="0" max="20" step="0.1" value="" placeholder="rapport du fonds"></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h2>Répartition</h2><button class="btn" id="addRow" type="button">Ajouter une ligne</button></div>
+      <div class="tablebox" style="border:0"><table class="alloc" id="allocT"><thead><tr><th>ETF</th><th class="n">Poids %</th><th class="n">Montant</th><th class="n">Cours</th><th class="n">Quantité</th><th class="n">Frais/an</th><th></th></tr></thead><tbody></tbody></table></div>
+      <p class="small muted" id="allocNote"></p>
+    </div>
+    <div class="card">
+      <h2>Ce que donne ce portefeuille</h2>
+      <div class="kpis" id="pkpis"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline"><h2>Si ce portefeuille avait été acheté il y a un an</h2><span class="small muted">Valeur hebdomadaire, sans rééquilibrage, dividendes exclus</span></div>
+    <div class="chart" id="pchart"></div>
+  </div>
+  <div class="card" id="driftCard">
+    <h2>Écart avec tes positions IBKR</h2>
+    <div id="drift" class="small"></div>
+  </div>
+</section>
+
+<!-- COMPARER -->
+<section class="panel" id="p-comparer" role="tabpanel" hidden>
+  <p class="intro">Compare jusqu'à trois ETF sur un an (base 100) et regarde leurs corrélations : deux ETF corrélés à plus de 0,9 font doublon dans un petit portefeuille.</p>
+  <div class="controls"><div class="ctl" style="flex-basis:100%"><span class="label">ETF comparés (3 max)</span><div class="chips" id="cmpChips"></div></div></div>
+  <div class="card"><div class="legend" id="cmpLegend"></div><div class="chart" id="cmpChart"></div></div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><h2>Corrélation des rendements hebdomadaires (1 an)</h2>
+      <div class="scale"><span>0</span><span class="ramp"><i style="background:var(--h0)"></i><i style="background:var(--h1)"></i><i style="background:var(--h2)"></i><i style="background:var(--h3)"></i><i style="background:var(--h4)"></i><i style="background:var(--h5)"></i><i style="background:var(--h6)"></i></span><span>1</span></div></div>
+    <div class="tablebox" style="border:0"><table class="heat" id="heat"></table></div>
+  </div>
+</section>
+
+<!-- INDICATEURS -->
+<section class="panel" id="p-indicateurs" role="tabpanel" hidden>
+  <p class="intro">Les indicateurs à suivre pour un portefeuille halal diversifié de petite taille, avec le seuil qui doit déclencher une action. Les valeurs en direct de tes ETF sont dans l'onglet Filtre.</p>
+  <h2>Conformité</h2>
+  <div class="tablebox"><table class="spec"><thead><tr><th>Indicateur</th><th>Ce qu'il mesure</th><th>Seuil d'alerte</th><th>Fréquence</th><th>Où le trouver</th></tr></thead><tbody id="specC"></tbody></table></div>
+  <h2>Coûts et accès</h2>
+  <div class="tablebox"><table class="spec"><thead><tr><th>Indicateur</th><th>Ce qu'il mesure</th><th>Seuil d'alerte</th><th>Fréquence</th><th>Où le trouver</th></tr></thead><tbody id="specK"></tbody></table></div>
+  <h2>Performance et risque</h2>
+  <div class="tablebox"><table class="spec"><thead><tr><th>Indicateur</th><th>Ce qu'il mesure</th><th>Seuil d'alerte</th><th>Fréquence</th><th>Où le trouver</th></tr></thead><tbody id="specR"></tbody></table></div>
+  <h2>Discipline du portefeuille</h2>
+  <div class="tablebox"><table class="spec"><thead><tr><th>Indicateur</th><th>Ce qu'il mesure</th><th>Seuil d'alerte</th><th>Fréquence</th><th>Où le trouver</th></tr></thead><tbody id="specD"></tbody></table></div>
+</section>
+
+<!-- VEILLE -->
+<section class="panel" id="p-veille" role="tabpanel" hidden>
+  <p class="intro">Articles et annonces récents sur les ETF charia, relevés le 27/09/2026. Les classements publiés par des sites spécialisés servent à repérer des fonds ; les chiffres de cette page viennent d'IBKR.</p>
+  <div class="news" id="news"></div>
+</section>
+
+<p class="foot">Outil de suivi, pas un conseil en investissement. La conformité charia d'un ETF dépend de la méthodologie de son indice et de son comité ; vérifie la fiche de l'émetteur et, en cas de doute, demande l'avis d'un savant de confiance. Les commissions IBKR indiquées sont des estimations à régler selon ta grille tarifaire.</p>
+</div>
+
+<script>
+/*__DATA__*/
+const SERVER="Interactive Brokers (IBKR)";
+const SNAP_FIELDS=["last","bid_ask","change","dividend_yield","avg_90d_usd_volume","cumulative_perf_1m","cumulative_perf_ytd","cumulative_perf_1y","cumulative_perf_3y","cumulative_perf_5y","total_net_assets","historical_vol","misc_statistics","top_status"];
+const BY=Object.fromEntries(UNIVERSE.map(e=>[e.t,e]));
+const CLASSES=[...new Set(UNIVERSE.map(e=>e.cls))];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- état ---------- */
+const store={get(k,d){try{const v=localStorage.getItem("radar:"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("radar:"+k,JSON.stringify(v))}catch(e){}}};
+const PRESETS={
+  nonEU:{prudent:[["SPUS",45],["SPWO",20],["SPSK",35]],equilibre:[["SPUS",55],["SPWO",30],["SPSK",15]],dynamique:[["SPUS",65],["SPWO",35]]},
+  EU:{prudent:[["MWIM",70]],equilibre:[["ISDW",80],["ISDE",20]],dynamique:[["MWIM",100]]}
+};
+const S={
+  res:store.get("res","nonEU"),prof:store.get("prof","equilibre"),
+  f:Object.assign({aum:"100",ter:0.65,liq:"0",dist:"all",hist:false,cls:CLASSES.slice()},store.get("f",{})),
+  w:Object.assign({perf:25,sharpe:25,cost:20,size:15,liq:15},store.get("w",{})),
+  rows:store.get("rows",null),cmp:store.get("cmp",["SPUS","SPWO","SPSK"]),
+  sort:{k:"score",dir:-1},
+  live:{},hist:{},acct:null,pos:null,errors:{},fresh:null,mode:"snap"
+};
+if(!S.rows) S.rows=PRESETS[S.res][S.prof].map(([t,w])=>({t,w}));
+
+/* ---------- données ---------- */
+function weeklyDates(n,end){const out=[];const d=new Date(end+"T00:00:00Z");for(let i=n-1;i>=0;i--){const x=new Date(d.getTime()-i*7*864e5);out.push(x.toISOString().slice(0,10))}return out}
+function hist(t){
+  if(S.hist[t]) return S.hist[t];
+  const c=SNAP.weekly[t]; if(!c) return null;
+  return {c,d:weeklyDates(c.length,SNAP.weeklyEnd),src:"snap"};
+}
+function data(t){const base=SNAP.snap[t]||{};const l=S.live[t];return l?Object.assign({},base,l):Object.assign({live:false},base)}
+function pct(x){return x==null||isNaN(x)?null:x}
+function parseSnap(p){
+  if(!p||typeof p!=="object") return null;
+  const g=(k,f)=>{const o=p[k];return o&&o[f]!=null?o[f]:null};
+  const o={live:true};
+  const last=g("last","price"); if(last!=null) o.p=last;
+  const set=(k,v)=>{if(v!=null&&!isNaN(v)) o[k]=v};
+  set("chg",g("change","change_pct"));set("m1",g("cumulative-perf-1m","change_pct"));set("ytd",g("cumulative-perf-ytd","change_pct"));
+  set("y1",g("cumulative-perf-1y","change_pct"));set("y3",g("cumulative-perf-3y","change_pct"));set("y5",g("cumulative-perf-5y","change_pct"));
+  const hv=g("historical-vol","annual_pct"); if(hv!=null) o.vol=hv*100;
+  set("dy",g("dividend-yield","yield_pct"));set("aum",g("total-net-assets","value"));set("liq",g("avg-90d-usd-volume","volume"));
+  set("h52",g("misc-statistics","high_52w"));set("l52",g("misc-statistics","low_52w"));
+  const ba=p["bid-ask"]; if(ba&&ba.bid>0&&ba.ask>0){o.bid=ba.bid;o.ask=ba.ask}
+  const st=p["top-status"]; if(st&&st.status) o.status=st.status;
+  const ts=p.last&&p.last.ts; if(ts) o.ts=ts*1000;
+  return o;
+}
+function maxDD(c){let pk=c[0],m=0;for(const x of c){if(x>pk)pk=x;const d=x/pk-1;if(d<m)m=d}return m*100}
+function rets(c){const r=[];for(let i=1;i<c.length;i++)r.push(c[i]/c[i-1]-1);return r}
+function corr(a,b){const n=Math.min(a.length,b.length);if(n<8)return null;a=a.slice(-n);b=b.slice(-n);const ma=a.reduce((s,x)=>s+x,0)/n,mb=b.reduce((s,x)=>s+x,0)/n;let sab=0,saa=0,sbb=0;for(let i=0;i<n;i++){const x=a[i]-ma,y=b[i]-mb;sab+=x*y;saa+=x*x;sbb+=y*y}return sab/Math.sqrt(saa*sbb)}
+
+function metrics(t){
+  const e=BY[t],d=data(t),h=hist(t);
+  const m={t,e,d};
+  m.dd=h?maxDD(h.c):null;
+  m.fromHigh=d.p&&d.h52?(d.p/d.h52-1)*100:null;
+  m.spread=d.bid&&d.ask?((d.ask-d.bid)/((d.ask+d.bid)/2))*100:null;
+  m.perf=d.y1!=null?d.y1:null;
+  m.sharpe=m.perf!=null&&d.vol?m.perf/d.vol:null;
+  m.age=2026-e.since;
+  return m;
+}
+
+/* ---------- filtre ---------- */
+function passes(m){
+  const f=S.f,e=m.e,d=m.d,why=[];
+  if(S.res==="EU"&&e.zone==="US") why.push("non accessible UE");
+  if(!f.cls.includes(e.cls)) why.push("classe exclue");
+  if(d.aum!=null&&d.aum<(+f.aum)*1e6) why.push("encours faible");
+  if(e.ter>f.ter+1e-9) why.push("frais");
+  if(+f.liq>0&&(d.liq==null||d.liq<(+f.liq)*1e6)) why.push("liquidité");
+  if(f.dist!=="all"&&e.dist!==f.dist) why.push("dividendes");
+  if(f.hist&&m.perf==null) why.push("historique");
+  return why;
+}
+function scoreAll(list){
+  const keys={perf:m=>m.perf,sharpe:m=>m.sharpe,cost:m=>-m.e.ter,size:m=>m.d.aum?Math.log10(m.d.aum):null,liq:m=>m.d.liq?Math.log10(m.d.liq):null};
+  const tot=Object.values(S.w).reduce((a,b)=>a+ +b,0)||1;
+  const rng={};
+  for(const k in keys){const v=list.map(keys[k]).filter(x=>x!=null);rng[k]=[Math.min(...v),Math.max(...v)]}
+  for(const m of list){
+    let s=0;m.missing=[];
+    for(const k in keys){const v=keys[k](m);let n;
+      if(v==null){n=.5;m.missing.push(k)}else{const [a,b]=rng[k];n=b>a?(v-a)/(b-a):.5}
+      s+=n*S.w[k]}
+    m.score=Math.round(100*s/tot);
+  }
+}
+function tagsFor(m){
+  const t=[],d=m.d;
+  if(m.perf==null) t.push(["w","historique < 1 an"]);
+  if(d.aum!=null&&d.aum<1e8) t.push(["w","petit encours"]);
+  if(d.vol!=null&&d.vol>20) t.push(["c","volatilité > 20 %"]);
+  if(m.dd!=null&&m.dd<-15) t.push(["c","baisse max > 15 %"]);
+  if(m.spread!=null&&m.spread>0.3) t.push(["w","écart achat/vente large"]);
+  if(m.e.zone==="US") t.push(["z","fractions possibles"]);
+  if(m.e.cls==="Sukuk") t.push(["g","amortisseur"]);
+  return t;
+}
+const fmt={
+  p:(x,d=2)=>x==null?"—":x.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d}),
+  pc:(x,d=1)=>x==null?"—":(x>0?"+":"")+x.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d})+" %",
+  usd:(x,d=0)=>x==null?"—":x.toLocaleString("fr-FR",{style:"currency",currency:"USD",minimumFractionDigits:d,maximumFractionDigits:d}),
+  big:x=>x==null?"—":x>=1e9?(x/1e9).toLocaleString("fr-FR",{maximumFractionDigits:2})+" Md$":(x/1e6).toLocaleString("fr-FR",{maximumFractionDigits:0})+" M$"
+};
+const cls=x=>x==null?"":x>0?"pos":x<0?"neg":"";
+
+const COLS=[
+  ["rank","#",0],["t","ETF",0],["score","Score",0],["cls","Classe",0],["m1","1 mois",1],["ytd","Depuis janv.",1],["y1","1 an",1],["vol","Vol. 30 j",1],["dd","Baisse max 1 an",1],["fromHigh","Vs plus haut 52 s.",1],["ter","Frais",1],["aum","Encours",1],["dy","Div.",1],["spread","Écart",1],["tags","Points d'attention",0]
+];
+function sortVal(m,k){switch(k){case "t":return m.t;case "cls":return m.e.cls;case "ter":return m.e.ter;case "aum":return m.d.aum;case "score":return m.pass?m.score:-1;case "dd":return m.dd;case "fromHigh":return m.fromHigh;case "spread":return m.spread;default:return m.d[k]}}
+function renderScreen(){
+  const all=UNIVERSE.map(e=>metrics(e.t));
+  all.forEach(m=>{m.why=passes(m);m.pass=!m.why.length});
+  const kept=all.filter(m=>m.pass);
+  if(kept.length) scoreAll(kept);
+  const k=S.sort.k,dir=S.sort.dir;
+  all.sort((a,b)=>{if(a.pass!==b.pass)return a.pass?-1:1;const va=sortVal(a,k),vb=sortVal(b,k);if(va==null&&vb==null)return 0;if(va==null)return 1;if(vb==null)return -1;return (va>vb?1:va<vb?-1:0)*dir});
+  const th=COLS.map(([key,lab,n])=>`<th class="${n?"n ":""}${key!=="rank"&&key!=="tags"?"sort":""}" data-k="${key}" ${key===k?`aria-sort="${dir>0?"ascending":"descending"}"`:""}>${lab}${key===k?(dir>0?" ▲":" ▼"):""}</th>`).join("");
+  $("#screen thead").innerHTML=`<tr>${th}</tr>`;
+  let r=0;
+  $("#screen tbody").innerHTML=all.map(m=>{
+    const d=m.d,e=m.e;const rank=m.pass?++r:"";
+    const tags=m.pass?tagsFor(m).map(([c,l])=>`<span class="tag ${c}">${l}</span>`).join(""):`<span class="tag z">exclu : ${m.why.join(", ")}</span>`;
+    return `<tr class="${m.pass?"":"out"}">
+      <td class="n">${rank}</td>
+      <td><div class="tk">${m.t} <span class="muted small" style="font-family:var(--sans);font-weight:400">${e.ex}</span></div><div class="nm">${esc(e.name)}</div><div class="cert">${esc(e.screen)}</div></td>
+      <td>${m.pass?`<div class="score"><span class="num">${m.score}</span><span class="bar"><i style="width:${m.score}%"></i></span></div>`:"—"}</td>
+      <td>${esc(e.cls)}<div class="small muted">${e.zone==="US"?"ETF US":"UCITS "+e.dom} · ${e.dist==="Acc"?"capitalisant":"distribuant"}</div></td>
+      <td class="n ${cls(d.m1)}">${fmt.pc(d.m1)}</td><td class="n ${cls(d.ytd)}">${fmt.pc(d.ytd)}</td><td class="n ${cls(d.y1)}">${fmt.pc(d.y1)}</td>
+      <td class="n">${d.vol==null?"—":fmt.p(d.vol,1)+" %"}</td><td class="n">${fmt.pc(m.dd)}</td><td class="n">${fmt.pc(m.fromHigh)}</td>
+      <td class="n">${fmt.p(e.ter,2)} %</td><td class="n">${fmt.big(d.aum)}</td><td class="n">${d.dy==null?"—":fmt.p(d.dy,2)+" %"}</td>
+      <td class="n">${m.spread==null?"—":fmt.p(m.spread,2)+" %"}</td>
+      <td><div class="tags">${tags}</div></td></tr>`}).join("");
+  $("#screenNote").textContent=`${kept.length} ETF retenus sur ${all.length}. Cours : ${S.mode==="live"?"IBKR en direct":"instantané IBKR du "+SNAP.asOf.split("-").reverse().join("/")}. Baisse max calculée sur les clôtures hebdomadaires d'un an. Écart achat/vente disponible seulement en séance.`;
+  document.querySelectorAll("#screen th.sort").forEach(h=>h.onclick=()=>{const kk=h.dataset.k;S.sort=S.sort.k===kk?{k:kk,dir:-S.sort.dir}:{k:kk,dir:kk==="t"||kk==="cls"||kk==="ter"?1:-1};renderScreen()});
+}
+function renderControls(){
+  document.querySelectorAll("#resSeg button,#resSeg2 button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===S.res));
+  document.querySelectorAll("#profSeg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===S.prof));
+  $("#fAum").value=S.f.aum;$("#fTer").value=S.f.ter;$("#fTerV").textContent=fmt.p(+S.f.ter,2)+" %";$("#fLiq").value=S.f.liq;$("#fDist").value=S.f.dist;$("#fHist").checked=S.f.hist;
+  $("#clsChips").innerHTML=CLASSES.map(c=>`<button type="button" class="chip" aria-pressed="${S.f.cls.includes(c)}" data-c="${esc(c)}">${esc(c)}</button>`).join("");
+  $("#clsChips").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const c=b.dataset.c;S.f.cls=S.f.cls.includes(c)?S.f.cls.filter(x=>x!==c):[...S.f.cls,c];save();renderControls();renderScreen()});
+  const W=[["perf","Performance 1 an"],["sharpe","Performance / volatilité"],["cost","Frais bas"],["size","Taille du fonds"],["liq","Liquidité"]];
+  $("#wgrid").innerHTML=W.map(([k,l])=>`<div class="ctl"><label class="label" for="w-${k}">${l} : <span class="num">${S.w[k]}</span></label><input id="w-${k}" type="range" min="0" max="50" step="5" value="${S.w[k]}" data-k="${k}"></div>`).join("");
+  $("#wgrid").querySelectorAll("input").forEach(i=>i.oninput=()=>{S.w[i.dataset.k]=+i.value;i.previousElementSibling.querySelector("span").textContent=i.value;save();renderScreen()});
+}
+function save(){store.set("res",S.res);store.set("prof",S.prof);store.set("f",S.f);store.set("w",S.w);store.set("rows",S.rows);store.set("cmp",S.cmp)}
+
+/* ---------- graphique en ligne ---------- */
+function lineChart(el,dates,series,opt={}){
+  const W=860,H=opt.h||280,L=58,R=16,T=14,B=30;
+  const all=series.flatMap(s=>s.v.filter(x=>x!=null));
+  if(!all.length){el.innerHTML='<p class="muted small">Pas d\'historique disponible pour cette sélection.</p>';return}
+  let lo=Math.min(...all),hi=Math.max(...all);const pad=(hi-lo)*.08||1;lo-=pad;hi+=pad;
+  const step=niceStep((hi-lo)/5);const t0=Math.ceil(lo/step)*step;const ticks=[];for(let v=t0;v<=hi;v+=step)ticks.push(v);
+  const n=dates.length,x=i=>L+(W-L-R)*(n<2?0:i/(n-1)),y=v=>T+(H-T-B)*(1-(v-lo)/(hi-lo));
+  const f=opt.fmt||(v=>fmt.p(v,0));
+  let g=ticks.map(v=>`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)" stroke-width="1"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end">${f(v)}</text>`).join("");
+  if(opt.base!=null&&opt.base>lo&&opt.base<hi) g+=`<line x1="${L}" x2="${W-R}" y1="${y(opt.base)}" y2="${y(opt.base)}" stroke="var(--axis)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
+  const mi=[];for(let i=0;i<n;i+=Math.max(1,Math.round(n/6)))mi.push(i);
+  g+=mi.map(i=>`<text x="${x(i)}" y="${H-8}" text-anchor="middle">${monthLab(dates[i])}</text>`).join("");
+  g+=`<line x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}" stroke="var(--axis)" stroke-width="1"/>`;
+  series.forEach((s,si)=>{
+    const pts=s.v.map((v,i)=>v==null?null:[x(i),y(v)]).filter(Boolean);if(!pts.length)return;
+    const d="M"+pts.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join("L");
+    if(opt.area&&series.length===1) g+=`<path d="${d}L${pts[pts.length-1][0]},${H-B}L${pts[0][0]},${H-B}Z" fill="${s.color}" fill-opacity=".10"/>`;
+    g+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const lp=pts[pts.length-1];g+=`<circle cx="${lp[0]}" cy="${lp[1]}" r="4" fill="${s.color}" stroke="var(--surface)" stroke-width="2"/>`;
+  });
+  g+=`<line class="xh" x1="0" x2="0" y1="${T}" y2="${H-B}" stroke="var(--axis)" stroke-width="1" visibility="hidden"/><rect x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent" class="hit"/>`;
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opt.label||"Graphique")}">${g}</svg><div class="tip" hidden></div>`;
+  const svg=el.querySelector("svg"),tip=el.querySelector(".tip"),xh=svg.querySelector(".xh");
+  const move=ev=>{const r=svg.getBoundingClientRect();const px=(ev.clientX-r.left)*W/r.width;let i=Math.round((px-L)/(W-L-R)*(n-1));i=Math.max(0,Math.min(n-1,i));
+    xh.setAttribute("x1",x(i));xh.setAttribute("x2",x(i));xh.setAttribute("visibility","visible");
+    tip.innerHTML=`<div class="small muted">Semaine du ${dates[i].split("-").reverse().join("/")}</div>`+series.map(s=>`<div class="r"><span><i style="background:${s.color}"></i>${esc(s.name)}</span><b>${s.v[i]==null?"—":f(s.v[i])}</b></div>`).join("");
+    tip.hidden=false;const tx=x(i)*r.width/W;tip.style.left=Math.min(Math.max(0,tx+12),r.width-170)+"px";tip.style.top="8px"};
+  svg.querySelector(".hit").addEventListener("pointermove",move);
+  svg.querySelector(".hit").addEventListener("pointerleave",()=>{tip.hidden=true;xh.setAttribute("visibility","hidden")});
+}
+function niceStep(r){const p=Math.pow(10,Math.floor(Math.log10(r)));const f=r/p;return (f<1.5?1:f<3?2:f<7?5:10)*p}
+function monthLab(d){const m=["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];const x=new Date(d+"T00:00:00Z");return m[x.getUTCMonth()]+(x.getUTCMonth()===0?" "+String(x.getUTCFullYear()).slice(2):"")}
+const SER=["var(--s1)","var(--s2)","var(--s3)"];
+
+/* ---------- portefeuille ---------- */
+function commission(e,qty){return e.zone==="US"?+$("#comUS").value||0:+$("#comLSE").value||0}
+function renderPortfolio(){
+  const cap=Math.max(0,+$("#cap").value||0);
+  const opts=UNIVERSE.filter(e=>S.res!=="EU"||e.zone==="UCITS");
+  let totW=0,inv=0,terUSD=0,divUSD=0,com=0,warn=[];
+  const tb=S.rows.map((r,i)=>{
+    const e=BY[r.t];const d=data(r.t);totW+= +r.w||0;
+    const tgt=cap*(+r.w||0)/100;let q=0;
+    if(d.p){q=e.zone==="US"?Math.floor(tgt/d.p*1e4)/1e4:Math.floor(tgt/d.p)}
+    const val=q*(d.p||0);inv+=val;terUSD+=val*e.ter/100;divUSD+=val*(d.dy||0)/100;if(q>0)com+=commission(e,q);
+    if(S.res==="EU"&&e.zone==="US") warn.push(`${r.t} n'est pas achetable par un résident UE (pas de document PRIIPs).`);
+    if(e.zone==="UCITS"&&q===0&&tgt>0) warn.push(`${r.t} : le montant ne couvre pas une part entière.`);
+    return `<tr><td><select data-i="${i}" class="rsel" aria-label="ETF ligne ${i+1}">${opts.concat(opts.find(o=>o.t===r.t)?[]:[e]).map(o=>`<option value="${o.t}" ${o.t===r.t?"selected":""}>${o.t} · ${esc(o.cls)}</option>`).join("")}</select></td>
+      <td class="n"><input type="number" min="0" max="100" step="5" value="${r.w}" data-i="${i}" class="rw" aria-label="Poids ${r.t}"></td>
+      <td class="n">${fmt.usd(tgt)}</td><td class="n">${fmt.p(d.p,2)}</td><td class="n">${e.zone==="US"?fmt.p(q,4):q}</td><td class="n">${fmt.usd(val*e.ter/100,2)}</td>
+      <td><button class="x" data-i="${i}" type="button" aria-label="Retirer ${r.t}">×</button></td></tr>`}).join("");
+  $("#allocT tbody").innerHTML=tb;
+  const cash=cap-inv-com;
+  $("#allocNote").innerHTML=(Math.abs(totW-100)>0.01?`<span class="tag w">Total des poids : ${fmt.p(totW,0)} %</span> `:"")+warn.map(w=>`<span class="tag c">${esc(w)}</span>`).join(" ")+
+    ` Les ETF américains s'achètent en fractions chez IBKR ; les lignes LSE en parts entières.`;
+  $("#allocT").querySelectorAll(".rsel").forEach(s=>s.onchange=()=>{S.rows[+s.dataset.i].t=s.value;save();renderPortfolio()});
+  $("#allocT").querySelectorAll(".rw").forEach(s=>s.onchange=()=>{S.rows[+s.dataset.i].w=+s.value;save();renderPortfolio()});
+  $("#allocT").querySelectorAll(".x").forEach(s=>s.onclick=()=>{S.rows.splice(+s.dataset.i,1);save();renderPortfolio()});
+
+  // simulation sur 1 an
+  const hs=S.rows.map(r=>({r,h:hist(r.t)})).filter(o=>o.h&&(+o.r.w>0));
+  let sim=null,dates=null,vol=null,dd=null,ret=null;
+  if(hs.length){
+    const n=Math.min(...hs.map(o=>o.h.c.length));dates=hs.find(o=>o.h.c.length===n).h.d.slice(-n);
+    const wsum=hs.reduce((s,o)=>s+ +o.r.w,0);
+    sim=[];for(let j=0;j<n;j++){let v=0;for(const o of hs){const c=o.h.c.slice(-n);v+=(+o.r.w/wsum)*c[j]/c[0]}sim.push(v*cap)}
+    const rr=rets(sim);const mu=rr.reduce((a,b)=>a+b,0)/rr.length;vol=Math.sqrt(rr.reduce((a,b)=>a+(b-mu)**2,0)/(rr.length-1))*Math.sqrt(52)*100;
+    dd=maxDD(sim);ret=(sim[n-1]/sim[0]-1)*100;
+    const miss=S.rows.filter(r=>+r.w>0&&!hist(r.t)).map(r=>r.t);
+    lineChart($("#pchart"),dates,[{name:"Portefeuille",color:"var(--accent)",v:sim}],{area:true,base:cap,fmt:v=>fmt.usd(v),label:"Valeur simulée du portefeuille"});
+    if(miss.length) $("#pchart").insertAdjacentHTML("beforeend",`<p class="small muted">Sans historique d'un an, exclus de la simulation : ${miss.join(", ")}.</p>`);
+  } else $("#pchart").innerHTML='<p class="muted small">Aucun historique disponible pour ces lignes.</p>';
+  const pur=$("#pur").value===""?null:+$("#pur").value;
+  const K=[
+    ["Investi",fmt.usd(inv,2),`reste ${fmt.usd(cash,2)} en liquidités`],
+    ["Frais de gestion",fmt.usd(terUSD,2)+" /an",`soit ${fmt.p(inv?terUSD/inv*100:0,2)} % pondéré`],
+    ["Commissions d'achat",fmt.usd(com,2),`${fmt.p(cap?com/cap*100:0,2)} % du capital`],
+    ["Dividendes estimés",fmt.usd(divUSD,2)+" /an","rendement actuel des ETF"],
+    ["À purifier",pur==null?"—":fmt.usd(divUSD*pur/100,2)+" /an",pur==null?"saisis le ratio publié par le fonds":`${fmt.p(pur,1)} % des dividendes`],
+    ["Zakat indicative",fmt.usd(inv*0.025,2),"2,5 % de la valeur, méthode la plus prudente"],
+    ["Perf. prix sur 1 an",fmt.pc(ret),"si acheté il y a un an"],
+    ["Volatilité 1 an",vol==null?"—":fmt.p(vol,1)+" %","rendements hebdomadaires annualisés"],
+    ["Baisse max 1 an",fmt.pc(dd),"du plus haut au plus bas"],
+    ["Dans 12 mois",fmt.usd(cap+12*(+$("#dca").value||0)),"capital versé avec les versements mensuels"]
+  ];
+  $("#pkpis").innerHTML=K.map(([a,b,c])=>`<div class="kpi"><span class="label">${a}</span><span class="v">${b}</span><span class="d">${c}</span></div>`).join("");
+  renderDrift(cap);
+}
+function renderDrift(){
+  const el=$("#drift");
+  if(S.pos==null){el.innerHTML=S.mode==="live"?"Lecture des positions IBKR…":"Visible quand la page lit ton compte IBKR.";return}
+  const items=normPositions(S.pos);
+  const halal=items.filter(p=>BY[p.sym]||UNIVERSE.some(e=>e.conid===p.conid));
+  if(!items.length){el.innerHTML="Ton compte IBKR n'a aucune position pour l'instant. Une fois tes premiers achats passés, l'écart avec la répartition cible s'affiche ici, avec une alerte au-delà de 5 points.";return}
+  const tot=halal.reduce((s,p)=>s+(p.mv||0),0);
+  const rows=S.rows.map(r=>{const p=halal.find(x=>x.sym===r.t||x.conid===BY[r.t].conid);const cw=p&&tot?p.mv/tot*100:0;const dlt=cw-(+r.w||0);
+    return `<tr><td class="tk">${r.t}</td><td class="n">${fmt.p(+r.w,0)} %</td><td class="n">${fmt.p(cw,1)} %</td><td class="n ${Math.abs(dlt)>5?"neg":""}">${fmt.pc(dlt)}</td><td>${Math.abs(dlt)>5?'<span class="tag c">rééquilibrer</span>':'<span class="tag g">dans la marge</span>'}</td></tr>`}).join("");
+  const other=items.filter(p=>!halal.includes(p)).map(p=>p.sym).join(", ");
+  el.innerHTML=`<div class="tablebox" style="border:0"><table><thead><tr><th>ETF</th><th class="n">Cible</th><th class="n">Actuel</th><th class="n">Écart</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`+(other?`<p class="small muted" style="margin-top:8px">Autres positions hors univers halal suivi : ${esc(other)}.</p>`:"");
+}
+function normPositions(p){
+  const arr=Array.isArray(p)?p:(p&&Array.isArray(p.positions)?p.positions:[]);
+  return arr.map(o=>({sym:String(o.symbol||o.ticker||o.contract_desc||o.description||"").split(" ")[0].toUpperCase(),conid:+(o.contract_id||o.conid||o.contractId||0),mv:+(o.market_value??o.marketValue??o.mkt_value??o.value??0)}));
+}
+
+/* ---------- comparer ---------- */
+function renderCompare(){
+  const withH=UNIVERSE.filter(e=>hist(e.t));
+  S.cmp=S.cmp.filter(t=>hist(t)).slice(0,3);
+  $("#cmpChips").innerHTML=withH.map(e=>{const i=S.cmp.indexOf(e.t);return `<button type="button" class="chip" aria-pressed="${i>=0}" data-t="${e.t}" ${i<0&&S.cmp.length>=3?"disabled":""}>${i>=0?`<i style="display:inline-block;width:10px;height:3px;border-radius:2px;background:${SER[i]};margin-right:6px;vertical-align:middle"></i>`:""}${e.t}</button>`}).join("");
+  $("#cmpChips").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const t=b.dataset.t;S.cmp=S.cmp.includes(t)?S.cmp.filter(x=>x!==t):[...S.cmp,t];save();renderCompare()});
+  const hs=S.cmp.map(t=>({t,h:hist(t)}));
+  if(hs.length){
+    const n=Math.min(...hs.map(o=>o.h.c.length));const dates=hs.find(o=>o.h.c.length===n).h.d.slice(-n);
+    const ser=hs.map((o,i)=>{const c=o.h.c.slice(-n);return {name:o.t,color:SER[i],v:c.map(x=>x/c[0]*100)}});
+    $("#cmpLegend").innerHTML=ser.map(s=>`<span><i style="background:${s.color}"></i>${s.name} <b class="num">${fmt.pc(s.v[s.v.length-1]-100)}</b></span>`).join("");
+    lineChart($("#cmpChart"),dates,ser,{base:100,fmt:v=>fmt.p(v,0),label:"Comparaison base 100"});
+  } else {$("#cmpLegend").innerHTML="";$("#cmpChart").innerHTML='<p class="muted small">Choisis au moins un ETF.</p>'}
+  const ts=withH.map(e=>e.t);const R={};ts.forEach(t=>R[t]=rets(hist(t).c));
+  const col=v=>v==null?"var(--surface2)":`var(--h${Math.max(0,Math.min(6,Math.floor(v*7)))})`;
+  const ink=v=>v!=null&&v>=0.57?"var(--heat-hi-ink)":"var(--ink)";
+  $("#heat").innerHTML=`<tr><th></th>${ts.map(t=>`<th>${t}</th>`).join("")}</tr>`+ts.map(a=>`<tr><th>${a}</th>${ts.map(b=>{const v=a===b?1:corr(R[a],R[b]);return `<td style="background:${col(v)};color:${ink(v)}" title="${a} / ${b} : ${v==null?"n.d.":fmt.p(v,2)}">${v==null?"—":fmt.p(v,2)}</td>`}).join("")}</tr>`).join("");
+}
+
+/* ---------- indicateurs & veille ---------- */
+const SEV={r:["var(--crit)","action"],w:["#fab219","surveiller"],g:["#0ca30c","info"]};
+const sev=k=>`<span class="sev" style="--sevc:${SEV[k][0]}">${SEV[k][1]}</span>`;
+const SPEC={
+ specC:[
+  ["Certification charia","Existence d'un comité charia ou d'un indice islamique reconnu (AAOIFI, S&P, FTSE/Yasaar, MSCI, Dow Jones Islamic).",sev("r")+" retrait du certificat ou changement d'indice","à chaque rapport annuel","site de l'émetteur, prospectus"],
+  ["Ratio de dette des sociétés","Les indices excluent les sociétés dont la dette dépasse environ 33 % de la capitalisation (S&P, DJ) ou des actifs (MSCI, FTSE). Les méthodes diffèrent : deux ETF « US charia » n'ont pas le même contenu.",sev("w")+" changement de méthodologie annoncé","semestriel (rebalancement d'indice)","fiche méthodologique de l'indice"],
+  ["Ratio de purification","Part des dividendes issue d'activités non conformes, à donner en charité sans intention de récompense.",sev("w")+" au-delà de 3 % des dividendes","trimestriel ou annuel","site de l'émetteur (SP Funds publie un calculateur)"],
+  ["Concentration technologique","Les filtres de dette favorisent la tech : souvent 35 à 45 % du fonds et plus de 30 % sur les 10 premières lignes.",sev("w")+" une seule valeur > 12 % du fonds","trimestriel","composition du fonds, IBKR Fundamentals"],
+  ["Zakat","Obligation distincte de la purification. Deux méthodes : 2,5 % de la valeur totale, ou 2,5 % de la part d'actifs zakatables des sociétés détenues.",sev("g")+" à calculer à ta date de hawl","annuel","valeur du portefeuille au jour du hawl"]
+ ],
+ specK:[
+  ["Frais de gestion (TER)","Coût annuel prélevé dans le fonds. Sur 1 000 $, 0,10 point = 1 $ par an.",sev("w")+" au-dessus de 0,55 % pour un ETF cœur","annuel","fiche du fonds (colonne Frais du filtre)"],
+  ["Commission par ordre","Coût fixe IBKR par achat. Sur 100 $ de versement, 1 $ de commission = 1 %.",sev("r")+" au-delà de 0,5 % du montant de l'ordre","à chaque ordre","relevé d'opérations IBKR"],
+  ["Écart achat / vente","Coût implicite de l'exécution. Visible en séance dans la colonne Écart.",sev("w")+" au-delà de 0,30 %","à chaque ordre (ordre limite conseillé)","cotation IBKR"],
+  ["Accès selon la résidence","Un résident UE/EEE ne peut pas acheter d'ETF américains (règlement PRIIPs, pas de document KID).",sev("r")+" changement de pays de résidence","ponctuel","profil de compte IBKR"],
+  ["Encours et liquidité","Un ETF de moins de 50 à 100 M$ risque la fermeture ; un volume faible élargit l'écart.",sev("w")+" encours < 100 M$ ou volume < 250 k$/jour","mensuel","colonnes Encours, filtre Liquidité"]
+ ],
+ specR:[
+  ["Performance 1 mois / depuis janvier / 1 an","Variation du prix. À comparer à un indice conventionnel pour voir l'effet du filtre charia.",sev("g")+" écart de plus de 5 points avec l'ETF du même segment","mensuel","onglet Filtre"],
+  ["Volatilité 30 jours","Amplitude annualisée des variations quotidiennes.",sev("w")+" au-dessus de 20 % pour une ligne cœur","hebdomadaire","onglet Filtre"],
+  ["Baisse maximale sur 1 an","Pire recul du plus haut au plus bas. Donne la perte que tu dois pouvoir supporter.",sev("r")+" au-delà de 15 % sur le portefeuille","mensuel","onglets Filtre et Portefeuille"],
+  ["Écart au plus haut 52 semaines","Situe le cours dans son range annuel ; utile pour étaler les achats.",sev("g")+" plus de 10 % sous le plus haut","hebdomadaire","onglet Filtre"],
+  ["Corrélation entre lignes","Deux ETF corrélés à plus de 0,9 font doublon (SPUS et HLAL : 0,96).",sev("w")+" au-dessus de 0,90","trimestriel","onglet Comparer"],
+  ["Rendement des sukuk","Les sukuk amortissent les baisses d'actions mais leur prix recule quand les taux montent.",sev("w")+" baisse de prix > 3 % sur 12 mois","mensuel","ligne SPSK"]
+ ],
+ specD:[
+  ["Dérive de l'allocation","Écart entre le poids actuel et le poids cible de chaque ligne.",sev("r")+" plus de 5 points d'écart","trimestriel","onglet Portefeuille (positions IBKR)"],
+  ["Versements réguliers","Investir un montant fixe chaque mois lisse le prix d'achat et limite l'effet des commissions minimum.",sev("g")+" versement manqué","mensuel","relevé IBKR"],
+  ["Liquidités non investies","Les liquidités d'un compte IBKR peuvent être rémunérées par des intérêts : désactive-les si tu veux éviter le riba.",sev("r")+" intérêts crédités sur le relevé","mensuel","Paramètres du compte IBKR"]
+ ]
+};
+const NEWS=[
+ ["2026-06-02","Lunate lance le premier ETF dividendes charia du Golfe","GCCDIV suit l'indice Solactive GCC Shariah Dividend, cotation à Abu Dhabi à partir du 23 juin 2026. Pas encore dans l'univers IBKR suivi ici.","Zawya via TradingView","https://www.tradingview.com/news/reuters.com,2026-06-02:newsml_Zaw1Qm24r:0-zawya-lunate-expands-its-shariah-compliant-offering-with-launch-of-the-first-of-its-kind-gcc-shariah-dividend-etf/"],
+ ["2026-02-16","Invesco lance un ETF MSCI ACWI Islamic en Europe","Premier ETF UCITS couvrant tout le marché mondial (développés et émergents) sous filtre charia. Frais de 0,35 %, capitalisant. Coté MWIM à Londres et en Suisse.","ETF Express","https://etfexpress.com/2026/02/16/invesco-launches-all-world-shariah-compliant-etf/"],
+ ["2026-01-19","Wahed lance deux ETF UCITS charia","Wahed S&P 500 Shariah (SPWI, 0,49 %) et Wahed Dow Jones Islamic World (DJIW), avec un filtre éthique et droits humains en plus du filtre charia.","ETF Express","https://etfexpress.com/2026/01/19/wahed-launches-shariah-ucits-etfs/"],
+ ["2026","SPUS ou HLAL : quel ETF halal US choisir ?","SPUS suit l'indice S&P 500 Shariah (grandes capitalisations, 0,45 %), HLAL le FTSE USA Shariah (grandes et moyennes, 0,50 %). Leur corrélation hebdomadaire sur un an est de 0,96 selon les données IBKR.","Zoya","https://blog.zoya.finance/spus-vs-hlal/"],
+ ["2026","MNZL, le nouvel ETF halal le moins cher aux États-Unis","Lancé le 18 novembre 2025, 0,40 % de frais, environ 460 lignes issues du Russell 1000, filtre AAOIFI plus droits humains. Encours encore faible (≈ 30 M$).","Zoya","https://blog.zoya.finance/mnzl-etf-guide/"],
+ ["2026","Les 8 meilleurs ETF halal de 2026 : frais et rendements","Panorama des ETF US : SPUS, HLAL, MNZL, UMMA, SPWO, SPSK, SPRE, SPTE. Frais de 0,40 % à 0,65 %.","HalalWallet","https://www.halalwallet.us/investing/halal-etfs"],
+ ["2026","ETF halal comparés : frais, rendements, positions","Comparatif des ETF US et de leur exposition sectorielle.","Amal Invest","https://amalinvest.com/halal-investing/halal-etfs-compared"],
+ ["2026","13 ETF charia en 2026 : le guide complet","Inclut les ETF UCITS (ISDW, HIWS, ISDE) et les méthodologies d'indice.","Halal Terminal","https://www.halalterminal.com/etf"],
+ ["2026","Meilleurs ETF halal pour les investisseurs britanniques","HIWS et ISWD au coude à coude sur 3 ans ; une ligne de cotation d'ISWD doit être radiée le 15 décembre 2026 (à vérifier sur ishares.com).","MoneyMagpie","https://www.moneymagpie.com/investment-articles/best-halal-etfs"],
+ ["2026","Calculateur de purification des dividendes","Outil de SP Funds pour calculer le montant à purifier sur SPUS, SPWO, SPSK, SPRE, SPTE.","SP Funds","https://www.sp-funds.com/purification-calculator/"],
+ ["2025","KWIN : un ETF de revenu alternatif conforme à la charia","KraneShares et Wahed remplacent les obligations à intérêt par des ventes à terme conformes. Frais de 0,51 %.","Nasdaq","https://www.nasdaq.com/press-release/wahed-and-kraneshares-announce-launch-kwin-shariah-compliant-alternative-income-etf"]
+];
+function renderStatic(){
+  for(const k in SPEC) $("#"+k).innerHTML=SPEC[k].map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("");
+  $("#news").innerHTML=NEWS.map(([d,t,p,s,u])=>`<article><time>${d.length>4?d.split("-").reverse().join("/"):d}</time><div><h3><a href="${u}" target="_blank" rel="noopener">${esc(t)}</a></h3><p>${esc(p)}</p><div class="src">${esc(s)}</div></div></article>`).join("");
+}
+
+/* ---------- onglets ---------- */
+const TABS=["filtre","portefeuille","comparer","indicateurs","veille"];
+function showTab(t){if(!TABS.includes(t))t="filtre";TABS.forEach(x=>{$("#p-"+x).hidden=x!==t;$("#tab-"+x).setAttribute("aria-selected",x===t)});if(t==="comparer")renderCompare();if(t==="portefeuille")renderPortfolio()}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>{showTab(b.dataset.tab);try{history.replaceState(null,"","#"+b.dataset.tab)}catch(e){}});
+
+/* ---------- événements ---------- */
+function setRes(v){S.res=v;S.rows=PRESETS[S.res][S.prof].map(([t,w])=>({t,w}));save();renderControls();renderAll()}
+document.querySelectorAll("#resSeg button,#resSeg2 button").forEach(b=>b.onclick=()=>setRes(b.dataset.v));
+document.querySelectorAll("#profSeg button").forEach(b=>b.onclick=()=>{S.prof=b.dataset.v;S.rows=PRESETS[S.res][S.prof].map(([t,w])=>({t,w}));save();renderControls();renderPortfolio()});
+$("#fAum").onchange=e=>{S.f.aum=e.target.value;save();renderScreen()};
+$("#fTer").oninput=e=>{S.f.ter=+e.target.value;$("#fTerV").textContent=fmt.p(S.f.ter,2)+" %";save();renderScreen()};
+$("#fLiq").onchange=e=>{S.f.liq=e.target.value;save();renderScreen()};
+$("#fDist").onchange=e=>{S.f.dist=e.target.value;save();renderScreen()};
+$("#fHist").onchange=e=>{S.f.hist=e.target.checked;save();renderScreen()};
+["#cap","#dca","#comUS","#comLSE","#pur"].forEach(id=>$(id).oninput=()=>renderPortfolio());
+$("#addRow").onclick=()=>{const used=S.rows.map(r=>r.t);const e=UNIVERSE.find(x=>(S.res!=="EU"||x.zone==="UCITS")&&!used.includes(x.t));if(e){S.rows.push({t:e.t,w:0});save();renderPortfolio()}};
+
+function renderAll(){renderScreen();if(!$("#p-portefeuille").hidden)renderPortfolio();if(!$("#p-comparer").hidden)renderCompare();renderAcct()}
+function renderAcct(){
+  const a=S.acct;
+  $("#aNet").textContent=a?fmt.usd(a.net_liquidation,2):"—";
+  $("#aCash").textContent=a?fmt.usd(a.total_cash_value,2):"—";
+  const items=S.pos?normPositions(S.pos):null;
+  $("#aPos").textContent=items?String(items.filter(p=>BY[p.sym]||UNIVERSE.some(e=>e.conid===p.conid)).length):"—";
+  $("#aFresh").textContent=S.mode==="live"&&S.fresh?"IBKR · "+new Date(S.fresh).toLocaleString("fr-FR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"Instantané du "+SNAP.asOf.split("-").reverse().join("/");
+}
+
+/* ---------- connexion IBKR ---------- */
+const MSG={
+  needs_reauth:"La connexion à Interactive Brokers a expiré. Reconnecte IBKR dans claude.ai → Paramètres → Connecteurs, puis clique sur Actualiser.",
+  server_not_connected:"Le connecteur Interactive Brokers (IBKR) n'est pas ajouté à ton compte claude.ai. Ajoute-le dans Paramètres → Connecteurs pour voir les cours en direct.",
+  selection_required:"Plusieurs connecteurs IBKR existent sur ton compte : choisis celui à utiliser dans la fenêtre proposée par claude.ai.",
+  not_in_manifest:"L'accès à IBKR a été refusé pour cette page. Les données affichées sont l'instantané du 25/09/2026.",
+  blocked_by_policy:"La politique de ton organisation bloque l'accès IBKR depuis cette page.",
+  approval_required:"Ton organisation exige une approbation pour chaque appel IBKR ; la page reste sur l'instantané.",
+  server_unavailable:"IBKR ne répond pas pour l'instant. Les dernières données reçues restent affichées.",
+  tool_error:"IBKR a renvoyé une erreur pour une partie des données."
+};
+function setStatus(kind,text){$("#statusPill").className="pill "+kind;$("#statusText").textContent=text}
+function banner(code,extra){
+  const k=code in MSG?code:"other";const text=MSG[k]||"Erreur inattendue du connecteur IBKR ("+code+"). Les données de l'instantané restent affichées.";
+  const lvl=["server_unavailable","tool_error"].includes(code)?"warn":"crit";
+  $("#banner").innerHTML=`<div class="banner ${lvl}" role="status">${esc(text)}${extra?" "+esc(extra):""}</div>`;
+}
+const DENY=["needs_reauth","server_not_connected","not_in_manifest","blocked_by_policy","approval_required","selection_required"];
+let mcp=null,unsubs=[],renderTimer=null;
+function soon(){clearTimeout(renderTimer);renderTimer=setTimeout(()=>{renderAll()},250)}
+function stamp(res){const t=res&&res.cache&&res.cache.storedAt?res.cache.storedAt:Date.now();if(!S.fresh||t>S.fresh)S.fresh=t}
+function onErr(key,err){
+  S.errors[key]=err.code;
+  const codes=Object.values(S.errors);
+  if(DENY.includes(err.code)){
+    if(key.startsWith("s:"))delete S.live[key.slice(2)];
+    if(key.startsWith("h:"))delete S.hist[key.slice(2)];
+    if(key==="acct")S.acct=null;if(key==="pos")S.pos=null;
+  }
+  const denied=codes.filter(c=>DENY.includes(c));
+  if(denied.length){S.mode="snap";setStatus("err","IBKR indisponible · instantané du 25/09");banner(denied[0])}
+  else if(codes.length) banner(err.code,err.code==="tool_error"&&err.message?"("+err.message.slice(0,140)+")":"");
+  soon();
+}
+function onOk(key){delete S.errors[key];if(!Object.keys(S.errors).length)$("#banner").innerHTML=""}
+function startLive(){
+  unsubs.forEach(u=>u());unsubs=[];
+  const OPT={refetchInterval:300000,cache:{staleTime:60000,gcTime:3600000}};
+  const HOPT={refetchInterval:3600000,cache:{staleTime:1800000,gcTime:86400000}};
+  for(const e of UNIVERSE){
+    unsubs.push(mcp.watchTool(SERVER,"get_price_snapshot",{contract_id:e.conid,market_data_names:SNAP_FIELDS},ev=>{
+      if(ev.type==="error")return onErr("s:"+e.t,ev.error);
+      const o=parseSnap(ev.result.payload);if(o){S.live[e.t]=o;S.mode="live";stamp(ev.result);setStatus("live","IBKR en direct");onOk("s:"+e.t);soon()}
+    },OPT));
+    unsubs.push(mcp.watchTool(SERVER,"get_price_history",{contract_id:e.conid,security_type:"STK",step:"ONE_WEEK",period:"ONE_YEAR",outside_rth:false},ev=>{
+      if(ev.type==="error")return onErr("h:"+e.t,ev.error);
+      const p=ev.result.payload;if(p&&Array.isArray(p.close)&&p.close.length>8){S.hist[e.t]={c:p.close,d:(p.time||[]).map(s=>String(s).slice(0,10)),src:"live"};onOk("h:"+e.t);soon()}
+    },HOPT));
+  }
+  unsubs.push(mcp.watchTool(SERVER,"get_account_summary",null,ev=>{if(ev.type==="error")return onErr("acct",ev.error);const p=ev.result.payload;if(p&&typeof p==="object"){S.acct=p;stamp(ev.result);onOk("acct");soon()}},OPT));
+  unsubs.push(mcp.watchTool(SERVER,"get_account_positions",null,ev=>{if(ev.type==="error")return onErr("pos",ev.error);const p=ev.result.payload;if(p&&typeof p==="object"){S.pos=p;onOk("pos");soon()}},OPT));
+}
+$("#refreshBtn").onclick=async()=>{
+  if(!mcp){banner("server_not_connected");return}
+  $("#refreshBtn").disabled=true;
+  try{await mcp.invalidate(SERVER)}catch(e){startLive()}
+  setTimeout(()=>{$("#refreshBtn").disabled=false},3000);
+};
+
+/* ---------- démarrage ---------- */
+renderControls();renderStatic();
+showTab((location.hash||"").slice(1));
+renderAll();
+(async()=>{
+  try{mcp=window.claude&&window.claude.use?await window.claude.use("mcp"):null}catch(e){mcp=null}
+  if(!mcp){setStatus("snap","Instantané IBKR du 25/09/2026");$("#refreshBtn").disabled=true;$("#refreshBtn").title="Disponible quand la page est ouverte dans Claude avec le connecteur IBKR";return}
+  setStatus("snap","Connexion à IBKR…");
+  startLive();
+})();
+</script>
