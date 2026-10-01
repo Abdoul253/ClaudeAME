@@ -1,6 +1,6 @@
 # Radar ETF Halal
 
-Suivi des ETF certifiés charia disponibles sur Interactive Brokers : filtre noté, portefeuille de départ à 1 000 $, comparateur, indicateurs de suivi et veille.
+Suivi des ETF certifiés charia disponibles sur Interactive Brokers : filtre noté, portefeuille de départ à 1 000 $, comparateur, indicateurs de suivi et veille. L'objectif principal est d'avoir des indicateurs précis, clair et conforme à la sharia en prenant en compte un filtre complet des meilleurs ETF. 
 
 Interface publiée : https://claude.ai/artifact/SoGPxuK7eR41qqkQDm7Z2H
 
