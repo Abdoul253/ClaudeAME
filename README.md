@@ -65,3 +65,7 @@ Lecture seule : le programme n'envoie aucun ordre. La passerelle IBKR demande un
 ## Bilan quotidien
 
 Une routine claude.ai (« Bilan quotidien ETF Halal ») tourne chaque jour à 7 h 52, heure de Djibouti. Elle lit IBKR, cherche l'actualité tech, IA, taux et finance islamique, écrit `briefs/<date>` et `news/latest` dans la base de l'application, puis envoie le résumé en notification.
+
+## Wiki
+
+Les pages du wiki sont dans `wiki/`. La GitHub Action `.github/workflows/wiki.yml` les publie dans le wiki du dépôt à chaque modification. Le wiki doit être activé et avoir une première page créée à la main (limite de GitHub), après quoi la publication est automatique.

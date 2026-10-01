@@ -1,0 +1,39 @@
+name: Publier le wiki
+
+on:
+  push:
+    paths:
+      - "wiki/**"
+      - ".github/workflows/wiki.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copier wiki/ vers le wiki GitHub
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -e
+          if ! git clone "https://x-access-token:${TOKEN}@github.com/${REPO}.wiki.git" /tmp/wiki; then
+            echo "::error::Wiki introuvable. Active le wiki (Settings > Features > Wikis) et crée une première page à la main, puis relance ce workflow."
+            exit 1
+          fi
+          rsync -a --delete --exclude .git wiki/ /tmp/wiki/
+          cd /tmp/wiki
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Wiki déjà à jour."
+          else
+            git commit -m "Wiki mis à jour depuis ${GITHUB_SHA::7}"
+            git push
+          fi
